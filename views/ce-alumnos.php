@@ -180,7 +180,7 @@ $datosInstitucion = $resultadoInstitucion["data"];
 												<a href="ce-validacion-alumno.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $alumnoDetalle["id"]; ?>&proceso=edicion">Validaci&oacute;n</a>
 											<?php endif; ?>
 											<br />
-											<a href="ce-kardex.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $alumnoDetalle["id"]; ?>">Kardex</a>
+											<a href="ce-kardex.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $alumnoDetalle["id"]; ?>">Historial Academico</a>
 										</td>
 									</tr>
 								<?php
