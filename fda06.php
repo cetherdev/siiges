@@ -41,7 +41,7 @@
   $pdf->getNombreFormato();
 
   $pdf->SetTextColor( 0, 127, 204 );
-  $pdf->Cell( 0, 5, utf8_decode("OBLIGACIONES ADQUIRIDAS A TRAVÉS DE LA OBTENCIÓN DEL RVOE"), 0, 1, "R");
+  $pdf->Cell( 0, 5, utf8_decode("OBLIGACIONES ADQUIRIDAS A TRAVÉS DE LA OBTENCIÓN DEL RVOE"), 0, 1, "L");
   $pdf->SetTextColor( 0, 0, 0 );
   $pdf->Ln( 5 );
   // echo "REPRESENTANTE: ";var_dump($pdf->usuarioR);
@@ -90,7 +90,7 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("6.- La Institución se compromete a mantener actualizados los planes y programas de estudio de acuerdo a los avances de la materia y someterlos a refrendo al término del periodo establecido por la Autoridad Educativa.")
+        utf8_decode("6.-  La Institución se compromete a mantener actualizados los planes y programas de estudio de acuerdo a los avances de la materia y someterlos a refrendo al término del periodo establecido por la Autoridad Educativa.")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -116,11 +116,6 @@
 
   $pdf->nuevaPagina();
   $pdf->Ln( 15 );
-
-  //$pdf->MultiCell( 0, 5,
-  //      utf8_decode("10.- Mantener vigente la Posesión Legal del Inmueble, el Dictamen de Seguridad Estructural, Licencia de Uso de Suelo, Dictamen de Protección Civil y Licencia Municipal.")
-  //      , 0, "J");
-  //$pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
         utf8_decode("11.- Constituir el Comité de Seguridad Escolar, de conformidad con los lineamientos establecidos en el Diario Oficial de la Federación del 4 de septiembre de 1986.")
