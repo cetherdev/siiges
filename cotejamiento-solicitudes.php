@@ -167,7 +167,7 @@ if (isset($_SESSION["resultado"])) {
 					<br>
 					<h2>Recepción de formatos Administrativos</h2>
 					<hr class="red">
-					<div class="form-group col-sm-14 col-md-14">
+					<div class="form-group col-sm-12 col-md-12">
 
 						<div class="col-sm-6 col-md-6">
 							<input id="fda01Checkbox" type="checkbox" style=" transform: scale(2.0)"> &nbsp; <a target="_blank" href=<?= "formatos/fda01.php?id=" . $_GET["solicitud"] ?>>FDA 01</a><br>
@@ -187,13 +187,13 @@ if (isset($_SESSION["resultado"])) {
 						</div>
 						<div class="col-sm-6 col-md-6">
 							<input id="fda05Checkbox" type="checkbox" style=" transform: scale(2.0)"> &nbsp; <a target="_blank" id="fda05"></a><br>
-							<br>
+					      <br>
 						</div>
-						
+
 						<div class="col-sm-6 col-md-6">
-							<input id="fda06Checkbox" type="checkbox" style=" transform: scale(2.0)"> &nbsp; <a target="_blank" href=<?= "formatos/fda06.php?id=" . $_GET["solicitud"] ?>>FDA 06</a><br>
-							<br>
-						</div>
+							<input id="fda06checkbox" type="checkbox" style=" transform: scale(2.0)"> &nbsp; <a target="_blank" id="fda'06"></a><br>
+							<br> 
+					</div>
 						<div class="col-sm-12 col-md-12">
 							<label>Comentarios</label>
 							<textarea class="form-control" name="comentarios" rows="8" cols="80"></textarea>
