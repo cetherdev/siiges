@@ -212,7 +212,8 @@ if (isset($_SESSION["resultado"])) {
 						<a target="_blank" href=<?= "formatos/fda03.php?id=" . $_GET["solicitud"] ?> id="fda03">FDA 03</a><br>
 						<a target="_blank" id="fda04"></a><br>
 						<a target="_blank" id="fda05"></a><br>
-						<a target="_blank" href=<?= "formatos/fda6.php?id=" . $_GET["solicitud"] ?> id="fda06">FDA 06</a><br> 
+						<a target="_blank" href=<?= "formatos/fda06.php?id=" . $_GET["solicitud"] ?> id="fda06">FDA 06</a><br> 
+				
 					</div>
 
 					<div class="form-group col-sm-6 col-md-4">
@@ -223,8 +224,8 @@ if (isset($_SESSION["resultado"])) {
 						<a target="_blank" id="fdp04">FDP 04</a><br>
 						<a target="_blank" href=<?= "formatos/fdp05.php?id=" . $_GET["solicitud"] ?>>FDP 05</a><br>
 						<a target="_blank" href=<?= "formatos/fdp06.php?id=" . $_GET["solicitud"] ?>>FDP 06</a><br>
-						<a target="_blank" href=<?= "formatos/fdp07.php?id=" . $_GET["solicitud"] ?>>FDP 07</a><br>
-						<a target="_blank" id="fdp08"></a><br>
+						
+						
 					</div>
 					<?php if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"] || Rol::ROL_GESTOR == $_SESSION["rol_id"]) : ?>
 						<div class="form-group col-sm-6 col-md-4">

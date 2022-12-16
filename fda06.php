@@ -90,7 +90,7 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("6.-  La Institución se compromete a mantener actualizados los planes y programas de estudio de acuerdo a los avances de la materia y someterlos a refrendo al término del periodo establecido por la Autoridad Educativa.")
+        utf8_decode("6.- La Institución se compromete a mantener actualizados los planes y programas de estudio de acuerdo a los avances de la materia y someterlos a refrendo al término del periodo establecido por la Autoridad Educativa.")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -100,7 +100,7 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("8.-  Facilitar  y  colaborar  en  las  actividades  de  evaluación,  inspección  y  vigilancia  que  las  autoridades competentes realicen u ordenen.")
+        utf8_decode("8.- Facilitar  y  colaborar  en  las  actividades  de  evaluación,  inspección  y  vigilancia  que  las  autoridades competentes realicen u ordenen.")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -117,13 +117,18 @@
   $pdf->nuevaPagina();
   $pdf->Ln( 15 );
 
+  //$pdf->MultiCell( 0, 5,
+  //      utf8_decode("10.- Mantener vigente la Posesión Legal del Inmueble, el Dictamen de Seguridad Estructural, Licencia de Uso de Suelo, Dictamen de Protección Civil y Licencia Municipal.")
+  //      , 0, "J");
+  //$pdf->Ln( 5 );
+
   $pdf->MultiCell( 0, 5,
         utf8_decode("11.- Constituir el Comité de Seguridad Escolar, de conformidad con los lineamientos establecidos en el Diario Oficial de la Federación del 4 de septiembre de 1986.")
         , 0, "J");
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("12.- La SICyT verificará las instalaciones para que cumplan con la normatividad vigente, higiene seguridad y pedagogía.")
+        utf8_decode("12.- La Secretaría de Innovación, Ciencia y Tecnología verificará las instalaciones para que cumplan con la normatividad vigente, higiene seguridad y pedagogía.")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -158,7 +163,7 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("19.-  Es obligación de la Institución Educativa, que la documentación que presenta sea auténtica.")
+        utf8_decode("19.- Es obligación de la Institución Educativa, que la documentación que presenta sea auténtica.")
         , 0, "J");
   $pdf->Ln( 5 );
 
