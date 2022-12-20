@@ -231,7 +231,6 @@ if (isset($_SESSION["resultado"])) {
 		</div>
 	</div>
 
-
 	<!-- JS GOB.MX -->
 	<script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
 	<!-- JS JQUERY -->

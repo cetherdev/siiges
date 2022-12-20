@@ -3,7 +3,6 @@ require("pdf.php");
 require_once "../../models/modelo-solicitud.php";
 require_once "../../models/modelo-docente.php";
 
-
 session_start();
 
 if (!isset($_GET["id"]) && !$_GET["id"]) {
@@ -17,14 +16,13 @@ $tituloTipoSolicitud = [
   "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
 ];
 $pdf = new PDF();
-//header('Content-Type: text/html; charset=UTF-8');
+
 $pdf->getData($_GET["id"]);
 $pdf->getDocentes(Docente::DOCENTE_ASIGNATURA);
-
 $pdf->AddPage("P", "Letter");
-
 $pdf->SetFont("Nutmegb", "", 11);
 $pdf->SetMargins(20, 35, 20);
+
 // Nombre del formato
 $pdf->SetFont("Nutmegb", "", 11);
 $pdf->Ln(25);
@@ -33,16 +31,14 @@ $y = $pdf->SetY(35);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(0, 127, 204);
 $pdf->Cell(140, 5, "", 0, 0, "L");
-
 $pdf->Cell(35, 6, "FDP06", 0, 0, "R", true);
-
 $pdf->SetTextColor(0, 127, 204);
+
 // Nombre del formato
 $pdf->Ln(15);
 
 $pdf->SetTextColor(0, 127, 204);
-
-$pdf->Cell(0, 5, utf8_decode("FORMATO PLANTILLA DE DOCENTES DE ASIGNATURA"), 0, 1, "L");
+$pdf->Cell(0, 5, utf8_decode("FORMATO PLANTILLA DE DOCENTES DE ASIGNATURA O TIEMPO COMPLETO"), 0, 1, "L");
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(10);
 $pdf->SetFont("Nutmeg", "", 9);
@@ -81,16 +77,13 @@ $dataPrograma = array(
   ]
 );
 
-//set widht for each column (6 columns)
 $pdf->SetWidths(array(75, 100));
 
-//set line height
 $pdf->SetLineHeight(5);
 
 $pdf->SetColors([[191, 191, 191], []]);
 
 foreach ($dataPrograma as $item) {
-  // write data using Row() method containing array of values
   $pdf->Row(array(
     $item['name'],
     $item['description']
@@ -120,7 +113,7 @@ foreach ($pdf->AsigPorGrado as $grado => $asignaturas) {
   $pdf->Cell(20, 10, utf8_decode("EXPERIENCIA"), 1, 0, "C", true);
   $y = $pdf->GetY();
   $x = $pdf->GetX();
-  $pdf->MultiCell(25, 5, utf8_decode("CONTRATO, ANTIGUEDAD"), 1, "C", true);
+  $pdf->MultiCell(25, 5, utf8_decode("DOC. ASIGNATURA / DOC. COMPLETO"), 1, "C", true);
   $pdf->SetXY($x + 25, $y);
   $y = $pdf->GetY();
   $x = $pdf->GetX();
@@ -145,17 +138,13 @@ foreach ($pdf->AsigPorGrado as $grado => $asignaturas) {
       ]
     );
 
-    //set widht for each column (6 columns)
-    $pdf->SetWidths(array(20, 35, 18, 25,  20, 25, 15, 20));
+    $pdf->SetWidths(array(20, 35, 18, 25, 20, 25, 15, 20));
 
-    //set line height
     $pdf->SetLineHeight(5);
     $pdf->SetColors([]);
 
     foreach ($dataAsignaturasGrado as $item) {
-
-      // write data using Row() method containing array of values
-      $pdf->Row(array(
+        $pdf->Row(array(
         $item['docente_docente'],
         $item['formacion_docente'],
         $item['documento_docente'],
@@ -176,7 +165,6 @@ foreach ($pdf->AsigPorGrado as $grado => $asignaturas) {
 $pdf->Ln(30);
 
 if ($pdf->programa["acuerdo_rvoe"]) {
-
   $pdf->SetFont("Nutmeg", "", 9);
   if ($pdf->programa["acuerdo_rvoe"]) {
     $y = $pdf->GetY();
@@ -184,7 +172,7 @@ if ($pdf->programa["acuerdo_rvoe"]) {
     $pdf->MultiCell(60, 5, utf8_decode(mb_strtoupper($pdf->nombreRepresentante)), "T", "C");
     $pdf->SetXY($x + 60, $y);
     $pdf->Cell(50, 5, mb_strtoupper(Solicitud::convertirFecha(date("d-m-y"))), 0, 0, "C");
-    $pdf->MultiCell(65, 5, utf8_decode("MTRA. MARGARITA FLORES MARQUEZ\nDIRECTORA DE INCORPORACIÓN"), "T", "C");
+    $pdf->MultiCell(65, 5, utf8_decode("ING. MARCO ARTURO CASTRO AGUILERA\nDIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES"), "T", "C");
   } else {
     $pdf->Cell(0, 5, "BAJO PROTESTA DE DECIR VERDAD", 0, 0, "C");
     $pdf->Ln(5);
