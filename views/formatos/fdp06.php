@@ -38,7 +38,7 @@ $pdf->SetTextColor(0, 127, 204);
 $pdf->Ln(15);
 
 $pdf->SetTextColor(0, 127, 204);
-$pdf->Cell(0, 5, utf8_decode("FORMATO PLANTILLA DE DOCENTES DE ASIGNATURA O TIEMPO COMPLETO"), 0, 1, "L");
+$pdf->Cell(0, 5, utf8_decode("FORMATO PLANTILLA DE DOCENTES (ASIGNATURA O TIEMPO COMPLETO)"), 0, 1, "L");
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(10);
 $pdf->SetFont("Nutmeg", "", 9);
@@ -113,7 +113,7 @@ foreach ($pdf->AsigPorGrado as $grado => $asignaturas) {
   $pdf->Cell(20, 10, utf8_decode("EXPERIENCIA"), 1, 0, "C", true);
   $y = $pdf->GetY();
   $x = $pdf->GetX();
-  $pdf->MultiCell(25, 5, utf8_decode("DOC. ASIGNATURA / DOC. COMPLETO"), 1, "C", true);
+  $pdf->MultiCell(25, 5, utf8_decode("CONTRATO, ANTIGUEDAD"), 1, "C", true);
   $pdf->SetXY($x + 25, $y);
   $y = $pdf->GetY();
   $x = $pdf->GetX();
