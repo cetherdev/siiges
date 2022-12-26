@@ -186,7 +186,7 @@ if (isset($_SESSION["resultado"])) {
 							<br>
 						</div>
 						<div class="col-sm-6 col-md-6">
-							<input id="fda05Checkbox" type="checkbox" style=" transform: scale(2.0)"> &nbsp; <a target="_blank" id="fda05"></a><br>
+							<input id="fda05Checkbox" type="checkbox" style=" transform: scale(2.0)"> &nbsp; <a target="_blank" href=<?= "formatos/fda05p.php?id=" . $_GET["solicitud"] ?>>FDA 05</a><br>
 							<br>
 						</div>
 						<div class="col-sm-6 col-md-6">

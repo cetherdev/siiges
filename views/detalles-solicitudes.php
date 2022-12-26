@@ -197,7 +197,6 @@ if (isset($_SESSION["resultado"])) {
 			</div>
 		</section>
 
-
 		<div class="container">
 			<section class="main row margin-section-formularios">
 				<div class="col-sm-12 col-md-12 col-lg-12">
@@ -211,7 +210,7 @@ if (isset($_SESSION["resultado"])) {
 						<a target="_blank" id="fda02"></a><br>
 						<a target="_blank" href=<?= "formatos/fda03.php?id=" . $_GET["solicitud"] ?> id="fda03">FDA 03</a><br>
 						<a target="_blank" id="fda04"></a><br>
-						<a target="_blank" id="fda05"></a><br>
+						<a target="_blank" href=<?= "formatos/fda05.php?id=" . $_GET["solicitud"] ?> id="fda05">FDA 05</a><br>
 						<a target="_blank" id="fda06"></a><br>
 					</div>
 
