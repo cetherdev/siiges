@@ -8,6 +8,7 @@ if (isset($_GET['tipo'])) {
   //echo $_GET["tipo"];
 }
 
+
 if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_string($_GET['tipo'])) {
   //echo "entra";
   header("Location: home.php");
@@ -32,7 +33,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
 
 <body>
   <div id="cargando" class="loader">
-
   </div>
   <!-- HEADER Y BARRA DE NAVEGACION -->
   <?php require_once "menu.php"; ?>
@@ -51,8 +51,8 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
         <br>
         <!-- Mensajes generales para todo el formulario -->
         <div id="mensaje">
-
         </div>
+
         <ul class="nav nav-tabs col-sm-12 col-md-12">
           <li class="active"><a data-toggle="tab" href="#tab-01">Datos generales</a></li>
           <li><a data-toggle="tab" href="#tab-02">Programa de estudios</a></li>
@@ -60,7 +60,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
           <li><a data-toggle="tab" href="#tab-04">Anexos</a></li>
           <li><a data-toggle="tab" href="#tab-05">Evaluaci&oacute;n curricular</a></li>
         </ul>
-
 
         <form id="solicitudes" class="form-horizontal" action="../controllers/control-solicitud.php" enctype="multipart/form-data" method="post">
           <div class="tab-content col-sm-12">

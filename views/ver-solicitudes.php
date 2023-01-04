@@ -1897,8 +1897,6 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                                     <th class="size" scope="col">Recursos materiales</th>
                                     <th class="size" scope="col">Ubicación</th>
                                     <th class="size" scope="col">Asignaturas</th>
-
-
                                   </tr>
                                 </thead>
                                 <tbody id="infraestructuras">
