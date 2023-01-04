@@ -61,7 +61,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
           <li><a data-toggle="tab" href="#tab-05">Evaluaci&oacute;n curricular</a></li>
         </ul>
 
-
         <form id="solicitudes" class="form-horizontal" action="../controllers/control-solicitud.php" enctype="multipart/form-data" method="post">
           <div class="tab-content col-sm-12">
             <!-- Institución -->
