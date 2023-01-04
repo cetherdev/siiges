@@ -1450,8 +1450,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                               incluya un resumen en los campos y suba su archivo completo tomando como referencia <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                             </p>
                           </div>
-
-
                         </div>
                       </div>
                     </div>

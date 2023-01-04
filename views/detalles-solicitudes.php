@@ -242,7 +242,6 @@ if (isset($_SESSION["resultado"])) {
               <a target="_blank" href="oficios/refrendo-rvoe.php" id="RefrendoRVOE" name="<?= $_GET["solicitud"] ?>" class="get" hidden>Refrendo de RVOE</a><br>
 
               <a target="_blank" href="oficios/acuerdo-rvoe.php" id="AcuerdoRVOE" name="<?= $_GET["solicitud"] ?>" class="get" hidden>Acuerdo de RVOE</a><br><br><br>
-
             </div>
 
             <div class="form-group col-sm-6 col-md-4">
