@@ -28,6 +28,7 @@ Documento.getFormatos = function () {
   var tipoEntidad = 5; // PROGRAMA
   var tipoDocumentoFDP03 = 8; // 8 -> FDP03
   var tipoDocumentoFDP04 = 9; //  9 -> FDP04
+  var tipoDocumentoFDA05 = 9; //  9 -> FDA05
 
   var ajaxPath = "../controllers/control-documento.php";
   var datos = {};
@@ -80,6 +81,39 @@ Documento.getFormatos = function () {
         });
       } else {
         $("#fdp04").attr("href", response.data.archivo);
+      }
+    },
+    error: function (response) {
+      console.log("ERROR");
+      console.log(response);
+    },
+  });
+
+  var ajaxPath = "../controllers/control-documento.php";
+  var datos = {};
+  datos.webService = "consultarFormato";
+  datos.url = "";
+  datos.tipo_entidad = tipoEntidad;
+  datos.solicitud_id = entidadId;
+  datos.tipo_documento = tipoDocumentoFDP03;
+
+  $.ajax({
+    type: "POST",
+    url: ajaxPath,
+    data: datos,
+    dataType: "json",
+    success: function (response) {
+      if ($.isArray(response.data) && !response.data.length > 0) {
+        console.log(response.message + " FDA05 para la solicitud " + entidadId);
+        $("#fda05").on("click", function (e) {
+          e.preventDefault();
+          Documento.mostrarMensaje(
+            "error",
+            response.message + " FDA05 para la solicitud " + entidadId
+          );
+        });
+      } else {
+        $("#fda05").attr("href", response.data.archivo);
       }
     },
     error: function (response) {
