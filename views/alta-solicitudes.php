@@ -1448,7 +1448,7 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                               <br>
                               <sup>1</sup>Incluir el acta de creación del comité tutorial <br>
                               <sup>2</sup> En caso de que los campos programa seguimiento, función tutorial, tipo tutoría, tasa egreso, estadísticas de titulación y modalidades de titulación incluyan cualquier tipo de ilustración o el texto sea demasiado
-                              incluya un resumen en los campos y suba su archivo completo tomando como referencia <a href="plantillas/FDP05.docx">(Descargar plantilla). </a>
+                              incluya un resumen en los campos y suba su archivo completo tomando como referencia <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                             </p>
                           </div>
 
