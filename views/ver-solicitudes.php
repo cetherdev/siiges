@@ -1385,7 +1385,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                         <!--FDA 05-->
                         <div class="form-group">
                           <div class="col-sm-12 col-md-6">
-                            <label class="control-label">FDA05 *</label>
+                            <label class="control-label">FDA 05 *</label>
                             <input type="hidden" id="fda_05-id" name="PROGRAMA-formato_herramientas_05-id" value="">
                             <input class="form-control" type="file" name="PROGRAMA-formato_herramientas_05" value="">
                           </div>

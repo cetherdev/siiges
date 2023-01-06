@@ -1446,8 +1446,7 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             <p class="small">
                               <br>
                               <sup>1</sup>Incluir el acta de creación del comité tutorial <br>
-                              <sup>2</sup> En caso de que los campos incluyan cualquier tipo de ilustración o el texto sea demasiado
-                              incluya un resumen en los campos y suba su archivo completo tomando como referencia <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
+                              <sup>2</sup> Este formato solamente aplica para modalidad mixta y no escolarizada <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                             </p>
                           </div>
                         </div>
@@ -1477,7 +1476,7 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             <p class="text-muted small">
                               <strong>¡Nota importante! </strong>
                               <br>
-                              Adjuntar archivo. <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
+                              Este formato solamente aplica para modalidad mixta y no escolarizada <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
                       </div>
