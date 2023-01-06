@@ -92,7 +92,7 @@
 							</a>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="">Formato descripción de instalaciones (FDA05)</label><br>
+							<label class="control-label" for="">Formato plataforma educativa tecnologica (FDA05)</label><br>
 							<a href="formatos/fda-05.php" target="_blank">
 								<button class="btn btn-default" type="button">
 									<span class="glyphicon glyphicon-file"></span>
