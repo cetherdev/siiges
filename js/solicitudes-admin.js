@@ -270,7 +270,7 @@ Solicitudes.getDetalles = function () {
 
           fda05.setAttribute(
             "href",
-            `formatos/fda05-2020.php?id=${solicitud.id}`
+            `plantillas/fda05.php?id=${solicitud.id}`
           );
           fda05.innerHTML = "FDA 05";
 

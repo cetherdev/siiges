@@ -87,6 +87,33 @@ Documento.getFormatos = function () {
       console.log(response);
     },
   });
+
+  datos.tipo_documento = tipoDocumentoFDA05;
+  $.ajax({
+    type: "POST",
+    url: ajaxPath,
+    data: datos,
+    dataType: "json",
+    success: function (response) {
+      if ($.isArray(response.data) && !response.data.length > 0) {
+        console.log(response.message + " FDA05 para la solicitud " + entidadId);
+        $("#fda05").on("click", function (e) {
+          e.preventDefault();
+          Documento.mostrarMensaje(
+            "error",
+            response.message + " FDA05 para la solicitud " + entidadId
+          );
+        });
+      } else {
+        $("#fda05").attr("href", response.data.archivo);
+      }
+    },
+    error: function (response) {
+      console.log("ERROR");
+      console.log(response);
+    },
+  });
+
 };
 
 Documento.showOficio = function (e) {
