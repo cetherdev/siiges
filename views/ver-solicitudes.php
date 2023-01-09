@@ -873,7 +873,6 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                               <sup>2</sup>Reglamento de academias o documento que contenga las reglas de operación de dichos cuerpos colegiados
                               <br><br>
                               <sup>3</sup>Documento que describa a detalla cada asignatura <a href="plantillas/FDP03.docx">(Descargar plantilla). </a> <br> <br>
-
                               <sup>4</sup>Documento en donde se especifique la hemerobibliografía por asignatura <a href="plantillas/FDP04.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
@@ -1398,7 +1397,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                             <p class="text-muted small">
                               <strong>¡Nota importante! </strong>
                               <br>
-                              Adjuntar archivo. <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
+                              Este formato solamente aplica para modalidad mixta y no escolarizada. <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
                       </div>
