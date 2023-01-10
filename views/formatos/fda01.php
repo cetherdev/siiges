@@ -225,7 +225,7 @@ $pdf->Cell(0, 5, utf8_decode("AT´N: DIRECTOR GENERAL DE INCORPORACIÓN Y SERVIC
 $pdf->Ln(5);
 $pdf->SetFont("Nutmeg", "", 9);
 
-$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("Guadalajara, Jal. a $fecha")), 0, 1, "R");
+$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("$fecha")), 0, 1, "R");
 $pdf->Ln(5);
 $pdf->MultiCell(0, 5, utf8_decode("Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de "
   . mb_strtoupper($tituloTipoSolicitud[$solicitud["tipo_solicitud_id"] - 1])
