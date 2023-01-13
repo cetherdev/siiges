@@ -873,7 +873,6 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                               <sup>2</sup>Reglamento de academias o documento que contenga las reglas de operación de dichos cuerpos colegiados
                               <br><br>
                               <sup>3</sup>Documento que describa a detalla cada asignatura <a href="plantillas/FDP03.docx">(Descargar plantilla). </a> <br> <br>
-
                               <sup>4</sup>Documento en donde se especifique la hemerobibliografía por asignatura <a href="plantillas/FDP04.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
@@ -1385,7 +1384,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                         <!--FDA 05-->
                         <div class="form-group">
                           <div class="col-sm-12 col-md-6">
-                            <label class="control-label">FDA05 *</label>
+                            <label class="control-label">FDA 05 *</label>
                             <input type="hidden" id="fda_05-id" name="PROGRAMA-formato_herramientas_05-id" value="">
                             <input class="form-control" type="file" name="PROGRAMA-formato_herramientas_05" value="">
                           </div>
@@ -1398,9 +1397,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                             <p class="text-muted small">
                               <strong>¡Nota importante! </strong>
                               <br>
-                              Adjuntar archivo que describa el estudio de pertinencia y factibilidad así como el estudio de oferta y demanda
-                              con las especificaciones señaladas en el Instructivo para la Obtención del Reconocimiento de Validez Oficial de Estudios de Educación Superior
-                              del Estado de Jalisco. <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
+                              Este formato solamente aplica para modalidad mixta y no escolarizada. <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
                       </div>
@@ -1813,7 +1810,6 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                                     <th class="size" scope="col">Nombre de la institución</th>
                                     <th class="size" scope="col">Tiempo de llegada (mins)</th>
 
-
                                   </tr>
                                 </thead>
                                 <tbody id="institucionesSalud">
@@ -1899,7 +1895,6 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                                     <th class="size" scope="col">Recursos materiales</th>
                                     <th class="size" scope="col">Ubicación</th>
                                     <th class="size" scope="col">Asignaturas</th>
-
 
                                   </tr>
                                 </thead>

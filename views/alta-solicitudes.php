@@ -61,7 +61,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
           <li><a data-toggle="tab" href="#tab-05">Evaluaci&oacute;n curricular</a></li>
         </ul>
 
-
         <form id="solicitudes" class="form-horizontal" action="../controllers/control-solicitud.php" enctype="multipart/form-data" method="post">
           <div class="tab-content col-sm-12">
             <!-- Institución -->
@@ -1447,12 +1446,9 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             <p class="small">
                               <br>
                               <sup>1</sup>Incluir el acta de creación del comité tutorial <br>
-                              <sup>2</sup> En caso de que los campos programa seguimiento, función tutorial, tipo tutoría, tasa egreso, estadísticas de titulación y modalidades de titulación incluyan cualquier tipo de ilustración o el texto sea demasiado
-                              incluya un resumen en los campos y suba su archivo completo tomando como referencia <a href="plantillas/FDP05.docx">(Descargar plantilla). </a>
+                              <sup>2</sup> Este formato solamente aplica para modalidad mixta y no escolarizada <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                             </p>
                           </div>
-
-
                         </div>
                       </div>
                     </div>
@@ -1480,9 +1476,7 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             <p class="text-muted small">
                               <strong>¡Nota importante! </strong>
                               <br>
-                              Adjuntar archivo que describa el estudio de pertinencia y factibilidad así como el estudio de oferta y demanda
-                              con las especificaciones señaladas en el Instructivo para la Obtención del Reconocimiento de Validez Oficial de Estudios de Educación Superior
-                              del Estado de Jalisco. <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
+                              Este formato solamente aplica para modalidad mixta y no escolarizada <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
                       </div>

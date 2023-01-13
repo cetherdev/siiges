@@ -210,7 +210,7 @@ if (isset($_SESSION["resultado"])) {
             <a target="_blank" id="fda02"></a><br>
             <a target="_blank" href=<?= "formatos/fda03.php?id=" . $_GET["solicitud"] ?> id="fda03">FDA 03</a><br>
             <a target="_blank" id="fda04"></a><br>
-            <a target="_blank" id="fda05"></a><br>
+            <a target="_blank" id="fda05">FDA 05</a><br>
             <a target="_blank" href=<?= "formatos/fda06.php?id=" . $_GET["solicitud"] ?> id="fda06">FDA 06</a><br>
           </div>
 
@@ -242,7 +242,6 @@ if (isset($_SESSION["resultado"])) {
               <a target="_blank" href="oficios/refrendo-rvoe.php" id="RefrendoRVOE" name="<?= $_GET["solicitud"] ?>" class="get" hidden>Refrendo de RVOE</a><br>
 
               <a target="_blank" href="oficios/acuerdo-rvoe.php" id="AcuerdoRVOE" name="<?= $_GET["solicitud"] ?>" class="get" hidden>Acuerdo de RVOE</a><br><br><br>
-
             </div>
 
             <div class="form-group col-sm-6 col-md-4">
