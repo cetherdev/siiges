@@ -284,7 +284,7 @@ $pdf->Ln(5);
 
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("9. OBJETIVOS PARTICULARES DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
+$pdf->Cell(0, 5, utf8_decode("9. OBJETIVOS PARTICULARES DEL PLAN DE ESTUDIOS Y/O COMPETENCIAS DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["objetivos_particulares"]), 0, "J");
 if ($pdf->checkNewPage()) {
