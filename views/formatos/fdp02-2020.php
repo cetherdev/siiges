@@ -46,6 +46,7 @@ $periodo = $pdf->ciclo["nombre"];
 $asignaturaAcademias = [];
 $asignaturaGrados = [];
 $asignaturaArea = [];
+
 //print_r($pdf->TodasAsignaturas);
 foreach ($pdf->TodasAsignaturas as $key => $asignatura) {
   if (
@@ -111,7 +112,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PLAN DE ESTUDIOS"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"]))
     ],
   );
   if ($pdf->programa["acuerdo_rvoe"]) {
@@ -132,7 +133,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PLAN DE ESTUDIOS"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"]))
     ],
   );
   if ($pdf->programa["acuerdo_rvoe"]) {
