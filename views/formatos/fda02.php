@@ -9,7 +9,7 @@
 
 //print_r($_GET["id"]);
   $tituloTipoSolicitud = [
-                        "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS",
+                        "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS (RVOE)",
                         "SOLICITUD DE REFRENDO A PLANES Y PROGRAMAS DE ESTUDIO ",
                         "SOLICITUD DE CAMBIO DE DOMICILIO",
                         "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
@@ -62,7 +62,7 @@
   $pdf->Cell( 70, 5, utf8_decode("DURACIÓN DEL PROGRAMA"), 1, 0, "L", true );
   $pdf->SetFillColor( 255, 255, 255 );
   $pdf->SetFont( "Arial", "", 9 );
-  $pdf->Cell( 105, 5, utf8_decode($pdf->programa["duracion"]), 1, 1, "L", true );
+  $pdf->Cell( 105, 5, utf8_decode($pdf->programa["duracion_periodos"]), 1, 1, "L", true );
 
   $pdf->SetFillColor( 166, 166, 166 );
   $pdf->SetFont( "Arial", "B", 9 );

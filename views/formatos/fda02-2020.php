@@ -13,7 +13,7 @@ if (!isset($_GET["id"]) && !$_GET["id"]) {
 
 //print_r($_GET["id"]);
 $tituloTipoSolicitud = [
-  "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS",
+  "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS (RVOE)",
   "SOLICITUD DE REFRENDO A PLAN Y PROGRAMA DE ESTUDIO",
   "SOLICITUD DE CAMBIO DE DOMICILIO",
   "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
@@ -48,7 +48,7 @@ $pdf->Ln(5);
 // Fecha
 $pdf->SetFont("Nutmeg", "", 9);
 $fecha =  $pdf->fecha;
-$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("Guadalajara, Jal. a $fecha")), 0, 1, "R");
+$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("$fecha")), 0, 1, "R");
 $pdf->Ln(5);
 
 // Tabla de encabezado Datos generales de la institución y programa 
@@ -63,7 +63,7 @@ $dataPrograma = array(
   ],
   [
     "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"]))
   ],
   [
     "name" => utf8_decode("NOMBRE COMPLETO DE LA RAZÓN SOCIAL"),
