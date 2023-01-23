@@ -60,7 +60,7 @@ $dataPrograma = array(
   ],
   [
     "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"]))
   ],
   [
     "name" => utf8_decode("TIPO DE TRÁMITE"),
