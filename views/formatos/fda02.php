@@ -107,7 +107,6 @@
   $pdf->SetY(115);
   $pdf->SetX(110);
   $pdf->Cell( 40, 5, utf8_decode($pdf->modalidad["nombre"]), 1, 1, "L", true );
-
   $pdf->SetY(110);
   $pdf->SetX(155);
   $pdf->SetFillColor( 166, 166, 166 );

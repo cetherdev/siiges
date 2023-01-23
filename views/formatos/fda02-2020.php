@@ -79,8 +79,6 @@ $pdf->SetLineHeight(5);
 
 $pdf->SetColors([[191, 191, 191], []]);
 
-
-
 foreach ($dataPrograma as $item) {
   // write data using Row() method containing array of values
   $pdf->Row(array(
