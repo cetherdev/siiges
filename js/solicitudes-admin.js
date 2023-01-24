@@ -222,18 +222,18 @@ Solicitudes.getDetalles = function () {
           fdp02.innerHTML = "FDP 02";
         }
 
+        const fda04 = document.getElementById("fda04");
+        fda04.setAttribute("href", `formatos/fda04.php?id=${solicitud.id}`);
+        fda04.innerHTML = "FDA 04";
+
         if (convocatoria < 2020 || convocatoria == 0) {
           const fda02 = document.getElementById("fda02");
-          const fda04 = document.getElementById("fda04");
           const fda05 = document.getElementById("fda05");
           const fda06 = document.getElementById("fda06");
           const fdp08 = document.getElementById("fdp08");
 
           fda02.setAttribute("href", `formatos/fda02.php?id=${solicitud.id}`);
           fda02.innerHTML = "FDA 02";
-
-          fda04.setAttribute("href", `formatos/fda04.php?id=${solicitud.id}`);
-          fda04.innerHTML = "FDA 04";
 
           fda05.setAttribute("href", `formatos/fda05.php?id=${solicitud.id}`);
           fda05.innerHTML = "FDA 05";
@@ -249,7 +249,6 @@ Solicitudes.getDetalles = function () {
           console.log("Migacion");
         } else {
           const fda02 = document.getElementById("fda02");
-          const fda04 = document.getElementById("fda04");
           const fda05 = document.getElementById("fda05");
           const fda06 = document.getElementById("fda06");
           const fda06Checkbox = document.getElementById("fda06Checkbox");
@@ -260,12 +259,6 @@ Solicitudes.getDetalles = function () {
             `formatos/fda02-2020.php?id=${solicitud.id}`
           );
           fda02.innerHTML = "FDA 02";
-
-          fda04.setAttribute(
-            "href",
-            `formatos/fda04-2020.php?id=${solicitud.id}`
-          );
-          fda04.innerHTML = "FDA 04";
 
           fda05.setAttribute(
             "href",
@@ -311,18 +304,6 @@ Solicitudes.getDetalles = function () {
             $("#OrdenInspección").hide();
           }
 
-          /* if (
-            solicitud.estatus >= Solicitudes.ESTATUS.CIMPRESION &&
-            solicitud.estatus != Solicitudes.ESTATUS.RECHAZADA &&
-            solicitud.estatus != 200
-          ) {
-            console.log(solicitud.estatus);
-            $("#Notificacion").show();
-            $("#" + Solicitudes.tiposControl[solicitud.tipo].acuerdoId).show();
-          } else {
-            $("#Notificacion").hide();
-            $("#" + Solicitudes.tiposControl[solicitud.tipo].acuerdoId).hide();
-          } */
           if (
             solicitud.estatus >= Solicitudes.ESTATUS.REVISION &&
             solicitud.estatus != Solicitudes.ESTATUS.RECHAZADA &&
