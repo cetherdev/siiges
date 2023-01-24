@@ -57,22 +57,22 @@
 
   $pdf->SetFont( "Arial", "", 9 );
   $pdf->MultiCell( 0, 5,
-        utf8_decode("$prefijo C. $pdf->nombreRepresentante de $pdf->nombreInstitucion declara, bajo protesta de decir verdad, que los datos proporcionados en la Solicitud $folio cuenta con un inmueble con las condiciones de seguridad, higiénicas necesarias para impartir el plan de estudios para el programa $programa, modalidad $modalidad en periodos $periodo, asimismo ACEPTA cumplir y se compromete con las siguientes obligaciones derivadas del otorgamiento del Reconocimiento de Validez Oficial de Estudios.")
+        utf8_decode("$prefijo C. $pdf->nombreRepresentante de $pdf->nombreInstitucion declara, bajo protesta de decir verdad, que los datos proporcionados en la Solicitud $folio cuenta con un inmueble con las condiciones de seguridad, higiénicas necesarias para impartir el plan de estudios para el programa $programa , modalidad $modalidad en periodos $periodo, asimismo ACEPTA cumplir y se compromete con las siguientes obligaciones derivadas del otorgamiento del Reconocimiento de Validez Oficial de Estudios.")
         , 0, "J");
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("1.- Cumplir con lo dispuesto en el artículo 3° de la Constitución Política de los Estados Unidos Mexicanos, en la Ley General de Educación, en la Ley de Educación del Estado de Jalisco, y demás disposiciones legales y administrativas que le sean aplicables.")
+        utf8_decode("1.- Cumplir con lo dispuesto en la Constitución Política de los Estados Unidos Mexicanos en el artículo 3°, la Ley General de Educación, en la Ley de Educación del Estado de Jalisco, y demás disposiciones legales y administrativas que le sean aplicables.")
         , 0, "J");
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("2.- Mencionar, en toda su documentación y publicidad que expida, la fecha y número del acuerdo por el cual se otorgó el Reconocimiento de Validez Oficial de Estudios, así como la autoridad que lo expidió y el periodo establecido.")
+        utf8_decode("2.- Mencionar, en toda su documentación y publicidad que expida, la fecha y número del acuerdo por el cual se otorgó el Reconocimiento de Validez Oficial de Estudios (RVOE), así como la autoridad que lo expidió y el periodo establecido.")
         , 0, "J");
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("3.- Respetar los lineamientos descritos en el Acuerdo que establece las bases mínimas de información para la comercialización de los servicios educativos que prestan los particulares.")
+        utf8_decode("3.- Respetar los lineamientos descritos en el Acuerdo del Reconocimiento de Validez Oficial (RVOE), que establecen  los lineamientos legales  para la comercialización de los servicios educativos que prestan los particulares.")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -82,7 +82,8 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("5.- Los planes y programas de estudio validados por la Autoridad Educativa, una vez que son aprobados no podrán modificarse hasta su vencimiento, de lo contrario no tendrá validez para cualquier trámite ante cualquier autoridad competente.")
+        utf8_decode("5.- Los planes y programas de estudio validados por la Autoridad Educativa, una vez que son aprobados no podrán modificarse hasta su vencimiento, de lo contrario no tendrá validez para cualquier trámite ante cualquier autoridad competente.
+        .")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -92,12 +93,12 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("7.- Reportar a la autoridad educativa, cualquier daño o modificación que sufra el inmueble en su estructura, con posterioridad a la fecha de presentación de la solicitud de autorización o reconocimiento de validez oficial de estudios, proporcionando, en su caso, los datos de la nueva constancia en la que se acredite que las reparaciones o modificaciones cumplen con las normas mínimas de construcción y seguridad.")
+        utf8_decode("7.- Reportar a la Autoridad Educativa, cualquier daño o modificación que sufra el inmueble en su estructura, con posterioridad a la fecha de presentación de la solicitud de autorización del Reconocimiento de Validez Oficial de Estudios, proporcionando, en su caso, los datos de la nueva constancia en la que se acredite que las reparaciones o modificaciones cumplen con las normas de construcción y seguridad.")
         , 0, "J");
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("8.-  Facilitar  y  colaborar  en  las  actividades  de  evaluación,  inspección  y  vigilancia  que  las  autoridades competentes realicen u ordenen.")
+        utf8_decode("8.- Facilitar y colaborar en las actividades de evaluación, inspección y vigilancia que las autoridades competentes realicen u ordenen, como lo establece la Ley General de Educación en su artículo 149 fracción V.")
         , 0, "J");
   $pdf->Ln( 5 );
 
@@ -107,17 +108,12 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("10.- Mantener vigente la Posesión Legal del Inmueble, el Dictamen de Seguridad Estructural, Licencia de Uso de Suelo, Dictamen de Protección Civil y Licencia Municipal.")
+        utf8_decode("10.- Mantener vigente la posesión legal del inmueble, el Dictamen de seguridad estructural, Licencia de uso de suelo, Dictamen de protección civil y Licencia municipal.")
         , 0, "J");
   $pdf->Ln( 5 );
 
   $pdf->nuevaPagina();
   $pdf->Ln( 15 );
-
-  //$pdf->MultiCell( 0, 5,
-  //      utf8_decode("10.- Mantener vigente la Posesión Legal del Inmueble, el Dictamen de Seguridad Estructural, Licencia de Uso de Suelo, Dictamen de Protección Civil y Licencia Municipal.")
-  //      , 0, "J");
-  //$pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
         utf8_decode("11.- Constituir el Comité de Seguridad Escolar, de conformidad con los lineamientos establecidos en el Diario Oficial de la Federación del 4 de septiembre de 1986.")
@@ -125,7 +121,7 @@
   $pdf->Ln( 5 );
 
   $pdf->MultiCell( 0, 5,
-        utf8_decode("12.- La Secretaría de Innovación, Ciencia y Tecnología verificará las instalaciones para que cumplan con la normatividad vigente, higiene seguridad y pedagogía.")
+        utf8_decode("12.- La Secretaría de Innovación, Ciencia y Técnologia (SICyT) verificará las instalaciones para que cumplan con la normatividad vigente, higiene seguridad y pedagogía.")
         , 0, "J");
   $pdf->Ln( 5 );
 

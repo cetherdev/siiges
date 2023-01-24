@@ -7,6 +7,14 @@ if (!isset($_GET["id"]) && !$_GET["id"]) {
   header("../home.php");
 }
 
+$cicloTxt = [
+  "SEMESTRALES",
+  "CUATRIMESTRALES",
+  "ANUALES",
+  "SEMESTRALES",
+  "CUATRIMESTRALES"
+];
+
 $pdf = new PDF();
 
 $pdf->getData($_GET["id"]);
@@ -53,7 +61,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
     ],
   );
 } else {
@@ -68,7 +76,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
     ],
   );
 }

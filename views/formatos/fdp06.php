@@ -15,6 +15,15 @@ $tituloTipoSolicitud = [
   "SOLICITUD DE CAMBIO DE DOMICILIO",
   "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
 ];
+
+$cicloTxt = [
+  "SEMESTRALES",
+  "CUATRIMESTRALES",
+  "ANUALES",
+  "SEMESTRALES",
+  "CUATRIMESTRALES"
+];
+
 $pdf = new PDF();
 //header('Content-Type: text/html; charset=UTF-8');
 $pdf->getData($_GET["id"]);
@@ -60,7 +69,7 @@ $dataPrograma = array(
   ],
   [
     "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
   ],
   [
     "name" => utf8_decode("TIPO DE TRÁMITE"),

@@ -216,12 +216,17 @@ Solicitudes.getDetalles = function () {
         //Comprobamos que tenga formato correcto
         const convocatoria = Number(solicitud.convocatoria);
 
+        const fdp02 = document.getElementById("fdp02");
+        if (fdp02) {
+          fdp02.setAttribute("href", `formatos/fdp02.php?id=${solicitud.id}`);
+          fdp02.innerHTML = "FDP 02";
+        }
+
         if (convocatoria < 2020 || convocatoria == 0) {
           const fda02 = document.getElementById("fda02");
           const fda04 = document.getElementById("fda04");
           const fda05 = document.getElementById("fda05");
           const fda06 = document.getElementById("fda06");
-          const fdp02 = document.getElementById("fdp02");
           const fdp08 = document.getElementById("fdp08");
 
           fda02.setAttribute("href", `formatos/fda02.php?id=${solicitud.id}`);
@@ -236,11 +241,6 @@ Solicitudes.getDetalles = function () {
           fda06.setAttribute("href", `formatos/fda06.php?id=${solicitud.id}`);
           fda06.innerHTML = "FDA 06";
 
-          if (fdp02) {
-            fdp02.setAttribute("href", `formatos/fdp02.php?id=${solicitud.id}`);
-            fdp02.innerHTML = "FDP 02";
-          }
-
           if (fdp08) {
             fdp08.setAttribute("href", `formatos/fdp08.php?id=${solicitud.id}`);
             fdp08.innerHTML = "FDP 08";
@@ -253,7 +253,6 @@ Solicitudes.getDetalles = function () {
           const fda05 = document.getElementById("fda05");
           const fda06 = document.getElementById("fda06");
           const fda06Checkbox = document.getElementById("fda06Checkbox");
-          const fdp02 = document.getElementById("fdp02");
           const fdp08 = document.getElementById("fdp08");
 
           fda02.setAttribute(
@@ -277,14 +276,6 @@ Solicitudes.getDetalles = function () {
           fda06.remove();
           if (fda06Checkbox) {
             fda06Checkbox.remove();
-          }
-
-          if (fdp02) {
-            fdp02.setAttribute(
-              "href",
-              `formatos/fdp02-2020.php?id=${solicitud.id}`
-            );
-            fdp02.innerHTML = "FDP 02";
           }
 
           console.log("Convocatoria actual");
