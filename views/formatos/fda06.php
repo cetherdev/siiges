@@ -1,6 +1,6 @@
 <?php
   require( "pdf.php" );
-
+  
   session_start( );
 
   if(!isset($_GET["id"]) && !$_GET["id"]){
@@ -8,7 +8,7 @@
   }
 
   class FDA06 extends PDF{
-
+      
     public function nuevaPagina(){
       $this->AliasNbPages( );
       $this->AddPage( "P", "Letter" );
@@ -85,7 +85,7 @@
         utf8_decode("5.- Los planes y programas de estudio validados por la Autoridad Educativa, una vez que son aprobados no podrán modificarse hasta su vencimiento, de lo contrario no tendrá validez para cualquier trámite ante cualquier autoridad competente.
         .")
         , 0, "J");
-  $pdf->Ln( 5 );
+  $pdf->Ln( 1 );
 
   $pdf->MultiCell( 0, 5,
         utf8_decode("6.- La Institución se compromete a mantener actualizados los planes y programas de estudio de acuerdo a los avances de la materia y someterlos a refrendo al término del periodo establecido por la Autoridad Educativa.")
