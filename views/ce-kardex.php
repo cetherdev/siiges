@@ -6,6 +6,7 @@ Utileria::validarSesion(basename(__FILE__));
 //====================================================================================================
 
 require_once "../models/modelo-programa.php";
+require_once "../models/modelo-situacion.php";
 require_once "../models/modelo-alumno.php";
 require_once "../models/modelo-persona.php";
 require_once "../models/modelo-calificacion.php";
@@ -16,6 +17,8 @@ require_once "../models/modelo-asignatura.php";
 $programa = new Programa();
 $programa->setAttributes(array("id" => $_GET["programa_id"]));
 $resultadoPrograma = $programa->consultarId();
+
+$situaciones = array(1 => 'Activo', 2 => 'Inactivo', 3 => 'Egresado', 4 => 'Baja');    
 
 $alumno = new Alumno();
 $alumno->setAttributes(array("id" => $_GET["alumno_id"]));
@@ -70,13 +73,12 @@ $resultadoPersona = $persona->consultarId();
           <ol class="breadcrumb pull-left">
             <li><i class="icon icon-home"></i></li>
             <li><a href="home.php">SIIGES</a></li>
-            <li><a href="ce-programas.php">Programas de Estudios</a></li>
             <?php if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) { ?>
               <li><a href="ce-alumnos-equivalencia.php?programa_id=<?php echo $_GET["programa_id"]; ?>">Alumnos</a></li>
             <?php } else { ?>
               <li><a href="ce-alumnos.php?programa_id=<?php echo $_GET["programa_id"]; ?>">Alumnos</a></li>
             <?php } ?>
-            <li class="active">Consulta de Historial Académico</li>
+            <li class="active">Consulta de Historial Acad&eacute;mico</li>
           </ol>
         </div>
       </div>
@@ -84,7 +86,7 @@ $resultadoPersona = $persona->consultarId();
       <!-- CUERPO PRINCIPAL -->
       <div class="col-sm-12 col-md-12 col-lg-12">
         <!-- TÍTULO -->
-        <h2 id="txtNombre">Consulta de Historial Académico</h2>
+        <h2 id="txtNombre">Consulta de Historial Acad&eacute;mico</h2>
         <hr class="red">
         <div class="row">
           <div class="col-sm-12">
@@ -93,38 +95,60 @@ $resultadoPersona = $persona->consultarId();
         </div>
         <!-- CONTENIDO -->
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-12 col-md-6">
             <table id="tabla-reporte1" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th width="20%">Matr&iacute;cula</th>
-                  <th width="20%">Apellido Paterno</th>
-                  <th width="20%">Apellido Materno</th>
-                  <th width="20%">Nombre</th>
-                  <?php
-                    if (Rol::ROL_ADMIN == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"])) :
-                  ?>
-                  <th width="20%">Acciones</th>
-                  <?php
-                    endif;
-                  ?>
+                  <th width="50%">Matr&iacute;cula</th>
+                  <th width="50%">Situaci&oacute;n</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><?php echo $resultadoAlumno["data"]["matricula"]; ?></td>
-                  <td><?php echo $resultadoPersona["data"]["apellido_paterno"]; ?></td>
+                  <td><?php 
+                  echo $situaciones[$resultadoAlumno["data"]["situacion_id"]]; 
+                  ?></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <table id="tabla-reporte1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th width="25%">Apellido Paterno</th>
+                  <th width="25%">Apellido Materno</th>
+                  <?php
+                  if (Rol::ROL_ADMIN == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"])) {
+                  ?>
+                    <th width="25%">Nombre</th>
+                    <th width="25%">Acciones</th>
+                  <?php
+                  } else {
+                  ?>
+                    <th width="50%">Nombre</th>
+                  <?php
+                  }
+                  ?>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><?php echo $resultadoPersona["data"]["nombre"]; ?></td>
                   <td><?php echo $resultadoPersona["data"]["apellido_materno"]; ?></td>
                   <td><?php echo $resultadoPersona["data"]["nombre"]; ?></td>
                   <?php
-                    if (Rol::ROL_ADMIN == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"])) :
+                  if (Rol::ROL_ADMIN == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"])) :
                   ?>
-                  <td>
-                    <a href="ce-catalogo-alumno.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $resultadoAlumno["data"]["id"]; ?>&proceso=consulta"><span id="" title="Abrir" class="glyphicon glyphicon-eye-open col-sm-1 size_icon"></span></a>
-                    <a href="ce-catalogo-alumno.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $resultadoAlumno["data"]["id"]; ?>&proceso=edicion"><span id="" title="Editar" class="glyphicon glyphicon-edit col-sm-1 size_icon"></span></a>
-                  </td>
+                    <td>
+                      <a href="ce-catalogo-alumno.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $resultadoAlumno["data"]["id"]; ?>&proceso=consulta"><span id="" title="Abrir" class="glyphicon glyphicon-eye-open col-sm-1 size_icon"></span></a>
+                      <a href="ce-catalogo-alumno.php?programa_id=<?php echo $resultadoPrograma["data"]["id"]; ?>&alumno_id=<?php echo $resultadoAlumno["data"]["id"]; ?>&proceso=edicion"><span id="" title="Editar" class="glyphicon glyphicon-edit col-sm-1 size_icon"></span></a>
+                    </td>
                   <?php
-                    endif;
+                  endif;
                   ?>
                 </tr>
               </tbody>
