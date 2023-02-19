@@ -3,12 +3,19 @@ require("pdf.php");
 require_once "../../models/modelo-solicitud.php";
 require_once "../../models/modelo-ciclo.php";
 
-
 session_start();
 
 if (!isset($_GET["id"]) && !$_GET["id"]) {
   header("../home.php");
 }
+
+$cicloTxt = [
+  "SEMESTRALES",
+  "CUATRIMESTRALES",
+  "ANUALES",
+  "SEMESTRALES",
+  "CUATRIMESTRALES"
+];
 
 $pdf = new PDF();
 $pdf->getData($_GET["id"]);
@@ -18,7 +25,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 35, 20);
 $pdf->SetAutoPageBreak(true, 30);
-
 
 // Nombre del formato
 $pdf->SetFont("Nutmegb", "", 11);
@@ -113,7 +119,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PLAN DE ESTUDIOS"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
     ],
   );
   if ($pdf->programa["acuerdo_rvoe"]) {
@@ -134,7 +140,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PLAN DE ESTUDIOS"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
     ],
   );
   if ($pdf->programa["acuerdo_rvoe"]) {
@@ -299,8 +305,6 @@ $pdf->Cell(0, 5, utf8_decode("10. ESTRUCTURA DEL PLAN DE ESTUDIOS"), 1, 1, "C", 
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->SetFillColor(192, 192, 192);
 
-
-
 // Tabla de materias para curriculum flexible
 if ($pdf->programa["ciclo_id"] == 4 || $pdf->programa["ciclo_id"] == 5) {
 
@@ -314,7 +318,6 @@ if ($pdf->programa["ciclo_id"] == 4 || $pdf->programa["ciclo_id"] == 5) {
     $horas_docente = 0;
     $horas_independiente = 0;
     $creditos = 0;
-
 
     $pdf->SetFillColor(166, 166, 166);
     $pdf->SetFont("Nutmeg", "", 7);
@@ -341,7 +344,6 @@ if ($pdf->programa["ciclo_id"] == 4 || $pdf->programa["ciclo_id"] == 5) {
     $pdf->Cell(15, 10, utf8_decode("CRÉDITOS"), 1, 0, "C", true);
     $pdf->Cell(28, 10, utf8_decode("INSTALACIONES"), 1, 0, "C", true);
     $pdf->Ln(10);
-
 
     // Fila de asignatura por asignatura
     foreach ($asignaturas as $asignatura => $detalle) {
@@ -434,7 +436,6 @@ if ($pdf->programa["ciclo_id"] == 4 || $pdf->programa["ciclo_id"] == 5) {
     $pdf->Ln();
     $pdf->Ln();
   }
-
 
   if ($pdf->checkNewPage()) {
     $pdf->Ln(15);
@@ -547,6 +548,7 @@ if ($pdf->programa["ciclo_id"] == 4 || $pdf->programa["ciclo_id"] == 5) {
             $pdf->Ln(15);
           }
         }
+
         // Suma de horas y créditos por grado
         $total_docente += $detalle["horas_docente"];
         $horas_docente += $detalle["horas_docente"];
@@ -703,7 +705,6 @@ if ($pdf->programa["minimo_horas_optativas"]) {
     ],
   );
 
-
   //set widht for each column (6 columns)
   $pdf->SetWidths(array(130, 44));
 
@@ -725,7 +726,6 @@ if ($pdf->programa["minimo_horas_optativas"]) {
 $pdf->Ln();
 $pdf->Ln();
 
-
 if ($pdf->checkNewPage()) {
   $pdf->Ln(15);
 }
@@ -746,7 +746,6 @@ $dataTotal = array(
   ],
 );
 
-
 //set widht for each column (6 columns)
 $pdf->SetWidths(array(130, 44));
 
@@ -765,43 +764,15 @@ foreach ($dataTotal as $item) {
 $pdf->Ln();
 $pdf->Ln();
 
-
 if ($pdf->checkNewPage()) {
   $pdf->Ln(15);
 }
 $pdf->Ln(5);
 
-$pdf->SetFillColor(166, 166, 166);
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("11. OPERACIÓN DEL PLAN DE ESTUDIOS A TRAVÉS DE SUS ACADEMIAS"), 1, 1, "C", true);
-
-foreach ($asignaturaAcademias as $academia => $asignaturas) {
-  $pdf->SetFillColor(191, 191, 191);
-  $pdf->SetFont("Nutmegb", "", 8);
-  $pdf->Cell(0, 5, utf8_decode(ucfirst($academia)), 1, 1, "L", true);
-  $pdf->SetFont("Nutmeg", "", 7);
-  $pdf->MultiCell(0, 5, utf8_decode($asignaturas), 1, "J");
-
-  if ($pdf->checkNewPage()) {
-    $pdf->SetFont("Nutmegb", "", 11);
-    $pdf->SetTextColor(255, 255, 255);
-    $pdf->SetFillColor(0, 127, 204);
-    $pdf->Cell(140, 5, "", 0, 0, "L");
-    $pdf->Cell(35, 6, "FDP02", 0, 0, "R", true);
-    $pdf->SetTextColor(0, 0, 0);
-    $pdf->Ln(15);
-  }
-}
-
-$pdf->SetFont("Nutmegbk", "", 7);
-$pdf->SetTextColor(191, 191, 191);
-$pdf->MultiCell(0, 5, utf8_decode("REGLAS DE OPERACIÓN: ADJUNTAR REGLAMENTO DE ACADEMIAS O DOCUMENTO QUE CONTENGA LAS REGLAS DE OPERACIÓN DE DICHOS CUERPOS COLEGIADOS"), 0, "L");
-$pdf->Ln(15);
-
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("12. LÍNEAS DE GENERACIÓN Y/O APLICACIÓN DEL CONOCIMIENTO "), 1, 1, "C", true);
+$pdf->Cell(0, 5, utf8_decode("11. LÍNEAS DE GENERACIÓN Y/O APLICACIÓN DEL CONOCIMIENTO "), 1, 1, "C", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["lineas_generacion_aplicacion_conocimiento"]), 0, "J");
 if ($pdf->checkNewPage()) {
@@ -811,7 +782,7 @@ $pdf->Ln(15);
 
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("13. REFRENDO DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
+$pdf->Cell(0, 5, utf8_decode("12. ACTUALIZACIÓN DEL PLAN DE ESTUDIOS"), 1, 1, "C", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["actualizacion"]), 0, "J");
 if ($pdf->checkNewPage()) {
@@ -821,7 +792,7 @@ $pdf->Ln(15);
 
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("14. PROYECTO DE SEGUIMIENTO DE EGRESADOS "), 1, 1, "C", true);
+$pdf->Cell(0, 5, utf8_decode("13. PROYECTO DE SEGUIMIENTO DE EGRESADOS "), 1, 1, "C", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["seguimiento_egresados"]), 0, "J");
 if ($pdf->checkNewPage()) {
@@ -831,7 +802,7 @@ $pdf->Ln(15);
 
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->MultiCell(0, 5, utf8_decode("15. VINCULACIÓN CON COLEGIOS DE PROFESIONISTAS, ACADEMIAS, ASOCIACIONES PROFESIONALES,ETC."), 1, "C", true);
+$pdf->MultiCell(0, 5, utf8_decode("14. VINCULACIÓN CON COLEGIOS DE PROFESIONISTAS, ACADEMIAS, ASOCIACIONES PROFESIONALES, ETC."), 1, "C", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["convenios_vinculacion"]), 0, "J");
 
@@ -856,6 +827,5 @@ if ($pdf->programa["acuerdo_rvoe"]) {
   $pdf->Cell(0, 5, utf8_decode(mb_strtoupper($pdf->nombreRepresentante)), 0, 0, "C");
 }
 $pdf->Ln(10);
-
 
 $pdf->Output("I", "FDP02.pdf");

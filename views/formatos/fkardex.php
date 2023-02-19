@@ -182,7 +182,7 @@ foreach ($pdf->calificacionesAlumno as $ciclos => $ciclo) {
       }
     }
 
-    if ($detalle["calificacion"] > $pdf->programa["calificacion_aprobatoria"]) {
+    if ($detalle["calificacion"] >= $pdf->programa["calificacion_aprobatoria"]) {
       $total_creditos += $detalle["asignatura"]["creditos"];
       $total_calificaciones += $detalle["calificacion"];
       $total_materias += 1;

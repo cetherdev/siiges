@@ -42,7 +42,7 @@ $pdf->Ln(5);
 // Fecha
 $pdf->SetFont("Nutmeg", "", 9);
 $fecha =  $pdf->fecha;
-$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("Guadalajara, Jal. a $fecha")), 0, 1, "R");
+$pdf->Cell(0, 5, utf8_decode(mb_strtoupper($fecha)), 0, 1, "R");
 $pdf->Ln(5);
 
 
@@ -66,10 +66,6 @@ $dataPersonaSolicitante = array(
     "name" => utf8_decode("APELLIDO MATERNO"),
     "description" => utf8_decode(mb_strtoupper($pdf->usuarioR["persona"]["apellido_materno"]))
   ],
-  [
-    "name" => utf8_decode("NACIONALIDAD"),
-    "description" => utf8_decode(mb_strtoupper($pdf->usuarioR["persona"]["nacionalidad"]))
-  ],
 );
 
 //set widht for each column (6 columns)
@@ -90,110 +86,13 @@ foreach ($dataPersonaSolicitante as $item) {
 $pdf->Ln();
 $pdf->Ln();
 
-
-// Tabla de domicilio de la institucion
-// Domicilio de la instituciones
-$pdf->SetFillColor(166, 166, 166);
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(174, 5, utf8_decode("2. DATOS DE LA INSTITUCIÓN"), 1, 1, "C", true);
-
-$dataDetalleDomicilioInstitucion = array(
-  [
-    "calle_institucion" => utf8_decode(mb_strtoupper($pdf->domicilioPlantel["calle"] . " " . $pdf->domicilioPlantel["numero_exterior"] . " " . $pdf->domicilioPlantel["numero_interior"])),
-    "colonia_institucion" => utf8_decode(mb_strtoupper($pdf->domicilioPlantel["colonia"])),
-    "codigo_postal_institucion" => utf8_decode(mb_strtoupper($pdf->domicilioPlantel["codigo_postal"])),
-    "municipio_institucion" => utf8_decode(mb_strtoupper($pdf->domicilioPlantel["municipio"])),
-    "estado_institucion" => utf8_decode(mb_strtoupper($pdf->domicilioPlantel["estado"])),
-    "telefono_institucion" => utf8_decode($pdf->plantel["telefono1"] . ",\n" . $pdf->plantel["telefono2"] . ",\n" . $pdf->plantel["telefono3"]),
-    "redes_sociales_institucion" => utf8_decode($pdf->plantel["redes_sociales"]),
-    "correo_institucion" => utf8_decode($pdf->plantel["email1"] . ",\n" . $pdf->plantel["email2"] . ",\n" . $pdf->plantel["email3"]),
-
-  ]
-);
-
-$pdf->SetFillColor(191, 191, 191);
-$pdf->Cell(116, 5, utf8_decode("CALLE Y NÚMERO"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("COLONIA"), 1, 0, "C", true);
-$pdf->Ln();
-
-//set widht for each column (6 columns)
-$pdf->SetWidths(array(116, 58));
-
-//set line height
-$pdf->SetLineHeight(5);
-$pdf->SetColors([]);
-$pdf->SetFont("Nutmeg", "", 9);
-
-foreach ($dataDetalleDomicilioInstitucion as $item) {
-  // write data using Row() method containing array of values
-  $pdf->Row(array(
-    $item['calle_institucion'],
-    $item['colonia_institucion']
-  ));
-}
-
-// Sergundo row de domicilio
-// add table heading using standard cells
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->SetFillColor(191, 191, 191);
-$pdf->Cell(58, 5, utf8_decode("CÓDIGO POSTAL"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("DELEGACIÓN O MUNICIPIO"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("ENTIDAD FEDERATIVA"), 1, 0, "C", true);
-$pdf->Ln();
-
-//set widht for each column (6 columns)
-$pdf->SetWidths(array(58, 58, 58));
-
-//set line height
-$pdf->SetLineHeight(5);
-$pdf->SetFont("Nutmeg", "", 9);
-
-foreach ($dataDetalleDomicilioInstitucion as $item) {
-  // write data using Row() method containing array of values
-  $pdf->Row(array(
-    $item['codigo_postal_institucion'],
-    $item['municipio_institucion'],
-    $item['estado_institucion']
-  ));
-}
-
-
-// Tercer row de domicilio
-// add table heading using standard cells
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->SetFillColor(191, 191, 191);
-$pdf->Cell(58, 5, utf8_decode("NÚMERO TELEFÓNICO"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("REDES SOCIALES"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("CORREO ELECTRÓNICO"), 1, 0, "C", true);
-$pdf->Ln();
-
-//set widht for each column (6 columns)
-$pdf->SetWidths(array(58, 58, 58));
-
-//set line height
-$pdf->SetLineHeight(5);
-$pdf->SetFont("Nutmeg", "", 9);
-
-foreach ($dataDetalleDomicilioInstitucion as $item) {
-  // write data using Row() method containing array of values
-  $pdf->Row(array(
-    $item['telefono_institucion'],
-    $item['redes_sociales_institucion'],
-    $item['correo_institucion'],
-  ));
-}
-
-$pdf->Ln();
-$pdf->Ln();
-
-
 if (!$pdf->institucion["es_nombre_autorizado"]) {
   // Propuesta de dombres
 
   //Datos de la propuesta de nombres
   $pdf->SetFont("Nutmegb", "", 9);
   $pdf->SetFillColor(166, 166, 166);
-  $pdf->MultiCell(174, 5, utf8_decode("3. PROPUESTA DE NOMBRE"), 1, "C", true);
+  $pdf->MultiCell(174, 5, utf8_decode("2. PROPUESTA DE NOMBRE"), 1, "C", true);
 
   $dataRatificacion = array(
     [

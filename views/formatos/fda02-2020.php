@@ -11,12 +11,19 @@ if (!isset($_GET["id"]) && !$_GET["id"]) {
   header("../home.php");
 }
 
-//print_r($_GET["id"]);
 $tituloTipoSolicitud = [
   "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS",
   "SOLICITUD DE REFRENDO A PLAN Y PROGRAMA DE ESTUDIO",
   "SOLICITUD DE CAMBIO DE DOMICILIO",
   "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
+];
+
+$cicloTxt = [
+  "SEMESTRALES",
+  "CUATRIMESTRALES",
+  "ANUALES",
+  "SEMESTRALES",
+  "CUATRIMESTRALES"
 ];
 
 // make new object
@@ -48,7 +55,7 @@ $pdf->Ln(5);
 // Fecha
 $pdf->SetFont("Nutmeg", "", 9);
 $fecha =  $pdf->fecha;
-$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("Guadalajara, Jal. a $fecha")), 0, 1, "R");
+$pdf->Cell(0, 5, utf8_decode(mb_strtoupper($fecha)), 0, 1, "R");
 $pdf->Ln(5);
 
 // Tabla de encabezado Datos generales de la institución y programa 
@@ -63,7 +70,7 @@ $dataPrograma = array(
   ],
   [
     "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
   ],
   [
     "name" => utf8_decode("NOMBRE COMPLETO DE LA RAZÓN SOCIAL"),
@@ -482,6 +489,373 @@ if ($pdf->checkNewPage()) {
 }
 
 $pdf->Ln();
+$pdf->Ln();
+
+//Datos de Rector
+$pdf->getRector($_GET["id"]);
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(15);
+  $pdf->SetFont("Nutmegb", "", 11);
+  $pdf->SetTextColor(255, 255, 255);
+  $pdf->SetFillColor(0, 127, 204);
+  $pdf->Cell(140, 5, "", 0, 0, "L");
+  $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+  $pdf->SetTextColor(0, 0, 0);
+  $pdf->Ln(15);
+}
+
+$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFillColor(166, 166, 166);
+$pdf->MultiCell(174, 5, utf8_decode("DATOS GENERALES DEL RECTOR"), 1, "C", true);
+// Primer row de rector
+$dataRector = array(
+  [
+    "nombre_rector" => utf8_decode(mb_strtoupper($pdf->rector["nombre"])),
+    "apellido_paterno_rector" => utf8_decode(mb_strtoupper($pdf->rector["apellido_paterno"])),
+    "apellido_materno_rector" => utf8_decode(mb_strtoupper($pdf->rector["apellido_materno"])),
+    "correo_rector_institucional" => utf8_decode(($pdf->rector["correo"])),
+    "correo_rector_personal" => utf8_decode(($pdf->rector["correo_secundario"])),
+    "celular_rector" => utf8_decode(mb_strtoupper($pdf->rector["celular"])),
+  ]
+);
+
+// add table heading using standard cells
+$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFont("Nutmegb", "", 9);
+$pdf->Cell(58, 5, utf8_decode("NOMBRE (S)"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("APELLIDO PATERNO"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("APELLIDO MATERNO"), 1, 0, "C", true);
+$pdf->Ln();
+
+//set widht for each column (6 columns)
+$pdf->SetWidths(array(58, 58, 58));
+
+//set line height
+$pdf->SetLineHeight(5);
+$pdf->SetColors([]);
+$pdf->SetFont("Nutmeg", "", 9);
+
+foreach ($dataRector as $item) {
+  // write data using Row() method containing array of values
+  $pdf->Row(array(
+    $item['nombre_rector'],
+    $item['apellido_paterno_rector'],
+    $item['apellido_materno_rector'],
+  ));
+}
+
+
+$pdf->SetFont("Nutmegb", "", 9);
+
+// add table heading using standard cells
+$pdf->SetFillColor(191, 191, 191);
+$pdf->Cell(58, 5, utf8_decode("CORREO INSTITUCIONAL"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("CORREO PERSONAL"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("NÚMERO DE TELÉFONO CELULAR"), 1, 0, "C", true);
+$pdf->Ln();
+
+//set widht for each column (6 columns)
+$pdf->SetWidths(array(58, 58, 58));
+
+//set line height
+$pdf->SetLineHeight(5);
+$pdf->SetColors([]);
+$pdf->SetFont("Nutmeg", "", 9);
+
+foreach ($dataRector as $item) {
+  // write data using Row() method containing array of values
+  $pdf->Row(array(
+    $item['correo_rector_institucional'],
+    $item['correo_rector_personal'],
+    $item['celular_rector'],
+  ));
+}
+if ($pdf->formaciones1) {
+
+  $pdf->Ln();
+  $pdf->SetFont("Nutmegb", "", 9);
+  $pdf->SetFillColor(166, 166, 166);
+  $pdf->MultiCell(174, 5, utf8_decode("FORMACIÓN ACADÉMICA"), 1, "C", true);
+
+  foreach ($pdf->formaciones1 as $key => $formacion) {
+
+    if ($pdf->checkNewPage()) {
+      $pdf->Ln(15);
+      $pdf->SetFont("Nutmegb", "", 11);
+      $pdf->SetTextColor(255, 255, 255);
+      $pdf->SetFillColor(0, 127, 204);
+      $pdf->Cell(140, 5, "", 0, 0, "L");
+      $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+      $pdf->SetTextColor(0, 0, 0);
+      $pdf->Ln(15);
+    }
+
+    $dataFormacionesRector = array(
+      [
+        "nivel_formacion" => utf8_decode(mb_strtoupper($formacion["nivel"])),
+        "nombre_formacion" => utf8_decode(mb_strtoupper($formacion["nombre"])),
+        "institucion_formacion" => utf8_decode(mb_strtoupper($formacion["institucion"])),
+        "documento_formacion" => utf8_decode(mb_strtoupper($formacion["descripcion"])),
+      ]
+    );
+
+    // add table heading using standard cells
+    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->SetFillColor(191, 191, 191);
+    $pdf->Cell(87, 5, utf8_decode("GRADO EDUCATIVO"), 1, 0, "C", true);
+    $pdf->Cell(87, 5, utf8_decode("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
+    $pdf->Ln();
+
+    //set widht for each column (6 columns)
+    $pdf->SetWidths(array(87, 87));
+
+    //set line height
+    $pdf->SetLineHeight(5);
+    $pdf->SetColors([]);
+    $pdf->SetFont("Nutmeg", "", 9);
+
+    foreach ($dataFormacionesRector as $item) {
+      // write data using Row() method containing array of values
+      $pdf->Row(array(
+        $item['nivel_formacion'],
+        $item['nombre_formacion'],
+      ));
+    }
+
+    // add table heading using standard cells
+    if ($pdf->checkNewPage()) {
+      $pdf->Ln(15);
+      $pdf->SetFont("Nutmegb", "", 11);
+      $pdf->SetTextColor(255, 255, 255);
+      $pdf->SetFillColor(0, 127, 204);
+      $pdf->Cell(140, 5, "", 0, 0, "L");
+      $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+      $pdf->SetTextColor(0, 0, 0);
+      $pdf->Ln(15);
+    }
+    $pdf->SetFillColor(191, 191, 191);
+    $y = $pdf->GetY();
+    $x = $pdf->GetX();
+    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->MultiCell(87, 5, utf8_decode("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, "C", true);
+    $pdf->SetXY($x + 87, $y);
+    $pdf->MultiCell(87, 10, utf8_decode("DOCUMENTO QUE ACREDITA SUS ESTUDIOS"), 1, "C", true);
+
+    //set widht for each column (6 columns)
+    $pdf->SetWidths(array(87, 87));
+
+    //set line height
+    $pdf->SetLineHeight(5);
+    $pdf->SetColors([]);
+    $pdf->SetFont("Nutmeg", "", 9);
+
+    foreach ($dataFormacionesRector as $item) {
+      // write data using Row() method containing array of values
+      $pdf->Row(array(
+        $item['institucion_formacion'],
+        $item['documento_formacion'],
+      ));
+    }
+
+
+    if (sizeof($pdf->formaciones1) > $key + 1) {
+      $pdf->SetFillColor(166, 166, 166);
+      $pdf->Cell(174, 5, "", 1, 1, "C", true);
+    }
+  }
+}
+
+$pdf->Ln(10);
+
+//Datos de Director
+$pdf->getDirector($_GET["id"]);
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(15);
+  $pdf->SetFont("Nutmegb", "", 11);
+  $pdf->SetTextColor(255, 255, 255);
+  $pdf->SetFillColor(0, 127, 204);
+  $pdf->Cell(140, 5, "", 0, 0, "L");
+  $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+  $pdf->SetTextColor(0, 0, 0);
+  $pdf->Ln(15);
+}
+
+$pdf->SetFont("Nutmegb", "", 9);
+$pdf->SetFillColor(166, 166, 166);
+$pdf->MultiCell(174, 5, utf8_decode("DATOS GENERALES DEL DIRECTOR"), 1, "C", true);
+// Primer row de director
+$dataDirector = array(
+  [
+    "nombre_director" => utf8_decode(mb_strtoupper($pdf->director["nombre"])),
+    "apellido_paterno_director" => utf8_decode(mb_strtoupper($pdf->director["apellido_paterno"])),
+    "apellido_materno_director" => utf8_decode(mb_strtoupper($pdf->director["apellido_materno"])),
+    "correo_director_institucional" => utf8_decode(($pdf->director["correo"])),
+    "correo_director_personal" => utf8_decode(($pdf->director["correo_secundario"])),
+    "celular_director" => utf8_decode(mb_strtoupper($pdf->director["celular"])),
+  ]
+);
+
+// add table heading using standard cells
+$pdf->SetFillColor(191, 191, 191);
+$pdf->SetFont("Nutmegb", "", 9);
+$pdf->Cell(58, 5, utf8_decode("NOMBRE (S)"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("APELLIDO PATERNO"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("APELLIDO MATERNO"), 1, 0, "C", true);
+$pdf->Ln();
+
+//set widht for each column (6 columns)
+$pdf->SetWidths(array(58, 58, 58));
+
+//set line height
+$pdf->SetLineHeight(5);
+$pdf->SetColors([]);
+$pdf->SetFont("Nutmeg", "", 9);
+
+foreach ($dataDirector as $item) {
+  // write data using Row() method containing array of values
+  $pdf->Row(array(
+    $item['nombre_director'],
+    $item['apellido_paterno_director'],
+    $item['apellido_materno_director'],
+  ));
+}
+
+
+$pdf->SetFont("Nutmegb", "", 9);
+
+// add table heading using standard cells
+$pdf->SetFillColor(191, 191, 191);
+$pdf->Cell(58, 5, utf8_decode("CORREO INSTITUCIONAL"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("CORREO PERSONAL"), 1, 0, "C", true);
+$pdf->Cell(58, 5, utf8_decode("NÚMERO DE TELÉFONO CELULAR"), 1, 0, "C", true);
+$pdf->Ln();
+
+//set widht for each column (6 columns)
+$pdf->SetWidths(array(58, 58, 58));
+
+//set line height
+$pdf->SetLineHeight(5);
+$pdf->SetColors([]);
+$pdf->SetFont("Nutmeg", "", 9);
+
+foreach ($dataDirector as $item) {
+  // write data using Row() method containing array of values
+  $pdf->Row(array(
+    $item['correo_director_institucional'],
+    $item['correo_director_personal'],
+    $item['celular_director'],
+  ));
+}
+
+if ($pdf->formaciones2) {
+
+  $pdf->Ln();
+  $pdf->SetFont("Nutmegb", "", 9);
+  $pdf->SetFillColor(166, 166, 166);
+  $pdf->MultiCell(174, 5, utf8_decode("FORMACIÓN ACADÉMICA"), 1, "C", true);
+
+  foreach ($pdf->formaciones2 as $key => $formacion) {
+
+    if ($pdf->checkNewPage()) {
+      $pdf->Ln(15);
+      $pdf->SetFont("Nutmegb", "", 11);
+      $pdf->SetTextColor(255, 255, 255);
+      $pdf->SetFillColor(0, 127, 204);
+      $pdf->Cell(140, 5, "", 0, 0, "L");
+      $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+      $pdf->SetTextColor(0, 0, 0);
+      $pdf->Ln(15);
+    }
+
+    $dataFormacionesDirector = array(
+      [
+        "nivel_formacion" => utf8_decode(mb_strtoupper($formacion["nivel"])),
+        "nombre_formacion" => utf8_decode(mb_strtoupper($formacion["nombre"])),
+        "institucion_formacion" => utf8_decode(mb_strtoupper($formacion["institucion"])),
+        "documento_formacion" => utf8_decode(mb_strtoupper($formacion["descripcion"])),
+      ]
+    );
+
+    // add table heading using standard cells
+    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->SetFillColor(191, 191, 191);
+    $pdf->Cell(87, 5, utf8_decode("GRADO EDUCATIVO"), 1, 0, "C", true);
+    $pdf->Cell(87, 5, utf8_decode("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
+    $pdf->Ln();
+
+    //set widht for each column (6 columns)
+    $pdf->SetWidths(array(87, 87));
+
+    //set line height
+    $pdf->SetLineHeight(5);
+    $pdf->SetColors([]);
+    $pdf->SetFont("Nutmeg", "", 9);
+
+    foreach ($dataFormacionesDirector as $item) {
+      // write data using Row() method containing array of values
+      $pdf->Row(array(
+        $item['nivel_formacion'],
+        $item['nombre_formacion'],
+      ));
+    }
+
+    // add table heading using standard cells
+    if ($pdf->checkNewPage()) {
+      $pdf->Ln(15);
+      $pdf->SetFont("Nutmegb", "", 11);
+      $pdf->SetTextColor(255, 255, 255);
+      $pdf->SetFillColor(0, 127, 204);
+      $pdf->Cell(140, 5, "", 0, 0, "L");
+      $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+      $pdf->SetTextColor(0, 0, 0);
+      $pdf->Ln(15);
+    }
+    $pdf->SetFillColor(191, 191, 191);
+    $y = $pdf->GetY();
+    $x = $pdf->GetX();
+    $pdf->SetFont("Nutmegb", "", 9);
+    $pdf->MultiCell(87, 5, utf8_decode("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, "C", true);
+    $pdf->SetXY($x + 87, $y);
+    $pdf->MultiCell(87, 10, utf8_decode("DOCUMENTO QUE ACREDITA SUS ESTUDIOS"), 1, "C", true);
+
+    //set widht for each column (6 columns)
+    $pdf->SetWidths(array(87, 87));
+
+    //set line height
+    $pdf->SetLineHeight(5);
+    $pdf->SetColors([]);
+    $pdf->SetFont("Nutmeg", "", 9);
+
+    foreach ($dataFormacionesDirector as $item) {
+      // write data using Row() method containing array of values
+      $pdf->Row(array(
+        $item['institucion_formacion'],
+        $item['documento_formacion'],
+      ));
+    }
+
+
+    if (sizeof($pdf->formaciones2) > $key + 1) {
+      $pdf->SetFillColor(166, 166, 166);
+      $pdf->Cell(174, 5, "", 1, 1, "C", true);
+    }
+  }
+}
+
+$pdf->Ln(10);
+
+if ($pdf->checkNewPage()) {
+  $pdf->Ln(15);
+  $pdf->SetFont("Nutmegb", "", 11);
+  $pdf->SetTextColor(255, 255, 255);
+  $pdf->SetFillColor(0, 127, 204);
+  $pdf->Cell(140, 5, "", 0, 0, "L");
+  $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
+  $pdf->SetTextColor(0, 0, 0);
+  $pdf->Ln(15);
+}
 
 //Diligencias
 //Datos del o los diligentes
@@ -546,7 +920,7 @@ foreach ($pdf->nombresDiligencias as $key => $diligencia) {
     $pdf->Cell(174, 5, "", 1, 1, "C", true);
   }
 }
-$pdf->Ln();
+$pdf->Ln(10);
 
 if ($pdf->checkNewPage()) {
   $pdf->Ln(15);
@@ -644,191 +1018,6 @@ if (!$pdf->institucion["es_nombre_autorizado"]) {
       $item['description']
     ));
   }
-}
-
-$pdf->Ln();
-
-//Datos de Rector
-$pdf->getRector($_GET["id"]);
-
-if ($pdf->checkNewPage()) {
-  $pdf->Ln(15);
-  $pdf->SetFont("Nutmegb", "", 11);
-  $pdf->SetTextColor(255, 255, 255);
-  $pdf->SetFillColor(0, 127, 204);
-  $pdf->Cell(140, 5, "", 0, 0, "L");
-  $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
-  $pdf->SetTextColor(0, 0, 0);
-  $pdf->Ln(15);
-}
-
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->SetFillColor(166, 166, 166);
-$pdf->MultiCell(174, 5, utf8_decode("DATOS GENERALES DEL RECTOR"), 1, "C", true);
-// Primer row de rector
-$dataRector = array(
-  [
-    "nombre_rector" => utf8_decode(mb_strtoupper($pdf->rector["nombre"])),
-    "apellido_paterno_rector" => utf8_decode(mb_strtoupper($pdf->rector["apellido_paterno"])),
-    "apellido_materno_rector" => utf8_decode(mb_strtoupper($pdf->rector["apellido_materno"])),
-    "correo_rector" => utf8_decode(($pdf->rector["correo"])),
-    "celular_rector" => utf8_decode(mb_strtoupper($pdf->rector["celular"])),
-  ]
-);
-
-// add table heading using standard cells
-$pdf->SetFillColor(191, 191, 191);
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(58, 5, utf8_decode("NOMBRE (S)"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("PRIMER APELLIDO"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("SEGUNDO APELLIDO"), 1, 0, "C", true);
-$pdf->Ln();
-
-//set widht for each column (6 columns)
-$pdf->SetWidths(array(58, 58, 58));
-
-//set line height
-$pdf->SetLineHeight(5);
-$pdf->SetColors([]);
-$pdf->SetFont("Nutmeg", "", 9);
-
-foreach ($dataRector as $item) {
-  // write data using Row() method containing array of values
-  $pdf->Row(array(
-    $item['nombre_rector'],
-    $item['apellido_paterno_rector'],
-    $item['apellido_materno_rector'],
-  ));
-}
-
-
-$pdf->SetFont("Nutmegb", "", 9);
-
-// add table heading using standard cells
-$pdf->SetFillColor(191, 191, 191);
-$pdf->Cell(116, 5, utf8_decode("CORREO ELECTRÓNICO"), 1, 0, "C", true);
-$pdf->Cell(58, 5, utf8_decode("NÚMERO DE TELÉFONO CELULAR"), 1, 0, "C", true);
-$pdf->Ln();
-
-//set widht for each column (6 columns)
-$pdf->SetWidths(array(116, 58));
-
-//set line height
-$pdf->SetLineHeight(5);
-$pdf->SetColors([]);
-$pdf->SetFont("Nutmeg", "", 9);
-
-foreach ($dataRector as $item) {
-  // write data using Row() method containing array of values
-  $pdf->Row(array(
-    $item['correo_rector'],
-    $item['celular_rector'],
-  ));
-}
-if ($pdf->formaciones1) {
- 
-  $pdf->Ln();
-  $pdf->SetFont("Nutmegb", "", 9);
-  $pdf->SetFillColor(166, 166, 166);
-  $pdf->MultiCell(174, 5, utf8_decode("FORMACIÓN ACADÉMICA"), 1, "C", true);
-
-  foreach ($pdf->formaciones1 as $key => $formacion) {
-
-    if ($pdf->checkNewPage()) {
-      $pdf->Ln(15);
-      $pdf->SetFont("Nutmegb", "", 11);
-      $pdf->SetTextColor(255, 255, 255);
-      $pdf->SetFillColor(0, 127, 204);
-      $pdf->Cell(140, 5, "", 0, 0, "L");
-      $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
-      $pdf->SetTextColor(0, 0, 0);
-      $pdf->Ln(15);
-    }
-
-    $dataFormacionesRector = array(
-      [
-        "nivel_formacion" => utf8_decode(mb_strtoupper($formacion["nivel"])),
-        "nombre_formacion" => utf8_decode(mb_strtoupper($formacion["nombre"])),
-        "institucion_formacion" => utf8_decode(mb_strtoupper($formacion["institucion"])),
-        "documento_formacion" => utf8_decode(mb_strtoupper($formacion["descripcion"])),
-      ]
-    );
-
-    // add table heading using standard cells
-    $pdf->SetFont("Nutmegb", "", 9);
-    $pdf->SetFillColor(191, 191, 191);
-    $pdf->Cell(87, 5, utf8_decode("GRADO EDUCATIVO"), 1, 0, "C", true);
-    $pdf->Cell(87, 5, utf8_decode("NOMBRE DE LOS ESTUDIOS"), 1, 0, "C", true);
-    $pdf->Ln();
-
-    //set widht for each column (6 columns)
-    $pdf->SetWidths(array(87, 87));
-
-    //set line height
-    $pdf->SetLineHeight(5);
-    $pdf->SetColors([]);
-    $pdf->SetFont("Nutmeg", "", 9);
-
-    foreach ($dataFormacionesRector as $item) {
-      // write data using Row() method containing array of values
-      $pdf->Row(array(
-        $item['nivel_formacion'],
-        $item['nombre_formacion'],
-      ));
-    }
-
-    // add table heading using standard cells
-    if ($pdf->checkNewPage()) {
-      $pdf->Ln(15);
-      $pdf->SetFont("Nutmegb", "", 11);
-      $pdf->SetTextColor(255, 255, 255);
-      $pdf->SetFillColor(0, 127, 204);
-      $pdf->Cell(140, 5, "", 0, 0, "L");
-      $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
-      $pdf->SetTextColor(0, 0, 0);
-      $pdf->Ln(15);
-    }
-    $pdf->SetFillColor(191, 191, 191);
-    $y = $pdf->GetY();
-    $x = $pdf->GetX();
-    $pdf->SetFont("Nutmegb", "", 9);
-    $pdf->MultiCell(87, 5, utf8_decode("NOMBRE DE LA INSTITUCIÓN EDUCATIVA DE PROCEDENCIA"), 1, "C", true);
-    $pdf->SetXY($x + 87, $y);
-    $pdf->MultiCell(87, 10, utf8_decode("DOCUMENTO QUE ACREDITA SUS ESTUDIOS"), 1, "C", true);
-
-    //set widht for each column (6 columns)
-    $pdf->SetWidths(array(87, 87));
-
-    //set line height
-    $pdf->SetLineHeight(5);
-    $pdf->SetColors([]);
-    $pdf->SetFont("Nutmeg", "", 9);
-
-    foreach ($dataFormacionesRector as $item) {
-      // write data using Row() method containing array of values
-      $pdf->Row(array(
-        $item['institucion_formacion'],
-        $item['documento_formacion'],
-      ));
-    }
-
-
-    if (sizeof($pdf->formaciones1) > $key + 1) {
-      $pdf->SetFillColor(166, 166, 166);
-      $pdf->Cell(174, 5, "", 1, 1, "C", true);
-    }
-  }
-}
-
-if ($pdf->checkNewPage()) {
-  $pdf->Ln(15);
-  $pdf->SetFont("Nutmegb", "", 11);
-  $pdf->SetTextColor(255, 255, 255);
-  $pdf->SetFillColor(0, 127, 204);
-  $pdf->Cell(140, 5, "", 0, 0, "L");
-  $pdf->Cell(35, 6, "FDA02", 0, 0, "R", true);
-  $pdf->SetTextColor(0, 0, 0);
-  $pdf->Ln(15);
 }
 
 $pdf->Ln(25);

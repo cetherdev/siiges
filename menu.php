@@ -38,17 +38,7 @@
 			</div>
 			<div class="modal-body">
 					El Sistema Integral de Información para la Gestión
-					de la Educación Superior (SIIGES),
-					Fue creado para resolver múltiples conflictos en la
-					SICYT en el proceso para obtener el RVOE.
-
-					Se desarrollo por alumnos de la MTI:
-					el Mtro. J. Arturo Gómez Reséndiz,
-					el Mtro. Angel Alberto Cardozo Cueva,
-					el Mtro. Marcos Fabian Ramírez Flores,
-					el Mtro. Aldo Roldán Hernández Rea,
-					el Ing. José Fernando Andrade Cervantes,
-					el Lic. Carlos Eduardo Serna Santana.
+					de la Educación Superior (SIIGES) ver 1.0
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

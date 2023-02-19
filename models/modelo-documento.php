@@ -69,6 +69,7 @@ tipo_entidad = id_tabla
                                               "dictamen_evaluacion"=>36,
                                               "formato_pedagogico_01"=>37,
                                               "dictamen_impi"=>38,
+                                              "formato_herramientas_05"=>39,
                                             );
 
     public static $dir_subida = '../uploads/';

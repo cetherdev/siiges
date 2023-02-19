@@ -7,6 +7,13 @@ if (!isset($_GET["id"]) && !$_GET["id"]) {
   header("../home.php");
 }
 
+$cicloTxt = [
+  "SEMESTRALES",
+  "CUATRIMESTRALES",
+  "ANUALES",
+  "SEMESTRALES",
+  "CUATRIMESTRALES"
+];
 
 $pdf = new PDF();
 
@@ -17,7 +24,6 @@ $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
 $pdf->SetMargins(20, 35, 20);
 $pdf->SetAutoPageBreak(true, 30);
-
 
 // Nombre del formato
 $pdf->SetFont("Nutmegb", "", 11);
@@ -55,7 +61,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
     ],
   );
 } else {
@@ -70,7 +76,7 @@ if ($pdf->institucion["es_nombre_autorizado"]) {
     ],
     [
       "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+      "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
     ],
   );
 }
@@ -101,15 +107,14 @@ $pdf->Cell(0, 5, utf8_decode("CON REFERENCIA GENERAL"), 1, 1, "L", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["necesidad_social"]), 0, "J");
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("CON REFERENCIA AL PERFIL DE EGRESO"), 1, 1, "L", true);
-$pdf->SetFont("Nutmeg", "", 9);
-$pdf->MultiCell(0, 5, utf8_decode($pdf->programa["necesidad_profesional"]), 0, "J");
-$pdf->ln();
 $pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(0, 5, utf8_decode("CON REFERENCIA AL PERFIL DE NUEVO INGRESO"), 1, 1, "L", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->programa["necesidad_institucional"]), 0, "J");
-
+$pdf->Cell(0, 5, utf8_decode("CON REFERENCIA AL PERFIL DE EGRESO"), 1, 1, "L", true);
+$pdf->SetFont("Nutmeg", "", 9);
+$pdf->MultiCell(0, 5, utf8_decode($pdf->programa["necesidad_profesional"]), 0, "J");
+$pdf->ln();
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
 $pdf->Cell(0, 5, utf8_decode("2. ESTUDIO DE OFERTA Y DEMANDA"), 1, 1, "C", true);
@@ -134,17 +139,11 @@ $pdf->MultiCell(0, 5, utf8_decode(""), 0, "L");
 
 $pdf->ln();
 
-$pdf->SetFillColor(166, 166, 166);
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("5 POLÍTICAS DE FUNCIONAMIENTO"), 1, 1, "C", true);
-$pdf->SetFont("Nutmeg", "", 9);
-$pdf->MultiCell(0, 5, utf8_decode(""), 0, "L");
-
 $pdf->ln();
 
 $pdf->SetFillColor(166, 166, 166);
 $pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("6 IDEARIO INSTITUCIONAL"), 1, 1, "C", true);
+$pdf->Cell(0, 5, utf8_decode("5 IDEARIO INSTITUCIONAL"), 1, 1, "C", true);
 $pdf->SetFillColor(191, 191, 191);
 $pdf->Cell(0, 5, utf8_decode("MISIÓN"), 1, 1, "L", true);
 $pdf->SetFont("Nutmeg", "", 9);
@@ -164,23 +163,12 @@ $pdf->Cell(0, 5, utf8_decode("VALORES INSTITUCIONALES"), 1, 1, "L", true);
 $pdf->SetFont("Nutmeg", "", 9);
 $pdf->MultiCell(0, 5, utf8_decode($pdf->institucion["valores_institucionales"]), 0, "J");
 
-$pdf->ln();
-
-
-$pdf->SetFont("Nutmegb", "", 9);
-$pdf->Cell(0, 5, utf8_decode("HISTORIA"), 1, 1, "L", true);
-$pdf->SetFont("Nutmeg", "", 9);
-$pdf->MultiCell(0, 5, utf8_decode($pdf->institucion["historia"]), 0, "J");
-
-
-$pdf->Ln(30);
+$pdf->ln(15);
 
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetFont("Nutmeg", "", 11);
 $pdf->Cell(0, 5, utf8_decode("BAJO PROTESTA DE DECIR VERDAD"), 0, 1, "C");
 $pdf->SetFont("Nutmegb", "", 11);
 $pdf->Cell(0, 5, utf8_decode(mb_strtoupper($pdf->nombreRepresentante)), 0, 1, "C");
-
-
 
 $pdf->Output("I", "PDP01.pdf");

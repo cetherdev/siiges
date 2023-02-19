@@ -18,6 +18,7 @@
     protected $sexo;
     protected $nacionalidad;
     protected $correo;
+    protected $correo_secundario;
     protected $telefono;
     protected $celular;
     protected $rfc;

@@ -128,6 +128,14 @@ EditarSolicitud.getSolicitud = function () {
 							documentos.formato_pedagogico_01.archivo
 						);
 					}
+          if (documentos.formato_herramientas_05 != undefined) {
+						$('#fda_05-id').val(documentos.formato_herramientas_05.id);
+						$('#contendorFDA05').attr('style', 'display: block');
+						$('#enlace-fda_05').attr(
+							'href',
+							documentos.formato_herramientas_05.archivo
+						);
+					}
 					if (documentos.dictamen_impi != undefined) {
 						$('#impi-id').val(documentos.dictamen_impi.id);
 						$('#contendorimpi').attr('style', 'display: block');
@@ -464,7 +472,8 @@ EditarSolicitud.getSolicitud = function () {
 					$('#nacionalidad_rector').val(rector.nacionalidad);
 					$('#curp_rector').val(rector.curp);
 					$('#sexo_rector').val(rector.sexo);
-					$('#correo_rector').val(rector.correo);
+					$('#correo_rector_institucional').val(rector.correo);
+					$('#correo_rector_personal').val(rector.correo_secundario);
 					$('#celular_rector').val(rector.celular);
 					//Formaciones de rector
 					if (rector.formaciones != undefined) {
@@ -533,7 +542,8 @@ EditarSolicitud.getSolicitud = function () {
 					$('#nacionalidad_director').val(director.nacionalidad);
 					$('#curp_director').val(director.curp);
 					$('#sexo_director').val(director.sexo);
-					$('#correo_director').val(director.correo);
+					$('#correo_director_institucional').val(director.correo);
+					$('#correo_director_personal').val(director.correo_secundario);
 					$('#celular_director').val(director.celular);
 					//Formaciones de director
 					if (director.formaciones != undefined) {
@@ -786,195 +796,6 @@ EditarSolicitud.getSolicitud = function () {
 								tics.substring(posicionEstructura + 11, posicionContratos)
 							);
 							$('#ti_contratos').val(tics.substring(posicionContratos + 10));
-						}
-						if (mixta.respaldos != undefined && mixta.respaldos.length > 0) {
-							var respaldos = mixta.respaldos;
-							for (let indice = 0; indice < respaldos.length; indice++) {
-								let filaRespaldo;
-								for (const property in respaldos[indice]) {
-									respaldos[indice][property] == null
-										? (respaldos[indice][property] = '')
-										: respaldos[indice][property];
-								}
-								if ($('#informacionCargar').val() != 4) {
-									var inputRespaldo = document.createElement('INPUT');
-									inputRespaldo.setAttribute('type', 'hidden');
-									inputRespaldo.setAttribute(
-										'id',
-										'inputRespaldo' + respaldos[indice].id
-									);
-									inputRespaldo.setAttribute('name', 'RESPALDO-respaldos[]');
-									inputRespaldo.setAttribute(
-										'value',
-										JSON.stringify({
-											id: respaldos[indice].id,
-											proceso: respaldos[indice].proceso,
-											periodicidad: respaldos[indice].periodicidad,
-											medios_almacenamiento:
-												respaldos[indice].medios_almacenamiento,
-											descripcion: respaldos[indice].descripcion,
-										})
-									);
-									__('inputsRespaldos').appendChild(inputRespaldo);
-									filaRespaldo =
-										'<tr id="respaldo' +
-										respaldos[indice].id +
-										'"><td>' +
-										respaldos[indice].descripcion +
-										'</td><td>' +
-										respaldos[indice].periodicidad +
-										'</td><td>' +
-										respaldos[indice].medios_almacenamiento +
-										'</td><td>' +
-										respaldos[indice].proceso +
-										'</td><td><button type="button" name="removeRespaldo" id="inputRespaldo-' +
-										respaldos[indice].id +
-										'_respaldo" class="btn btn-danger" onclick="EditarSolicitud.eliminarFilaTabla(this)">Quitar</button></td></tr>';
-								} else {
-									filaRespaldo =
-										'<tr id="respaldo' +
-										respaldos[indice].id +
-										'"><td>' +
-										respaldos[indice].descripcion +
-										'</td><td>' +
-										respaldos[indice].periodicidad +
-										'</td><td>' +
-										respaldos[indice].medios_almacenamiento +
-										'</td><td>' +
-										respaldos[indice].proceso +
-										'</td></tr>';
-								}
-								//Construir fila
-								$('#respaldos tr:last').after(filaRespaldo);
-								nfilaRespaldo = respaldos[indice].id + 1;
-							}
-						}
-						if (mixta.espejos != undefined && mixta.espejos.length > 0) {
-							var espejos = mixta.espejos;
-							for (let posEsp = 0; posEsp < espejos.length; posEsp++) {
-								var filaEspejo;
-								for (const property in espejos[posEsp]) {
-									espejos[posEsp][property] == null
-										? (espejos[posEsp][property] = '')
-										: espejos[posEsp][property];
-								}
-								if ($('#informacionCargar').val() != 4) {
-									var inputEspejo = document.createElement('INPUT');
-									inputEspejo.setAttribute('type', 'hidden');
-									inputEspejo.setAttribute(
-										'id',
-										'inputEspejo' + espejos[posEsp].id
-									);
-									inputEspejo.setAttribute('name', 'ESPEJO-espejos[]');
-									inputEspejo.setAttribute(
-										'value',
-										JSON.stringify({
-											id: espejos[posEsp].id,
-											proveedor: espejos[posEsp].proveedor,
-											ubicacion: espejos[posEsp].ubicacion,
-											ancho_banda: espejos[posEsp].ancho_banda,
-											url_espejo: espejos[posEsp].url_espejo,
-											periodicidad: espejos[posEsp].periodicidad,
-										})
-									);
-									__('inputsEspejos').appendChild(inputEspejo);
-									filaEspejo =
-										'<tr id="espejo' +
-										espejos[posEsp].id +
-										'"><td>' +
-										espejos[posEsp].proveedor +
-										'</td><td>' +
-										espejos[posEsp].ancho_banda +
-										'</td><td>' +
-										espejos[posEsp].ubicacion +
-										'</td><td>' +
-										espejos[posEsp].url_espejo +
-										'</td><td>' +
-										espejos[posEsp].periodicidad +
-										'</td><td><button type="button" name="removeEspejo" id="inputEspejo-' +
-										espejos[posEsp].id +
-										'_espejo" class="btn btn-danger" onclick="EditarSolicitud.eliminarFilaTabla(this)">Quitar</button></td></tr>';
-								} else {
-									filaEspejo =
-										'<tr id="espejo' +
-										espejos[posEsp].id +
-										'"><td>' +
-										espejos[posEsp].proveedor +
-										'</td><td>' +
-										espejos[posEsp].ancho_banda +
-										'</td><td>' +
-										espejos[posEsp].ubicacion +
-										'</td><td>' +
-										espejos[posEsp].url_espejo +
-										'</td><td>' +
-										espejos[posEsp].periodicidad +
-										'</td></tr>';
-								}
-
-								nfilaEspejo = espejos[posEsp].id + 1;
-								$('#espejos tr:last').after(filaEspejo);
-							}
-						}
-						if (mixta.licencias_software != '') {
-							var licencias = JSON.parse(mixta.licencias_software);
-							for (var li = 0; li < licencias.length; li++) {
-								var filaLicencia;
-								if ($('#informacionCargar').val() != 4) {
-									var inputLicencia = document.createElement('INPUT');
-									inputLicencia.setAttribute('type', 'hidden');
-									inputLicencia.setAttribute('id', 'licencia' + li);
-									inputLicencia.setAttribute('name', 'MIXTA-licencias[]');
-									inputLicencia.setAttribute(
-										'value',
-										JSON.stringify({
-											nombre: licencias[li].nombre,
-											contrato: licencias[li].contrato,
-											tipo: licencias[li].tipo,
-											terminos: licencias[li].terminos,
-											usuarios: licencias[li].usuarios,
-											enlace: licencias[li].enlace,
-										})
-									);
-									__('inputsLicencias').appendChild(inputLicencia);
-									filaLicencia =
-										'<tr id="licencia' +
-										li +
-										'"><td>' +
-										licencias[li].nombre +
-										'</td><td>' +
-										licencias[li].contrato +
-										'</td><td>' +
-										licencias[li].usuarios +
-										'</td><td>' +
-										licencias[li].tipo +
-										'</td><td>' +
-										licencias[li].terminos +
-										'</td><td>' +
-										licencias[li].enlace +
-										'</td><td><button type="button" name="removeLicencia" id="' +
-										li +
-										'" class="btn btn-danger" onclick="eliminarLicencia(this)">Quitar</button></td></tr>';
-								} else {
-									filaLicencia =
-										'<tr id="licencia' +
-										li +
-										'"><td>' +
-										licencias[li].nombre +
-										'</td><td>' +
-										licencias[li].contrato +
-										'</td><td>' +
-										licencias[li].usuarios +
-										'</td><td>' +
-										licencias[li].tipo +
-										'</td><td>' +
-										licencias[li].terminos +
-										'</td><td>' +
-										licencias[li].enlace +
-										'</td></tr>';
-								}
-								nfilaLicencia = licencias[li].id + 1;
-								$('#licencias tr:last').after(filaLicencia);
-							}
 						}
 					}
 					if (programa.turnos != undefined) {

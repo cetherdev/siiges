@@ -357,8 +357,16 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             <br>
                           </div>
                           <div class="col-sm-6 col-md-3">
-                            <label class="control-label" for="">Correo Electrónico</label><br>
-                            <input type="text" id="correo_rector" name="RECTOR-correo" class="form-control" campo="Correo del rector" ubicacion="Datos generales apartado Rector" value="" placeholder="correo@mail.com">
+                            <label class="control-label" for="">Teléfono celular</label><br>
+                            <input type="text" id="celular_rector" name="RECTOR-celular" class="form-control" campo="Celular del rector" ubicacion="Datos generales apartado Rector" value="" placeholder="(33) 00 00 00 00">
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <label class="control-label" for="">Correo institucional</label><br>
+                            <input type="text" id="correo_rector_institucional" name="RECTOR-correo" class="form-control" campo="Correo institucional del rector" ubicacion="Datos generales apartado Rector" value="" placeholder="correo@mail.com">
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <label class="control-label" for="">Correo personal</label><br>
+                            <input type="text" id="correo_rector_personal" name="RECTOR-correo_secundario" class="form-control" campo="Correo personal del rector" ubicacion="Datos generales apartado Rector" value="" placeholder="correo@mail.com">
                           </div>
                         </div>
                         <!-- Formación del rector -->
@@ -462,7 +470,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                           <div class="col-sm-6 col-md-4">
                             <label class="control-label" for="">Clave CURP</label><br>
                             <input type="text" id="curp_director" name="DIRECTOR-curp" class="form-control" value="" placeholder="CURP del director">
-
                           </div>
                           <div class="col-sm-6 col-md-3">
                             <label class="control-label" for="">Género</label><br>
@@ -472,6 +479,18 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                               <option value="Femenino">Femenino</option>
                             </select>
                             <br>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <label class="control-label" for="">Teléfono celular</label><br>
+                            <input type="text" id="celular_director" name="DIRECTOR-celular" class="form-control" campo="Celular del director" ubicacion="Datos generales apartado Director" value="" placeholder="(33) 00 00 00 00">
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <label class="control-label" for="">Correo institucional</label><br>
+                            <input type="text" id="correo_director_institucional" name="DIRECTOR-correo" class="form-control" campo="Correo institucional del director" ubicacion="Datos generales apartado Director" value="" placeholder="correo@mail.com">
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <label class="control-label" for="">Correo personal</label><br>
+                            <input type="text" id="correo_director_personal" name="DIRECTOR-correo_secundario" class="form-control" campo="Correo personal del director" ubicacion="Datos generales apartado Director" value="" placeholder="correo@mail.com">
                           </div>
                         </div>
                         <!-- Formación del director -->
@@ -814,26 +833,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                     <div class="panel-body">
                       <!--Estudio de pertinencia-->
                       <div class="form-group">
-                        <!-- <div class="col-sm-12 col-md-12">
-                          <h2>Estudio de pertinencia y factibilidad</h2>
-                          <hr class="red">
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <label class="control-label">Con referencia general</label>
-                          <textarea class="form-control" id="necesidad_social" name="PROGRAMA-necesidad_social" rows="8" placeholder="Solo texto si su estudio incluye alguna ilustración, plasme un resúmen de este apartado y suba en un archivo en pdf el estudio completo"></textarea><br>
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <label class="control-label">Con referencia al perfil de egreso</label>
-                          <textarea class="form-control" id="necesidad_profesional" name="PROGRAMA-necesidad_profesional" rows="8" placeholder="Solo texto si su estudio incluye alguna ilustración, plasme un resúmen de este apartado y suba en un archivo en pdf el estudio completo"></textarea><br>
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <label class="control-label">Con referencia al perfil de nuevo ingreso</label>
-                          <textarea class="form-control" id="necesidad_institucional" name="PROGRAMA-necesidad_institucional" rows="8" placeholder="Solo texto si su estudio incluye alguna ilustración, plasme un resúmen de este apartado y suba en un archivo en pdf el estudio completo"></textarea> <br>
-                        </div> -->
-                        <!-- <div class="col-sm-12 col-md-7">
-                          <label class="control-label">Archivo *</label>
-                          <input class="form-control" type="file" name="PROGRAMA-estudio_pertinencia" value=""><br>
-                        </div> -->
                         <div class="col-sm-12 col-md-7">
                           <label class="control-label">FDP01 *</label>
                           <input class="form-control" type="file" name="PROGRAMA-formato_pedagogico_01" value=""><br>
@@ -847,43 +846,6 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             del Estado de Jalisco. <a href="plantillas/FDP01.docx">(Descargar plantilla). </a>
                         </div>
                       </div>
-                      <!--Estudio de oferta y demanda-->
-                      <!-- <div class="form-group">
-                        <div class="col-sm-12 col-md-12">
-                          <h2>Estudio de oferta y demanda*</h2>
-                          <hr class="red">
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <label class="control-label">Resúmen del estudio de oferta y demanda</label>
-                          <textarea class="form-control" id="estudio_oferta_demanda" name="PROGRAMA-estudio_oferta_demanda" rows="8" placeholder="Solo texto si su estudio incluye alguna ilustración, plasme un resúmen de este apartado y suba en un archivo en pdf el estudio completo"></textarea>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                          <label class="control-label">Archivo (en caso de creerlo necesario)</label>
-                          <input class="form-control" type="file" name="PROGRAMA-archivo_oferta_demanda" value="">
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <label class="control-label">Fuentes de información</label>
-                          <textarea class="form-control" id="fuentes_informacion" name="PROGRAMA-fuentes_informacion" rows="8" placeholder="Citar las fuentes de información utilizadas en la realización de los estudios de pertinencia, factibilidad, Oferta y demanda educativa"></textarea><br>
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <p class="small">*El estudio de oferta y demanda deberá contener un cuadro comparativo de programas educativos similares a nivel internacional, nacional y local, así como la demanda potencial a quien va dirigido</p>
-                        </div>
-                      </div> -->
-                      <!--Recursos para su oepración-->
-                      <!-- <div class="form-group">
-                        <div class="col-sm-12 col-md-12">
-                          <h2>Recursos para la operación</h2>
-                          <hr class="red">
-                        </div>
-                        <div class="col-sm-12 col-md-12">
-                          <label class="control-label">Recursos financieros</label>
-                          <textarea class="form-control" id="recursos_operacion" name="PROGRAMA-recursos_operacion" rows="8" placeholder="Señalar los recursos financieros propios y externos destinados al programa educativo"></textarea>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                          <label class="control-label">Convenios</label>
-                          <input class="form-control" type="file" name="PROGRAMA-convenios" value=""><br>
-                        </div>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -1517,305 +1479,33 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                 <?php } ?>
                 <?php if (($_GET['tipo'] == 1 &&  ($_GET['modalidad'] > 1 && $_GET['modalidad'] < 4)) || ($_GET['tipo'] == 2 && ($_GET['modalidad'] > 1 && $_GET['modalidad'] < 4))) {  ?>
 
-                  <!-- Licencias -->
-                  <div id="mixta-licencia" class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-tittle">
-                        <a data-parent="#acordion3" data-toggle="collapse" href="#licencia-programa" aria-expanded="false" aria-controls="licencia-programa" class="collapsed">Licencias de software</a>
-                        <button type="button" class="collpase-button collapsed" data-parent="#acordion3" data-toggle="collapse" href="#licencia-programa" aria-expanded="false"></button>
-                      </h4>
-                    </div>
-                    <div id="licencia-programa" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <div class="form-group">
-                          <div class="col-sm-12 col-md-12">
-                            <h2>Licencias de software</h2>
-                            <hr class="red">
-                          </div>
-                          <!-- insertar valores -->
-                          <div class=" form-group col-sm-12 col-md-12">
-
-                            <div id="inputsLicencias"></div>
-                            <div id="mensajesLicencias">
-
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Nombre de la herramienta educativa *</label>
-                              <input id="nombreLicencia" class="form-control" type="text" placeholder="Nombre de la herramienta educativa"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                              <label>Contrato *</label>
-                              <input id="contratoLicencia" class="form-control" type="text" placeholder="Número de contrato"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                              <label>Licencia</label>
-                              <input id="tipoLicencia" class="form-control" type="text" placeholder="Tipo de licencia"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Terminos de la licencia *</label>
-                              <textarea class="form-control" id="terminosLicencia" rows="4" placeholder="Terminos y condiciones de la licencia"></textarea><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Sistema de enlace</label>
-                              <textarea class="form-control" id="enlaceLicencia" rows="4" placeholder="Describir el sistema de enlace de la licencia"></textarea><br>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                              <label>Usuarios cubiertos</label>
-                              <input id="usuariosLicencia" class="form-control" type="number"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <br>
-                              <button class="btn btn-secundary" type="button" name="button" onclick="agregarLicencia()">Agregar licencia</button><br><br>
-                            </div>
-
-                          </div>
-                          <!-- tabla que muestra los valores -->
-                          <div class="col-sm-12 col-md-12">
-                            <div class="table-responsive">
-                              <table class="table  table-bordered">
-                                <thead>
-                                  <tr>
-                                    <th class="size" scope="col">Nombre</th>
-                                    <th class="size" scope="col">Contrato</th>
-                                    <th class="size" scope="col">Usuarios cubierto</th>
-                                    <th class="size" scope="col">Licencia</th>
-                                    <th class="size" scope="col">Terminos</th>
-                                    <th class="size" scope="col">Sistema enlace</th>
-                                    <th class="size" scope="col">Acción</th>
-                                  </tr>
-                                </thead>
-                                <tbody id="licencias">
-                                  <tr>
-                                  </tr>
-
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
                   <!-- Herramientas educativas -->
                   <div id="mixta-herramientas" class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-tittle">
-                        <a data-parent="#acordion3" data-toggle="collapse" href="#herramientas-programa" aria-expanded="false" aria-controls="herramientas-programa" class="collapsed">Herramientas educativas</a>
+                        <a data-parent="#acordion3" data-toggle="collapse" href="#herramientas-programa" aria-expanded="false" aria-controls="herramientas-programa" class="collapsed">Herramientas educativas *</a>
                         <button type="button" class="collpase-button collapsed" data-parent="#acordion3" data-toggle="collapse" href="#herramientas-programa" aria-expanded="false"></button>
                       </h4>
                     </div>
                     <div id="herramientas-programa" class="panel-collapse collapse">
                       <div class="panel-body">
+                        <!--FDA 05-->
                         <div class="form-group">
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Herramientas educativas</h3>
-                            <hr class="red">
+                          <div class="col-sm-12 col-md-7">
+                            <label class="control-label">FDA05 *</label>
+                            <input class="form-control" type="file" name="PROGRAMA-formato_herramientas_05" value=""><br>
                           </div>
                           <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Servicios y herramientas educativas de aprendizaje con las que cuenta el sistema</label>
-                            <textarea class="form-control" campo="Servicios y herramientas educativas" id="servicios_herramientas_educativas" name="MIXTA-servicios_herramientas_educativas" rows="4" placeholder="Describa los servicios y herramientas educativas de aprendizaje con las que cuenta el sistema"></textarea><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Sistemas de seguridad</h3>
-                            <hr class="red">
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Sistemas y protocolos utilizados</label>
-                            <textarea class="form-control" campo="Sistemas y protocolos" id="sistemas_seguridad" name="MIXTA-sistemas_seguridad" rows="4" placeholder="Mencione los sistemas de seguridad utilizados"></textarea><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Direccionamineto IP</h3>
-                            <hr class="red">
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Direccionamiento IP Público</label>
-                            <textarea class="form-control" campo="Direccionamiento IP" id="direccionamiento_ip_publico" name="MIXTA-direccionamiento_ip_publico" rows="4" placeholder="Describa el direccionamineto de ip público con el que cuenta su plantel"></textarea><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Tecnologías de la información y la comunicación</h3>
-                            <hr class="red">
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Ingreso a la plataforma</label>
-                            <textarea class="form-control" campo="Ingreso a la plataforma" id="ti_ingreso" name="MIXTA-ti_ingreso" rows="4" placeholder="Proporcionar un ingreso a la plataforma, este deberá ser permanente"></textarea><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Estructura</label>
-                            <textarea class="form-control" campo="Estructura de la herramienta educativa" id="ti_estructura" name="MIXTA-ti_estructura" rows="4" placeholder="Describir la estructura"></textarea><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Contratos</label>
-                            <textarea class="form-control" campo="Contratos de la herramienta educativa" id="ti_contratos" name="MIXTA-ti_contratos" rows="4" placeholder="Mencione los contratos realizados para la utilizacion de plataforma (biliotecas, laboratorias virtuales)"></textarea><br><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Acceso a internet</h3>
-                            <hr class="red">
-                          </div>
-                          <div class="col-sm-12 col-md-6">
-                            <label class="control-label">Enlaces y ancho de banda</label>
-                            <textarea class="form-control" campo="Enlaces de internet" id="acceso_internet" type="text" name="MIXTA-acceso_internet" placeholder="Nombre de los enlaces y ancho de banda"></textarea>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Mantenimiento a la plataforma</h3>
-                            <hr class="red">
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Descripción</label>
-                            <textarea class="form-control" campo="Descripción del mantenimiento a la plataforma" id="mantenimiento_plataforma" name="MIXTA-mantenimiento_plataforma" rows="4" placeholder="Describa el mantenimiento que se le brinda a la plataforma"></textarea><br><br>
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <h3>Diagrama de proceso</h3>
-                            <hr class="red">
-                          </div>
-                          <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Comunicación alumno-docente</label>
-                            <textarea class="form-control" campo="Comunicación alumno-docente" id="diagrama_plataforma" name="MIXTA-diagrama_plataforma" rows="4" placeholder="Describa como se realizará la comunicación entre alumnos y docentes"></textarea><br><br>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Respaldos -->
-                  <div id="mixta-respaldos" class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-tittle">
-                        <a data-parent="#acordion3" data-toggle="collapse" href="#respaldos-programa" aria-expanded="false" aria-controls="respaldos-programa" class="collapsed">Respaldos</a>
-                        <button type="button" class="collpase-button collapsed" data-parent="#acordion3" data-toggle="collapse" href="#respaldos-programa" aria-expanded="false"></button>
-                      </h4>
-                    </div>
-                    <div id="respaldos-programa" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <div class="form-group">
-                          <div class="col-sm-12 col-md-12">
-                            <h2>Respaldos</h2>
-                            <hr class="red">
-                          </div>
-                          <div class="form-group col-sm-12 col-md-12">
-                            <div id="inputsRespaldos"></div>
-                            <div id="mensajeRespaldos">
-
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Descripción del servicio de datos respaldados *</label>
-                              <textarea id="servicioRespaldo" class="form-control" rows="4" placeholder="Descripción del servicio de datos respaldados"></textarea>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Periodicidad *</label>
-                              <input id="periodicidadRespaldo" class="form-control" placeholder="Periodicidad"><br><br><br><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Medios de almacenamineto *</label>
-                              <textarea id="mediosRespaldo" class="form-control" rows="4" placeholder="Medios de almacenamineto utilizados en el servicio"></textarea>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Proceso de respaldo *</label>
-                              <textarea id="procesoRespaldo" class="form-control" rows="4" placeholder="Proceso de respaldo utilizado"></textarea>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
+                            <p class="text-muted small">
+                              <strong>¡Nota importante! </strong>
                               <br>
-                              <button class="btn btn-secundary" type="button" name="button" onclick="agregarRespaldo()">Agregar respaldo</button><br><br>
-                            </div>
-                            <!-- tabla que muestra los valores -->
-                            <div class="col-sm-12 col-md-12">
-                              <div class="table-responsive">
-                                <table class="table  table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th class="size" scope="col">Servicio</th>
-                                      <th class="size" scope="col">Periodicidad</th>
-                                      <th class="size" scope="col">Medios almacenamiento</th>
-                                      <th class="size" scope="col">Proceso</th>
-                                      <th class="size" scope="col">Acción</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody id="respaldos">
-                                    <tr>
-                                    </tr>
-
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Espejos -->
-                  <div id="mixta-espejos" class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-tittle">
-                        <a data-parent="#acordion3" data-toggle="collapse" href="#espejos-programa" aria-expanded="false" aria-controls="espejos-programa" class="collapsed">Espejos</a>
-                        <button type="button" class="collpase-button collapsed" data-parent="#acordion3" data-toggle="collapse" href="#espejos-programa" aria-expanded="false"></button>
-                      </h4>
-                    </div>
-                    <div id="espejos-programa" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <div class="form-group">
-                          <div class="col-sm-12 col-md-12">
-                            <h2>Espejos</h2>
-                            <hr class="red">
-                          </div>
-                          <div class="form-group col-sm-12 col-md-12">
-                            <div id="inputsEspejos"></div>
-                            <div id="mensajeEspejos"></div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Proveedor *</label>
-                              <input id="proveedorEspejo" class="form-control" placeholder="Nombre del proveedor">
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Ancho de banda *</label>
-                              <input id="anchoEspejo" class="form-control" placeholder="Ancho de banda del espejo"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Ubicación fisica *</label>
-                              <input id="ubicacionEspejo" class="form-control" placeholder="Ubicación física"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>URL</label>
-                              <input id="urlEspejo" class="form-control" placeholder="url del espejo"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                              <label>Periodicidad*</label>
-                              <input id="periodicidadEspejo" class="form-control" placeholder="Periodicidad"><br>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                              <br>
-                              <button class="btn btn-secundary" type="button" name="button" onclick="agregarEspejo()">Agregar espejo</button><br><br>
-                            </div>
-                            <!-- tabla que muestra los valores -->
-                            <div class="col-sm-12 col-md-12">
-                              <div class="table-responsive">
-                                <table class="table  table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th class="size" scope="col">Proveedor</th>
-                                      <th class="size" scope="col">Ancho de banda</th>
-                                      <th class="size" scope="col">Ubicación</th>
-                                      <th class="size" scope="col">Url</th>
-                                      <th class="size" scope="col">Periodicidad</th>
-                                      <th class="size" scope="col">Acción</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody id="espejos">
-                                    <tr>
-                                    </tr>
-
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
+                              Este formato solamente aplica para modalidad mixta y no escolarizada <a href="plantillas/FDA05.docx">(Descargar plantilla). </a>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 <?php } ?>
-
-
               </div>
             </div>
 

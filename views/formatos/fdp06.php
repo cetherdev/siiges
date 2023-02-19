@@ -3,7 +3,6 @@ require("pdf.php");
 require_once "../../models/modelo-solicitud.php";
 require_once "../../models/modelo-docente.php";
 
-
 session_start();
 
 if (!isset($_GET["id"]) && !$_GET["id"]) {
@@ -16,10 +15,19 @@ $tituloTipoSolicitud = [
   "SOLICITUD DE CAMBIO DE DOMICILIO",
   "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
 ];
+
+$cicloTxt = [
+  "SEMESTRALES",
+  "CUATRIMESTRALES",
+  "ANUALES",
+  "SEMESTRALES",
+  "CUATRIMESTRALES"
+];
+
 $pdf = new PDF();
 //header('Content-Type: text/html; charset=UTF-8');
 $pdf->getData($_GET["id"]);
-$pdf->getDocentes(Docente::DOCENTE_ASIGNATURA);
+$pdf->getDocentes(Docente::DOCENTE_ASIGNATURA) && getDocentes(Docente::DOCENTE_TIMEPO_COMPLETO);
 
 $pdf->AddPage("P", "Letter");
 
@@ -42,7 +50,7 @@ $pdf->Ln(15);
 
 $pdf->SetTextColor(0, 127, 204);
 
-$pdf->Cell(0, 5, utf8_decode("FORMATO PLANTILLA DE DOCENTES DE ASIGNATURA"), 0, 1, "L");
+$pdf->Cell(0, 5, utf8_decode("FORMATO PLANTILLA DE DOCENTES ( ASIGNATURA O TIEMPO COMPLETO)"), 0, 1, "L");
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(10);
 $pdf->SetFont("Nutmeg", "", 9);
@@ -61,7 +69,7 @@ $dataPrograma = array(
   ],
   [
     "name" => utf8_decode("DURACIÓN DEL PROGRAMA"),
-    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion"]))
+    "description" => utf8_decode(mb_strtoupper($pdf->programa["duracion_periodos"] . ' PERIODOS ' . $cicloTxt[$pdf->ciclo["id"] - 1]))
   ],
   [
     "name" => utf8_decode("TIPO DE TRÁMITE"),
@@ -127,6 +135,8 @@ foreach ($pdf->AsigPorGrado as $grado => $asignaturas) {
   $pdf->MultiCell(15, 10, utf8_decode("SE ACEPTA"), 1, "C", true);
   $pdf->SetXY($x + 15, $y);
   $pdf->Cell(20, 10, utf8_decode("OBSERVACIONES"), 1, 0, "C", true);
+  $pdf->SetXY($x + 15, $y);
+  $pdf->Cell(20, 10, utf8_decode("TIPO DOCENTE"), 1, 0, "C", true);
   $pdf->Ln(10);
 
   foreach ($asignaturas as $asignatura => $detalle) {
@@ -184,7 +194,7 @@ if ($pdf->programa["acuerdo_rvoe"]) {
     $pdf->MultiCell(60, 5, utf8_decode(mb_strtoupper($pdf->nombreRepresentante)), "T", "C");
     $pdf->SetXY($x + 60, $y);
     $pdf->Cell(50, 5, mb_strtoupper(Solicitud::convertirFecha(date("d-m-y"))), 0, 0, "C");
-    $pdf->MultiCell(65, 5, utf8_decode("MTRA. MARGARITA FLORES MARQUEZ\nDIRECTORA DE INCORPORACIÓN"), "T", "C");
+    $pdf->MultiCell(65, 5, utf8_decode("ING. MARCO ARTURO CASTRO AGUILERA\nDIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES"), "T", "C");
   } else {
     $pdf->Cell(0, 5, "BAJO PROTESTA DE DECIR VERDAD", 0, 0, "C");
     $pdf->Ln(5);

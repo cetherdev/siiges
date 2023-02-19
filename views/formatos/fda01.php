@@ -52,7 +52,7 @@ if (!isset($_GET["id"]) && !$_GET["id"]) {
 }
 
 $tituloTipoSolicitud = [
-  "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS",
+  "SOLICITUD DE RECONOCIMIENTO DE VALIDEZ OFICIAL DE ESTUDIOS (RVOE)",
   "SOLICITUD DE REFRENDO A PLAN Y PROGRAMA DE ESTUDIO",
   "SOLICITUD DE CAMBIO DE DOMICILIO",
   "SOLICITUD DE CAMBIO DE REPRESENTANTE LEGAL"
@@ -218,14 +218,14 @@ $pdf->SetTextColor(0, 127, 204);
 $pdf->Cell(0, 5, utf8_decode("OFICIO DE ENTREGA DE DOCUMENTACIÓN"), 0, 1, "L");
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(10);
-$pdf->Cell(0, 5, utf8_decode("SUBSECRETARIO DE EDUCACIÓN SUPERIOR"), 0, 1, "L");
+$pdf->Cell(0, 5, utf8_decode("SUBSECRETARÍA DE EDUCACIÓN SUPERIOR"), 0, 1, "L");
 $pdf->Ln(5);
 $pdf->Cell(0, 5, utf8_decode("AT´N: DIRECTOR GENERAL DE INCORPORACIÓN Y SERVICIOS ESCOLARES."), 0, 1, "R");
 
 $pdf->Ln(5);
 $pdf->SetFont("Nutmeg", "", 9);
 
-$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("Guadalajara, Jal. a $fecha")), 0, 1, "R");
+$pdf->Cell(0, 5, utf8_decode(mb_strtoupper("$fecha")), 0, 1, "R");
 $pdf->Ln(5);
 $pdf->MultiCell(0, 5, utf8_decode("Por este conducto manifiesto que estoy en condiciones para iniciar el trámite de "
   . mb_strtoupper($tituloTipoSolicitud[$solicitud["tipo_solicitud_id"] - 1])

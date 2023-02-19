@@ -88,7 +88,6 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -211,7 +210,7 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_nacimiento">Fecha de Nacimiento* </label>
+                <label class="control-label" for="fecha_nacimiento">Fecha de nacimiento* </label>
                 <input type="text" id="fecha_nacimiento" name="fecha_nacimiento" value="<?php echo (isset($resultadoPersona)) ? $resultadoPersona["data"]["fecha_nacimiento"] : ""; ?>" maxlength="10" class="form-control" required />
               </div>
             </div>
@@ -287,9 +286,17 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
               <div class="form-group">
                 <label class="control-label" for="matricula">Matr&iacute;cula* </label>
                 <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="La matrícula deberá ser generada por la Institución Educativa, considerando que debe ser única para cada alumno"></span>
-                <input type="text" id="matricula" name="matricula" value="<?php echo (isset($resultadoPersona)) ? $resultadoAlumno["data"]["matricula"] : ""; ?>" maxlength="255" class="form-control" required />
+                <input type="text" id="matricula" name="matricula" value="<?php echo (isset($resultadoAlumno)) ? $resultadoAlumno["data"]["matricula"] : ""; ?>" maxlength="255" class="form-control" required />
               </div>
             </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="control-label" for="">Fecha de registro </label>
+                <input type="text" id="" name="" value="<?php echo (isset($resultadoAlumno)) ? date_format(date_create($resultadoAlumno["data"]["created_at"]), 'Y-m-d') : ""; ?>" maxlength="10" class="form-control" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
                 <?php if (
@@ -300,10 +307,10 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
 
                   <label class="control-label" for="revalidacion_equivalencia">Tipo de tr&aacute;mite</label>
                   <select onchange="changeFunc(
-							<?php
+              <?php
                   echo (isset($json) ? htmlentities($json) : '');
               ?>
-							 );" id="tipo_tramite_id" name="tipo_tramite_id" class="selectpicker" data-live-search="true" data-width="100%" required>
+               );" id="tipo_tramite_id" name="tipo_tramite_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                     <option value=""> </option>
                     <?php
                     $tipoTramite = new TipoTramite();
@@ -333,10 +340,10 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
                 <div class="form-group">
                   <label class="txt-label1" for="situacion_id">Situaci&oacute;n</label>
                   <select onchange="changeFunc(
-							<?php
-              echo (isset($json) ? htmlentities($json) : '');
-              ?>
-							 );" id="situacion_id" name="situacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
+                    <?php
+                    echo (isset($json) ? htmlentities($json) : '');
+                    ?>
+                  );" id="situacion_id" name="situacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                     <option value=""> </option>
                     <?php
                     $situacion = new Situacion();
@@ -357,7 +364,6 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
                 </div>
               </div>
               <?php if (isset($resultadoAlumno["data"]["situacion_id"]) && $resultadoAlumno["data"]["situacion_id"] == "4") : ?>
-
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label class="control-label" for="">Fecha de baja</label><br>
@@ -381,34 +387,45 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
                 <div class="form-group">
                   <label class="txt-label1" for="situacion_id">Situaci&oacute;n</label>
                   <select onchange="changeFunc(
-							<?php
-              echo (isset($json) ? htmlentities($json) : '');
-              ?>
-							 );" id="situacion_id" name="situacion_id" class="selectpicker" data-live-search="true" <?php $resultadoAlumno["data"]["situacion_id"] != 2 ?> data-width="100%" required>
-                    <option value=""> </option>
+                    <?php
+                    echo (isset($json) ? htmlentities($json) : '');
+                    ?>
+                  );" id="situacion_id" name="situacion_id" class="selectpicker" data-live-search="true" data-width="100%"
+                  <?php !isset($resultadoAlumno["data"]["situacion_id"]) ?>  required
+                  >
                     <?php
                     $situacion = new Situacion();
                     $situacion->setAttributes(array());
                     $resultadoSituacion = $situacion->consultarTodos();
 
                     $max = count($resultadoSituacion["data"]);
-
-                    if (isset($resultadoAlumno["data"]["id"]) && $resultadoAlumno["data"]["situacion_id"] == 1) {
-                      for ($i = 0; $i < $max; $i++) {
-                        if ($resultadoSituacion["data"][$i]["id"] == 1 || $resultadoSituacion["data"][$i]["id"] == 4) {
-                          if ($resultadoSituacion["data"][$i]["id"] == $resultadoAlumno["data"]["situacion_id"]) {
-                            echo "<option value='" . $resultadoSituacion["data"][$i]["id"] . "' selected>" . $resultadoSituacion["data"][$i]["nombre"] . "</option>";
-                          } else {
-                            echo "<option value='" . $resultadoSituacion["data"][$i]["id"] . "'>" . $resultadoSituacion["data"][$i]["nombre"] . "</option>";
+                    if (isset($resultadoAlumno["data"]["id"])) {
+                      switch ($resultadoAlumno["data"]["situacion_id"]) {
+                        case 1:
+                          for ($i = 0; $i < $max; $i++) {
+                            if ($resultadoSituacion["data"][$i]["id"] == 1 || $resultadoSituacion["data"][$i]["id"] == 4) {
+                              if ($resultadoSituacion["data"][$i]["id"] == $resultadoAlumno["data"]["situacion_id"]) {
+                                echo "<option value='" . $resultadoSituacion["data"][$i]["id"] . "' selected>" . $resultadoSituacion["data"][$i]["nombre"] . "</option>";
+                              } else {
+                                echo "<option value='" . $resultadoSituacion["data"][$i]["id"] . "'>" . $resultadoSituacion["data"][$i]["nombre"] . "</option>";
+                              }
+                            }
                           }
-                        }
+                          break;
+                        case 2:
+                          echo "<option value='2' selected>" . "Inactivo" . "</option>";
+                          break;
+                        case 3:
+                          echo "<option value='3' selected>" . "Egresado" . "</option>";
+                          break;
+                        case 4:
+                          echo "<option value='4' selected>" . "Baja" . "</option>";
+                        default:
+                          # code...
+                          break;
                       }
-                    } else if (isset($resultadoAlumno["data"]["id"]) &&  $resultadoAlumno["data"]["situacion_id"] == 2) {
+                    } else {
                       echo "<option value='2' selected>" . "Inactivo" . "</option>";
-                    } else if (isset($resultadoAlumno["data"]["id"]) &&  $resultadoAlumno["data"]["situacion_id"] == 3) {
-                      echo "<option value='3' selected>" . "Egresado" . "</option>";
-                    } else if (isset($resultadoAlumno["data"]["id"]) &&  $resultadoAlumno["data"]["situacion_id"] == 4) {
-                      echo "<option value='4' selected>" . "Baja" . "</option>";
                     }
                     ?>
                   </select>
@@ -457,7 +474,6 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
           ?>
         </div>
       </form>
-
     </section>
 
     <!-- Modal para confirmación -->
@@ -538,7 +554,6 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
       }
     }
 
-
     $(document).ready(function() {
       $("#fecha_nacimiento").datepicker({
         firstDay: 1,
@@ -547,6 +562,7 @@ if (Rol::ROL_REVALIDACION_EQUIVALENCIA == $_SESSION["rol_id"]) {
         dateFormat: 'yy-mm-dd'
       });
     });
+
   </script>
   <!-- JS PROPIOS -->
   <script src="../js/alumnos.js"></script>
