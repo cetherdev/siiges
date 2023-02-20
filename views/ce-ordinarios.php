@@ -178,7 +178,11 @@ $resultadoAsignatura = $asignatura->consultarId();
 										<th width="20%">Matr&iacute;cula</th>
 										<th width="40%">Nombre</th>
 										<th width="20%">Calificaci&oacute;n Ordinario</th>
-										<th width="20%">Fecha de Examen
+										<th width="20%"><?php if ($resultadoCicloEscolar && $_GET["tramite"] == "equiv") : ?>
+												Fecha Equivalencia
+											<?php else : ?>
+												Fecha de Examen
+											<?php endif ?>
 											<input type="checkbox" name="checkbox" id="checkbox" value="" data-toggle="tooltip" data-placement="top" title="Copiar primera fecha en todos los campos">
 										</th>
 									</tr>
@@ -222,14 +226,14 @@ $resultadoAsignatura = $asignatura->consultarId();
 												<td><?php echo $resultadoAlumno["data"]["matricula"]; ?></td>
 												<td><?php echo $resultadoPersona["data"]["apellido_paterno"] . " " . $resultadoPersona["data"]["apellido_materno"] . " " . $resultadoPersona["data"]["nombre"]; ?></td>
 												<td id="calificaciones"><input type="number" id="calificacion[]" name="calificacion[]" value="<?php
-																																																											echo $resultadoCalificacion["data"][0]["calificacion"];
-																																																											?>" maxlength="5" min="<?php
-																																																																							echo $resultadoPrograma["data"]["calificacion_minima"];
-																																																																							?>" max="<?php
-																																																																												echo $resultadoPrograma["data"]["calificacion_maxima"];
-																																																																												?>" class="form-control" step="<?php
-																																																																																												echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";
-																																																																																												?>" /></td>
+																																				echo $resultadoCalificacion["data"][0]["calificacion"];
+																																				?>" maxlength="5" min="<?php
+																																																																	echo $resultadoPrograma["data"]["calificacion_minima"];
+																																																																	?>" max="<?php
+																																																																										echo $resultadoPrograma["data"]["calificacion_maxima"];
+																																																																										?>" class="form-control" step="<?php
+																																																																																				echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";
+																																																																																				?>" /></td>
 												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo $resultadoCalificacion["data"][0]["fecha_examen"]; ?>" maxlength="10" class="form-control" /></td>
 											</tr>
 									<?php
