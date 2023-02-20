@@ -178,11 +178,11 @@ $resultadoAsignatura = $asignatura->consultarId();
 										<th width="20%">Matr&iacute;cula</th>
 										<th width="40%">Nombre</th>
 										<th width="20%">Calificaci&oacute;n Ordinario</th>
-										<th width="20%"><?php if ($resultadoCicloEscolar && $_GET["tramite"] == "equiv") : ?>
+										<th width="20%"><?php if ($resultadoCicloEscolar && $_GET["tramite"] == "equiv") { ?>
 												Fecha Equivalencia
-											<?php else : ?>
+											<?php } else { ?>
 												Fecha de Examen
-											<?php endif ?>
+											<?php } ?>
 											<input type="checkbox" name="checkbox" id="checkbox" value="" data-toggle="tooltip" data-placement="top" title="Copiar primera fecha en todos los campos">
 										</th>
 									</tr>

@@ -179,7 +179,12 @@ $resultadoAsignatura = $asignatura->consultarId();
 										<th width="30%">Nombre</th>
 										<th width="15%">Calificaci&oacute;n Ordinario</th>
 										<th width="20%">Calificaci&oacute;n Extraordinario</th>
-										<th width="20%">Fecha de Examen</th>
+										<th width="20%"><?php if ($resultadoCicloEscolar && $_GET["tramite"] == "equiv") { ?>
+												Fecha Equivalencia
+											<?php } else { ?>
+												Fecha de Examen
+											<?php } ?>
+										</th>
 									</tr>
 								</thead>
 								<tbody>
