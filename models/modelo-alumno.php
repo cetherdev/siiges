@@ -4,6 +4,10 @@
   */
 
   require_once "base-catalogo.php";
+  require_once "modelo-persona.php";
+  require_once "modelo-calificacion.php";
+  require_once "modelo-grupo.php";
+  require_once "modelo-ciclo-escolar.php";
 
 	define( "TABLA_ALUMNOS", "alumnos" );
 
@@ -11,6 +15,7 @@
   {
     protected $id;
     protected $persona_id;
+    protected $tipo;
     protected $situacion_id;
     protected $programa_id;
     protected $tipo_tramite_id;
@@ -28,6 +33,7 @@
     protected $observaciones2;
     protected $fecha_baja;
     protected $observaciones_baja;
+    protected $ciclo_escolar_id;
 
 		// Constructor
 		public function __construct( )
@@ -103,5 +109,44 @@
 			$resultado = parent::consultarSQLCatalogo( $sql );
 			return $resultado;
     }
+
+      // Método para consultar alumnos con extraordinatios por ciclo
+      public function consultarAlumnosExtraordinarios( )
+      {
+    //"select * from " . TABLA_CALIFICACIONES . " where tipo='$this->tipo' and deleted_at is null order by id";
+    $sql = " SELECT extraordinarios.calificacion calificacion,
+        extraordinarios.tipo tipo,
+        extraordinarios.alumno_id alumno_id,
+        extraordinarios.asignatura_id asignatura_id,
+        grupos.grado grado,
+        ciclos_escolares.id ciclo_escolar_id,
+        ciclos_escolares.nombre ciclo_escolar,
+        ciclos_escolares.programa_id programa_id,
+        alumnos.matricula matricula,
+        alumnos.persona_id persona_id,
+        personas.nombre nombre,
+        personas.apellido_paterno apellido_paterno,
+        personas.apellido_materno apellido_materno
+        FROM " . TABLA_CALIFICACIONES . " extraordinarios
+
+        LEFT JOIN " . TABLA_GRUPOS . "
+        ON extraordinarios.grupo_id = grupos.id
+
+        LEFT JOIN " . TABLA_CICLOS_ESCOLARES . "
+        ON grupos.ciclo_escolar_id = ciclos_escolares.id
+
+        LEFT JOIN " . TABLA_ALUMNOS . " ON extraordinarios.alumno_id = alumnos.id
+
+        LEFT JOIN " . TABLA_PERSONAS . " ON alumnos.persona_id = personas.id
+
+        WHERE extraordinarios.tipo = 2
+        AND extraordinarios.calificacion REGEXP '^[0-9]+\\.?[0-9]*$'
+        AND ciclos_escolares.id = '$this->ciclo_escolar_id'
+        AND extraordinarios.deleted_at is null
+        AND alumnos.deleted_at is null";
+
+        $resultado = parent::consultarSQLCatalogo( $sql );
+        return $resultado;
+      }
   }
 ?>
