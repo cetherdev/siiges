@@ -137,7 +137,7 @@ $resultadoPersona = $persona->consultarId();
               </thead>
               <tbody>
                 <tr>
-                  <td><?php echo $resultadoPersona["data"]["nombre"]; ?></td>
+                  <td><?php echo $resultadoPersona["data"]["apellido_paterno"]; ?></td>
                   <td><?php echo $resultadoPersona["data"]["apellido_materno"]; ?></td>
                   <td><?php echo $resultadoPersona["data"]["nombre"]; ?></td>
                   <?php
