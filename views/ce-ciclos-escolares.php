@@ -52,6 +52,11 @@ $resultadoInstitucion = $institucion->consultarId();
 			<!-- BARRA DE INFORMACION -->
 			<div class="row" style="padding-left: 15px; padding-right: 15px;">
 				<div class="col-sm-12 col-md-12 col-lg-12">
+          <?php
+          $resultadoInstitucion = isset($resultadoInstitucion["data"][0])
+            ? $resultadoInstitucion["data"][0]
+            : $resultadoInstitucion["data"];
+          ?>
 					<!-- BARRA DE USUARIO -->
 					<ol class="breadcrumb pull-right">
 						<li><i class="icon icon-user"></i></li>
@@ -62,7 +67,7 @@ $resultadoInstitucion = $institucion->consultarId();
 					<ol class="breadcrumb pull-left">
 						<li><i class="icon icon-home"></i></li>
 						<li><a href="home.php">SIIGES</a></li>
-						<li><a href="ce-programas-plantel.php?institucion_id=<?php echo $resultadoInstitucion["data"]["id"] ?>&plantel_id=<?php echo $resultadoPlantel["data"]["id"] ?>">Programas de Estudios</a></li>
+						<li><a href="ce-programas-plantel.php?institucion_id=<?php echo $resultadoInstitucion["id"] ?>&plantel_id=<?php echo $resultadoPlantel["data"]["id"] ?>">Programas de Estudios</a></li>
 						<li class="active">Ciclos Escolares</li>
 					</ol>
 				</div>
@@ -100,10 +105,10 @@ $resultadoInstitucion = $institucion->consultarId();
 							<thead>
 								<tr>
 									<th width="10%">Id</th>
-									<th width="20%">Ciclo</th>
-									<th width="50%">Descripci&oacute;n</th>
-									<th width="10%">Acciones</th>
-									<th width="10%">Acciones</th>
+									<th width="30%">Ciclo</th>
+									<th width="30%">Descripci&oacute;n</th>
+									<th width="15%">Acciones</th>
+									<th width="15%">Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -154,7 +159,14 @@ $resultadoInstitucion = $institucion->consultarId();
 												endif; ?>
 											</td>
 											<td>
-												<a href="ce-grados.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $atributoCicloEscolar["id"]; ?>">Grados</a>
+                        <a href="ce-grados.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $atributoCicloEscolar["id"]; ?>">Grados</a><br>
+                        <?php
+                        if (Rol::ROL_ADMIN == $_SESSION["rol_id"] || Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"] ) :
+                        ?>
+												  <a href="ce-reporte-extraordinarios.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $atributoCicloEscolar["id"]; ?>">Reporte extraordinarios</a>
+                        <?php
+                        endif;
+                        ?>
 											</td>
 										</tr>
 								<?php

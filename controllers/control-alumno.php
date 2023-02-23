@@ -255,3 +255,14 @@ if ($_POST["webService"] == "guardarAlumnoCertificado") {
     $result = $bitacora->guardar(); */
   retornarWebService($_POST["url"], $resultadoAlumno);
 }
+
+// Web service para consultar registro por programa id
+if ($_POST["webService"] == "consultarAlumnosExtraordinarios") {
+  $obj = new Alumno();
+  $aux = new Utileria();
+  $_POST = $aux->limpiarEntrada($_POST);
+  $obj->setAttributes($_POST);
+  $resultadoAlumnos = $obj->consultarAlumnosExtraordinarios();
+
+  retornarWebService($_POST["url"], $resultadoAlumnos);
+}
