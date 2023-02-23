@@ -8,6 +8,7 @@
   require_once "modelo-calificacion.php";
   require_once "modelo-grupo.php";
   require_once "modelo-ciclo-escolar.php";
+  require_once "modelo-asignatura.php";
 
 	define( "TABLA_ALUMNOS", "alumnos" );
 
@@ -126,7 +127,8 @@
         alumnos.persona_id persona_id,
         personas.nombre nombre,
         personas.apellido_paterno apellido_paterno,
-        personas.apellido_materno apellido_materno
+        personas.apellido_materno apellido_materno,
+        asignaturas.clave clave_asignatura
         FROM " . TABLA_CALIFICACIONES . " extraordinarios
 
         LEFT JOIN " . TABLA_GRUPOS . "
@@ -138,6 +140,8 @@
         LEFT JOIN " . TABLA_ALUMNOS . " ON extraordinarios.alumno_id = alumnos.id
 
         LEFT JOIN " . TABLA_PERSONAS . " ON alumnos.persona_id = personas.id
+        
+        LEFT JOIN " . TABLA_ASIGNATURA . " ON extraordinarios.asignatura_id = asignaturas.id
 
         WHERE extraordinarios.tipo = 2
         AND extraordinarios.calificacion REGEXP '^[0-9]+\\.?[0-9]*$'

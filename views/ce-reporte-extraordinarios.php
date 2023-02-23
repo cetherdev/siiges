@@ -6,16 +6,27 @@ Utileria::validarSesion(basename(__FILE__));
 //====================================================================================================
 
 require_once "../models/modelo-programa.php";
-require_once "../models/modelo-situacion.php";
-require_once "../models/modelo-persona.php";
-require_once "../models/modelo-calificacion.php";
-require_once "../models/modelo-grupo.php";
+require_once "../models/modelo-plantel.php";
+require_once "../models/modelo-institucion.php";
 require_once "../models/modelo-ciclo-escolar.php";
-require_once "../models/modelo-asignatura.php";
 
 $programa = new Programa();
 $programa->setAttributes(array("id" => $_GET["programa_id"]));
 $resultadoPrograma = $programa->consultarId();
+
+$plantel = new Plantel();
+$plantel->setAttributes(array("id" => $resultadoPrograma["data"]["plantel_id"]));
+$resultadoPlantel = $plantel->consultarId();
+
+$institucion = new Institucion();
+$institucion->setAttributes(array("id" => $resultadoPlantel["data"]["institucion_id"]));
+$resultadoInstitucion = $institucion->consultarId();
+
+
+$ciclo = new CicloEscolar();
+$ciclo->setAttributes(array("id" => $_GET["ciclo_id"]));
+$resultadoCiclo = $ciclo->consultarId();
+
 
 ?>
 
@@ -42,8 +53,10 @@ $resultadoPrograma = $programa->consultarId();
 
 <body>
   <!-- HEADER Y MENÚ -->
-  <?php require_once "menu.php"; ?>
-
+  <?php require_once "menu.php"; 
+  
+  $resultadoInstitucion = isset($resultadoInstitucion["data"][0]) ? $resultadoInstitucion["data"][0] : $resultadoInstitucion["data"];
+  ?>
   <!-- CUERPO DE PANTALLA -->
   <div class="container">
     <section class="main row margin-section-formularios">
@@ -60,9 +73,8 @@ $resultadoPrograma = $programa->consultarId();
           <!-- BARRA DE NAVEGACION -->
           <ol class="breadcrumb pull-left">
             <li><i class="icon icon-home"></i></li>
-            <li><a href="home.php">SIIGES</a></li>
-              <li><a href="ce-alumnos-equivalencia.php?programa_id=<?php echo $_GET["programa_id"]; ?>">Alumnos</a></li>
-              <li><a href="ce-alumnos.php?programa_id=<?php echo $_GET["programa_id"]; ?>">Alumnos</a></li>
+            <li><a href="ce-programas-plantel.php?institucion_id=<?php echo $resultadoInstitucion["id"] ?>&plantel_id=<?php echo $resultadoPlantel["data"]["id"] ?>">Programas de Estudios</a></li>
+						<li><a href="ce-ciclos-escolares.php?programa_id=<?php echo $_GET["programa_id"]; ?>">Ciclos Escolares</a></li>
             <li class="active">Reporte extraordinarios</li>
           </ol>
         </div>
@@ -80,20 +92,20 @@ $resultadoPrograma = $programa->consultarId();
         </div>
         <!-- CONTENIDO -->
         <div class="row">
-          <div class="col-sm-12 col-md-12">
+          <div class="col-sm-12 col-md-9">
             <table id="tabla-reporte1" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th width="25%">Matr&iacute;cula</th>
-                  <th width="25%">Situaci&oacute;n</th>
-                  <th width="50%">Cr&eacute;ditos obtenidos</th>
+                  <th width="25%">Acuerdo RVOE</th>
+                  <th width="25%">Ciclo Escolar</th>
+                  <th width="25%">Total de extraordinarios</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td id="creditos_obtenidos"></td>
+                  <td><?php echo $resultadoPrograma["data"]["acuerdo_rvoe"];?></td>
+                  <td><?php echo $resultadoCiclo["data"]["nombre"];?></td>
+                  <td id="totalExtraordinarios"></td>
                 </tr>
               </tbody>
             </table>
@@ -134,6 +146,7 @@ $resultadoPrograma = $programa->consultarId();
     </section>
     <!-- inputs hidden -->
     <input id="programa_id" type="hidden" value="<?= $_GET["programa_id"] ?>">
+    <input id="ciclo_escolar_id" type="hidden" value="<?= $_GET["ciclo_id"] ?>">
   </div>
 
   <!-- JS GOB.MX -->

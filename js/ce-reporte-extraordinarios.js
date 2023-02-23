@@ -1,5 +1,4 @@
-const Calificacion = {};
-const getAlumnosExtraordinarios = async () => {
+const getAlumnosExtraordinarios = async (ciclo_escolar_id) => {
   try {
     return await $.ajax({
       type: 'POST',
@@ -8,7 +7,7 @@ const getAlumnosExtraordinarios = async () => {
       data: {
         webService: 'consultarAlumnosExtraordinarios',
         url: '',
-        ciclo_escolar_id: 1189,
+        ciclo_escolar_id,
       }
     })
 
@@ -29,7 +28,7 @@ const tableReport = (alumnosExtraordinarios)=> {
       { data: "apellido_paterno" },
       { data: "apellido_materno" },
       { data: "grado" },
-      { data: "asignatura_id" }
+      { data: "clave_asignatura" }
     ],
     oLanguage: {
       sProcessing: "Procesando...",
@@ -69,58 +68,17 @@ const tableReport = (alumnosExtraordinarios)=> {
   });
 } 
 
-
-
-Calificacion.getCalificacionPorCiclo = async function () {
-  const programaId =  document.getElementById('programa_id'); 
-  const programa = await getPrograma(programaId.value);
-
-	Calificacion.calificacionPromesa = $.ajax({
-		type: 'POST',
-		url: '../controllers/control-calificacion.php',
-		dataType: 'json',
-		data: {
-			webService: 'consultarCalificacionPorAlumno',
-			url: '',
-			alumno_id: $('#alumno_id').val(),
-      calificacion_aprobatoria: programa.data.calificacion_aprobatoria
-		},
-		success: function (data) {
-
-      const creditosObtenidos = document.getElementById('creditos_obtenidos')
-      creditosObtenidos.innerHTML = `${data.totalCreditos} de ${programa.data.creditos}`;
-
-      const calificaciones = data.calificacionCiclo;
-      
-      let todasCalificaciones = [];
-
-      for (const ciclo_escolar in calificaciones) {
-
-        if (Object.hasOwnProperty.call(calificaciones, ciclo_escolar)) {
-
-          const materias_ciclo = calificaciones[ciclo_escolar];
-
-          materias_ciclo.sort((a, b) => {
-            return a.consecutivo - b.consecutivo;
-          })
-          todasCalificaciones = todasCalificaciones.concat(materias_ciclo);
-        }
-      }
-		},
-		error: function (respuesta, errmsg, err) {
-			console.log(respuesta.status + ': ' + respuesta.responseText);
-		},
-	});
-};
-
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const calificaciones = await getAlumnosExtraordinarios();
+    const ciclo_escolar_id = document.getElementById('ciclo_escolar_id');
+    const calificaciones = await getAlumnosExtraordinarios(ciclo_escolar_id.value);
+
+    const totalExtraordinarios = document.getElementById('totalExtraordinarios');
+    totalExtraordinarios.innerHTML = calificaciones.data.length;
 
     const tabla = await tableReport(calificaciones.data);
-    console.log("Hello World!");
   } catch (error) {
-    
+    console.log(error);
   }
 
 });
