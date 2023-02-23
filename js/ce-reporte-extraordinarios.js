@@ -17,7 +17,6 @@ const getAlumnosExtraordinarios = async (ciclo_escolar_id) => {
 }
 
 const tableReport = (alumnosExtraordinarios)=> {
-  console.log(alumnosExtraordinarios);
   $("#extraordinarios").DataTable({
     bDeferRender: true,
     sPaginationType: "full_numbers",
