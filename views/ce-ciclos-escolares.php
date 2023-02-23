@@ -160,7 +160,13 @@ $resultadoInstitucion = $institucion->consultarId();
 											</td>
 											<td>
                         <a href="ce-grados.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $atributoCicloEscolar["id"]; ?>">Grados</a><br>
-												<a href="ce-reporte-extraordinarios.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $atributoCicloEscolar["id"]; ?>">Reporte extraordinarios</a>
+                        <?php
+                        if (Rol::ROL_ADMIN == $_SESSION["rol_id"] || Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"] ) :
+                        ?>
+												  <a href="ce-reporte-extraordinarios.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $atributoCicloEscolar["id"]; ?>">Reporte extraordinarios</a>
+                        <?php
+                        endif;
+                        ?>
 											</td>
 										</tr>
 								<?php
