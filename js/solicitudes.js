@@ -2134,22 +2134,22 @@ Solicitud.camposLlenos = function () {
 	}
 
 	if ($('#tipo').val() != 3) {
-		if (
+		/* if (
 			$('#inputsLicencias > *').length == 0 &&
 			$('#auxmodalidad').val() == 2
 		) {
 			resultado = resultado + 'Por lo menos introduzca una licencia' + '<br>';
-		}
-		if (
+		} */
+		/* if (
 			$('#inputsRespaldos > *').length == 0 &&
 			$('#auxmodalidad').val() == 2
 		) {
 			resultado = resultado + 'Por lo menos un sistema de respaldo' + '<br>';
-		}
-		if ($('#inputsEspejos > *').length == 0 && $('#auxmodalidad').val() == 2) {
+		} */
+		/* if ($('#inputsEspejos > *').length == 0 && $('#auxmodalidad').val() == 2) {
 			resultado =
 				resultado + 'Por lo menos introzduca un sistema de espejo' + '<br>';
-		}
+		} */
 	}
 
 	if (resultado.length > 0) {
