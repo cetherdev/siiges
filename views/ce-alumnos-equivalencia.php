@@ -141,12 +141,11 @@ $resultadoInstitucion = $institucion->consultarId();
 
                   $validacion = new Validacion();
                   $resultadoValidacion = $validacion->consultarPor("validaciones", array("alumno_id" => $resultadoAlumno["data"][$i]["id"], "deleted_at"), "*");
-                  $parametros4["id"] = $resultadoValidacion["data"][0]["situacion_validacion_id"];
-
+                  
+                  isset($resultadoValidacion["data"][0]) ? $parametros4["id"] = $resultadoValidacion["data"][0]["situacion_validacion_id"] : $parametros4["id"] = "";
                   $situacionValidacion = new SituacionValidacion();
                   $situacionValidacion->setAttributes($parametros4);
                   $resultadoSituacionValidacion = $situacionValidacion->consultarId();
-
                 ?>
                   <tr>
                     <td><?php echo $resultadoAlumno["data"][$i]["id"]; ?></td>
@@ -161,7 +160,7 @@ $resultadoInstitucion = $institucion->consultarId();
 
                       if (Rol::ROL_CONTROL_ESCOLAR_IES == $_SESSION["rol_id"] || (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"])) :
                         echo "<br>";
-                        echo isset($resultadoSituacionValidacion["data"]) ? $resultadoSituacionValidacion["data"]["nombre"] : "Sin validar";
+                        echo isset($resultadoSituacionValidacion["data"]["nombre"]) ? $resultadoSituacionValidacion["data"]["nombre"] : "Sin validar";
                       endif;
                       ?>
                     </td>
