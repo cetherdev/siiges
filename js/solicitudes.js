@@ -2133,23 +2133,14 @@ Solicitud.camposLlenos = function () {
 		resultado = resultado + 'Turno del programa' + '<br>';
 	}
 
-	if ($('#tipo').val() != 3) {
-		if (
-			$('#inputsLicencias > *').length == 0 &&
-			$('#auxmodalidad').val() == 2
-		) {
-			resultado = resultado + 'Por lo menos introduzca una licencia' + '<br>';
-		}
-		if (
-			$('#inputsRespaldos > *').length == 0 &&
-			$('#auxmodalidad').val() == 2
-		) {
-			resultado = resultado + 'Por lo menos un sistema de respaldo' + '<br>';
-		}
-		if ($('#inputsEspejos > *').length == 0 && $('#auxmodalidad').val() == 2) {
-			resultado =
-				resultado + 'Por lo menos introzduca un sistema de espejo' + '<br>';
-		}
+  if ($('#tipo').val() != 3) {
+    if (
+      !($('#fda_05-id').val()) &&
+      $('#auxmodalidad').val() == 2
+    ) {
+      console.log('Herramienta educativa');
+      resultado = resultado + 'Archivo de herramienta educativa FDA05' + '<br>';
+    }
 	}
 
 	if (resultado.length > 0) {
