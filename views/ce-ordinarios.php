@@ -226,22 +226,16 @@ $resultadoAsignatura = $asignatura->consultarId();
 											<tr>
 												<td><?php echo $resultadoAlumno["data"]["matricula"]; ?></td>
 												<td><?php echo $resultadoPersona["data"]["apellido_paterno"] . " " . $resultadoPersona["data"]["apellido_materno"] . " " . $resultadoPersona["data"]["nombre"]; ?></td>
-												<td id="calificaciones"><input type="number" id="calificacion[]" name="calificacion[]" value="<?php
-																																																											echo $resultadoCalificacion["data"][0]["calificacion"];
-																																																											?>" maxlength="5" min="<?php
-																																																																							echo $resultadoPrograma["data"]["calificacion_minima"];
-																																																																							?>" max="<?php
-																																																																												echo $resultadoPrograma["data"]["calificacion_maxima"];
-																																																																												?>" class="form-control" step="<?php
-																																																																																												echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";
-																																																																																												?>" /></td>
-												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo $resultadoCalificacion["data"][0]["fecha_examen"]; ?>" maxlength="10" class="form-control" /></td>
+												<td id="calificaciones">
+													<input type="number" id="calificacion[]" name="calificacion[]" value="<?php echo $resultadoCalificacion["data"][0]["calificacion"];?>" maxlength="5" min="<?php echo $resultadoPrograma["data"]["calificacion_minima"];?>" max="<?php echo $resultadoPrograma["data"]["calificacion_maxima"]; ?>" class="form-control" step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1"; ?>" <?php if ($resultadoAlumno["data"]["situacion_id"] == 3) {echo "disabled";} ?> /></td>
+												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo $resultadoCalificacion["data"][0]["fecha_examen"]; ?>" maxlength="10" class="form-control"<?php if ($resultadoAlumno["data"]["situacion_id"] == 3) {echo "disabled";} ?> /></td>
 											</tr>
 									<?php
 										}
 									}
 									?>
 								</tbody>
+
 							</table>
 						</div>
 					</div>
