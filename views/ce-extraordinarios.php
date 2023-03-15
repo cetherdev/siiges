@@ -239,13 +239,16 @@ $resultadoAsignatura = $asignatura->consultarId();
 															echo "style='color: red;'";
 														} ?>><?php echo $resultadoCalificacion["data"][0]["calificacion"]; ?></td>
 												<td id="calificaciones">
-													<input list="datalist" id="calificacion[]" name="calificacion[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["calificacion"]) ? $resultadoCalificacion2["data"][0]["calificacion"] : ""; ?>" class="form-control" <?php
-																																																																																																																														if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) {
-																																																																																																																															echo "readonly";
-																																																																																																																														}
-																																																																																																																														?> step="<?php
-																																																																																																																																			echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";
-																																																																																																																																			?>" />
+													<input list="datalist" id="calificacion[]" name="calificacion[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["calificacion"]) ? $resultadoCalificacion2["data"][0]["calificacion"] : ""; ?>" class="form-control" 
+                          <?php
+                            if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
+                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))
+                            || ($resultadoAlumno["data"]["situacion_id"] == 3)) { echo "disabled"; }
+                          ?> 
+                          step="
+                          <?php
+                          echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";
+                          ?>" />
 													<datalist id="datalist">
 														<option value="NS (No solicitó)">
 														<option value="NP (No presentó)">
@@ -253,11 +256,15 @@ $resultadoAsignatura = $asignatura->consultarId();
 														<option value="SD (Sin Derecho)">
 													</datalist>
 												</td>
-												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["fecha_examen"]) ? $resultadoCalificacion2["data"][0]["fecha_examen"] : ""; ?>" maxlength="10" class="form-control" <?php
-																																																																																																																																				if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) {
-																																																																																																																																					echo "readonly";
-																																																																																																																																				}
-																																																																																																																																				?> /></td>
+												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["fecha_examen"]) ? $resultadoCalificacion2["data"][0]["fecha_examen"] : ""; ?>" maxlength="10" class="form-control" 
+                          <?php
+                            if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
+                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))
+                            || ($resultadoAlumno["data"]["situacion_id"] == 3)) {
+                              echo "disabled";
+                            }
+                          ?> />
+                        </td>
 											</tr>
 									<?php
 										}
