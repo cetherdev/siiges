@@ -216,7 +216,7 @@ if (isset($_SESSION["resultado"])) {
 
           <div class="form-group col-sm-6 col-md-4">
             <h4>Formatos Pedagógicos</h4>
-            <a target="_blank" href=<?= "formatos/fdp01.php?id=" . $_GET["solicitud"] ?>>FDP 01</a><br>
+            <a target="_blank" id="fdp01">FDP 01</a><br>
             <a target="_blank" id="fdp02"></a><br>
             <a target="_blank" id="fdp03">FDP 03</a><br>
             <a target="_blank" id="fdp04">FDP 04</a><br>
