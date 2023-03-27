@@ -26,6 +26,7 @@ Documento.mostrarMensaje = function (tipo, texto) {
 Documento.getFormatos = function () {
   var entidadId = $("#id_solicitud").val();
   var tipoEntidad = 5; // PROGRAMA
+  var tipoDocumentoFDP01 = 37; // 37 -> FDP01
   var tipoDocumentoFDP03 = 8; // 8 -> FDP03
   var tipoDocumentoFDP04 = 9; //  9 -> FDP04
   var tipoDocumentoFDA05 = 39;
@@ -36,8 +37,34 @@ Documento.getFormatos = function () {
   datos.url = "";
   datos.tipo_entidad = tipoEntidad;
   datos.solicitud_id = entidadId;
-  datos.tipo_documento = tipoDocumentoFDP03;
+  datos.tipo_documento = tipoDocumentoFDP01;
 
+  $.ajax({
+    type: "POST",
+    url: ajaxPath,
+    data: datos,
+    dataType: "json",
+    success: function (response) {
+      if ($.isArray(response.data) && !response.data.length > 0) {
+        console.log(response.message + " FDP01 para la solicitud " + entidadId);
+        $("#fdp01").on("click", function (e) {
+          e.preventDefault();
+          Documento.mostrarMensaje(
+            "error",
+            response.message + " FDP01 para la solicitud " + entidadId
+          );
+        });
+      } else {
+        $("#fdp01").attr("href", response.data.archivo);
+      }
+    },
+    error: function (response) {
+      console.log("ERROR");
+      console.log(response);
+    },
+  });
+
+  datos.tipo_documento = tipoDocumentoFDP03;
   $.ajax({
     type: "POST",
     url: ajaxPath,
