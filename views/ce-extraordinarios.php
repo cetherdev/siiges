@@ -180,12 +180,12 @@ $resultadoAsignatura = $asignatura->consultarId();
 										<th width="15%">Calificaci&oacute;n Ordinario</th>
 										<th width="20%">Calificaci&oacute;n Extraordinario</th>
 										<th width="20%">
-                      <?php if ($resultadoCicloEscolar && $_GET["tramite"] == "equiv") { ?>
+											<?php if ($resultadoCicloEscolar && $_GET["tramite"] == "equiv") { ?>
 												Fecha Equivalencia
 											<?php } else { ?>
 												Fecha de Examen
 											<?php } ?>
-                    </th>
+										</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -236,31 +236,52 @@ $resultadoAsignatura = $asignatura->consultarId();
 												<td><?php echo $resultadoAlumno["data"]["matricula"]; ?></td>
 												<td><?php echo $resultadoPersona["data"]["apellido_paterno"] . " " . $resultadoPersona["data"]["apellido_materno"] . " " . $resultadoPersona["data"]["nombre"]; ?></td>
 												<td <?php if ($resultadoCalificacion["data"][0]["calificacion"] < $resultadoPrograma["data"]["calificacion_aprobatoria"]) {
-															echo "style='color: red;'";
-														} ?>><?php echo $resultadoCalificacion["data"][0]["calificacion"]; ?></td>
+														echo "style='color: red;'";
+													} ?>><?php echo $resultadoCalificacion["data"][0]["calificacion"]; ?></td>
+
+
+
+
+
+
 												<td id="calificaciones">
-													<input list="datalist" id="calificacion[]" name="calificacion[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["calificacion"]) ? $resultadoCalificacion2["data"][0]["calificacion"] : ""; ?>" class="form-control" 
-                          <?php
-                            if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
-                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) { echo "readonly"; }
-                          ?> 
-                          step="
-                          <?php
-                          echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";
-                          ?>" />
-													<datalist id="datalist">
-														<option value="NS (No solicitó)">
-														<option value="NP (No presentó)">
-														<option value="RC (Recursa)">
-														<option value="SD (Sin Derecho)">
-													</datalist>
+													<input 
+														list="datalist" 
+														id="calificacion[]" 
+														name="calificacion[]"
+														value="<?php 
+															echo isset($resultadoCalificacion2["data"][0]["calificacion"]) ? $resultadoCalificacion2["data"][0]["calificacion"] : ""; 
+														?>" 
+														class="form-control" 
+														<?php
+														if (
+															($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"])
+															|| (!isset($resultadoCalificacion["data"][0]["calificacion"])))
+															{echo "readonly";}
+														?>
+														step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1"; ?>" 
+													/>
+														<datalist id="datalist">
+															<option value="NS (No solicitó)">
+															<option value="NP (No presentó)">
+															<option value="RC (Recursa)">
+															<option value="SD (Sin Derecho)">
+														</datalist>
 												</td>
-												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["fecha_examen"]) ? $resultadoCalificacion2["data"][0]["fecha_examen"] : ""; ?>" maxlength="10" class="form-control" 
-                          <?php
-                            if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
-                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) { echo "readonly"; }
-                          ?> />
-                        </td>
+
+
+
+
+
+
+												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["fecha_examen"]) ? $resultadoCalificacion2["data"][0]["fecha_examen"] : ""; ?>" maxlength="10" class="form-control" <?php
+																																																																								if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"])
+																																																																									|| (!isset($resultadoCalificacion["data"][0]["calificacion"]))
+																																																																								) {
+																																																																									echo "readonly";
+																																																																								}
+																																																																								?> />
+												</td>
 											</tr>
 									<?php
 										}
