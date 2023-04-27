@@ -244,7 +244,7 @@ $resultadoAsignatura = $asignatura->consultarId();
                             if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
                             || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) { echo "readonly"; }
                           ?> 
-                          step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";?>" />
+                          step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";?>" <?php if ($resultadoAlumno["data"]["situacion_id"] == 3) {echo "readonly"; } ?>/>
 													<datalist id="datalist">
 														<option value="NS (No solicitó)">
 														<option value="NP (No presentó)">
