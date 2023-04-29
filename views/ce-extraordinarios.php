@@ -242,7 +242,9 @@ $resultadoAsignatura = $asignatura->consultarId();
 													<input list="datalist" id="calificacion[]" name="calificacion[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["calificacion"]) ? $resultadoCalificacion2["data"][0]["calificacion"] : ""; ?>" class="form-control" 
                           <?php
                             if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
-                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) { echo "readonly"; }
+                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))
+                            || ($resultadoAlumno["data"]["situacion_id"] == 3)
+                            ) { echo "readonly"; }
                           ?> 
                           step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";?>" />
 													<datalist id="datalist">
@@ -255,7 +257,9 @@ $resultadoAsignatura = $asignatura->consultarId();
 												<td><input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo isset($resultadoCalificacion2["data"][0]["fecha_examen"]) ? $resultadoCalificacion2["data"][0]["fecha_examen"] : ""; ?>" maxlength="10" class="form-control" 
                           <?php
                             if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
-                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))) { echo "readonly"; }
+                            || (!isset($resultadoCalificacion["data"][0]["calificacion"]))
+                            || ($resultadoAlumno["data"]["situacion_id"] == 3)
+                            ) { echo "readonly"; }
                           ?> />
                         </td>
 											</tr>
