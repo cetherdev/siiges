@@ -242,7 +242,7 @@ if ($_GET["proceso"] == "edicion") {
             <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="nombre_programa">Modificado por</label>
-                <input type="text" id="" name="" value="<?php echo (isset($resultadoUsuario)) ? $resultadoUsuario["data"]["persona"]["nombre"] . " " . $resultadoUsuario["data"]["persona"]["apellido_materno"] . " " . $resultadoUsuario["data"]["persona"]["apellido_paterno"] : ""; ?>" maxlength="255" class="form-control" readonly />
+                <input type="text" id="" name="" value="<?php echo (isset($resultadoUsuario)) ? $resultadoUsuario["data"]["persona"]["nombre"] . " " . $resultadoUsuario["data"]["persona"]["apellido_paterno"]  . " " . $resultadoUsuario["data"]["persona"]["apellido_materno"] : ""; ?>" maxlength="255" class="form-control" readonly />
               </div>
             </div>
           </div>
