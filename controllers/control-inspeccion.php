@@ -304,13 +304,15 @@
     $aux = new Utileria( );
     $_POST = $aux->limpiarEntrada( $_POST );
     //Consultar datos del inspector
-    $inspector = new Persona();
-    $inspector->setAttributes(array("id"=>$_POST["persona_id"]));
-    $res_inspector = $inspector->consultarId();
-    if( $res_inspector["status"] == "200" )
+    $persona = new Persona();
+    $persona->setAttributes(array("id"=>$_POST["persona_id"]));
+    $res_persona = $persona->consultarId();
+    $inspector = new Inspector();
+    $inspector->setAttributes(array("persona_id" => $_POST["persona_id"]));
+    $inspecciones_realizadas = $inspector->consultarInspeccionesInspector();
+    if( $res_persona["status"] == "200" )
     {
-      $inspeccion = new Inspeccion();
-      $programas_inspeccionados = $inspeccion->consultarPor("inspectores",array("persona_id"=>$_POST["persona_id"], "deleted_at"),array("programa_id"));
+      /* $programas_inspeccionados = $inspeccion->consultarPor("inspectores",array("persona_id"=>$_POST["persona_id"], "deleted_at"),array("programa_id"));
       if( sizeof($programas_inspeccionados["data"]) > 0 )
       {
         $programas_inspeccionados = $programas_inspeccionados["data"];
@@ -349,7 +351,8 @@
           $resultado["data"] = $inspecciones;
         }
 
-      }
+      } */
+      $resultado["data"] = $inspecciones_realizadas["data"];
     }
 
 
