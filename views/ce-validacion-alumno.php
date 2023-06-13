@@ -297,13 +297,13 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="nombre_institucion_emisora">Instituci&oacute;n de procedencia*: </label>
+                <label class="control-label" for="nombre_institucion_emisora">Instituci&oacute;n de procedencia: </label>
                 <input type="text" id="nombre_institucion_emisora" name="nombre_institucion_emisora" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["nombre_institucion_emisora"] : ""; ?>" maxlength="255" class="form-control" required />
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="estado">Estado de procedencia*: </label>
+                <label class="control-label" for="estado">Estado de procedencia: </label>
                 <select id="estado_id" name="estado_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                   <option value=""> </option>
                   <?php
@@ -323,7 +323,7 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="clave_centro_trabajo_emisor">CCT de instituci&oacute;n de procedencia*:</label>
+                <label class="control-label" for="clave_centro_trabajo_emisor">CCT de instituci&oacute;n de procedencia:</label>
                 <input type="text" id="clave_centro_trabajo_emisor" name="clave_centro_trabajo_emisor" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["clave_centro_trabajo_emisor"] : ""; ?>" maxlength="255" class="form-control" required />
               </div>
             </div>
@@ -331,7 +331,7 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="nivel_id">Nivel de estudios cursado*: </label>
+                <label class="control-label" for="nivel_id">Nivel de estudios cursado: </label>
                 <select id="nivel_id" name="nivel_id" class="selectpicker" data-live-search="true" data-width="100%" onchange="crearInputCedula()" required>
                   <option value=""> </option>
                   <?php
@@ -352,13 +352,13 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_inicio_antecedente">Fecha de inicio de antecedente*:</label>
+                <label class="control-label" for="fecha_inicio_antecedente">Fecha de inicio de antecedente:</label>
                 <input type="text" id="fecha_inicio_antecedente" name="fecha_inicio_antecedente" value="<?php echo isset($res_validacion["data"][0]["fecha_inicio_antecedente"]) ? $res_validacion["data"][0]["fecha_inicio_antecedente"] : ""; ?>" maxlength="255" class="form-control" required />
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_fin_antecedente">Fecha de finalizaci&oacute;n de antecedente*:</label>
+                <label class="control-label" for="fecha_fin_antecedente">Fecha de finalizaci&oacute;n de antecedente:</label>
                 <input type="text" id="fecha_fin_antecedente" name="fecha_fin_antecedente" value="<?php echo isset($res_validacion["data"][0]["fecha_fin_antecedente"]) ? $res_validacion["data"][0]["fecha_fin_antecedente"] : ""; ?>" maxlength="255" class="form-control" required />
               </div>
             </div>
@@ -372,14 +372,14 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_expedicion">Fecha de expedici&oacute;n*:</label>
+                <label class="control-label" for="fecha_expedicion">Fecha de expedici&oacute;n:</label>
                 <input type="text" id="fecha_expedicion" name="fecha_expedicion" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["fecha_expedicion"] : ""; ?>" maxlength="255" class="form-control" required />
               </div>
             </div>
             <?php if (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"] || (Rol::ROL_ADMIN == $_SESSION["rol_id"])) : ?>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento*: </label>
+                  <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento: </label>
                   <select id="situacion_validacion_id" name="situacion_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                     <option value=""> </option>
                     <?php
@@ -400,7 +400,7 @@ if ($_GET["proceso"] == "edicion") {
             <?php if (Rol::ROL_CONTROL_ESCOLAR_IES == $_SESSION["rol_id"] || (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"])) : ?>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento*: </label>
+                  <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento: </label>
                   <select id="situacion_validacion_id" name="situacion_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required disabled>
                     <option value=""> </option>
                     <?php
@@ -423,7 +423,7 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="tipo_validacion">Tipo de validaci&oacute;n*</label>
+                <label class="control-label" for="tipo_validacion">Tipo de validaci&oacute;n</label>
                 <select id="tipo_validacion_id" name="tipo_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                   <option value=""> </option>
                   <?php
@@ -454,7 +454,7 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-8">
               <div class="form-group">
-                <label class="control-label" for="archivo_validacion">Archivo de validaci&oacute;n*
+                <label class="control-label" for="archivo_validacion">Archivo de validaci&oacute;n
                   <a class="questionmark" href="../views/ce-descripcion-tipo-validacion.php" target="_blank">
                     <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Da clic para ver los datalles de cada documento"></span>
                   </a>
@@ -465,7 +465,7 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_validacion">Fecha de archivo de validaci&oacute;n*
+                <label class="control-label" for="fecha_validacion">Fecha de archivo de validaci&oacute;n
                   <a class="questionmark" href="#">
                     <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Fecha en la que la Institución Educativa realiza la carga de información en la plataforma"></span>
                   </a>
