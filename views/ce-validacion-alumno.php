@@ -303,7 +303,7 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="estado">Estado de procedencia: </label>
+                <label class="control-label" for="estado">Estado de procedencia*: </label>
                 <select id="estado_id" name="estado_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                   <option value=""> </option>
                   <?php
@@ -331,7 +331,7 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="nivel_id">Nivel de estudios cursado: </label>
+                <label class="control-label" for="nivel_id">Nivel de estudios cursado*: </label>
                 <select id="nivel_id" name="nivel_id" class="selectpicker" data-live-search="true" data-width="100%" onchange="crearInputCedula()" required>
                   <option value=""> </option>
                   <?php
@@ -400,7 +400,7 @@ if ($_GET["proceso"] == "edicion") {
             <?php if (Rol::ROL_CONTROL_ESCOLAR_IES == $_SESSION["rol_id"] || (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"])) : ?>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento: </label>
+                  <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento*: </label>
                   <select id="situacion_validacion_id" name="situacion_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required disabled>
                     <option value=""> </option>
                     <?php
@@ -423,7 +423,7 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="tipo_validacion">Tipo de validaci&oacute;n</label>
+                <label class="control-label" for="tipo_validacion">Tipo de validaci&oacute;n*:</label>
                 <select id="tipo_validacion_id" name="tipo_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
                   <option value=""> </option>
                   <?php
