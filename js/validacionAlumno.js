@@ -47,7 +47,7 @@ ValidacionAlumno.guardarCambios = async function (e) {
 		);
 	} else {
 
-/*     const formData = new FormData(document.getElementById('form1'));
+    const formData = new FormData(document.getElementById('form1'));
     console.log(formData.get('url'));
     if (!formData.get('url')) {
       formData.append('url', `../views/ce-validacion.php?programa_id=${formData.get('programa_id')}&codigo=200`)
@@ -74,7 +74,7 @@ ValidacionAlumno.guardarCambios = async function (e) {
       console.error(err instanceof SyntaxError);
       console.error(err.message);
       console.error(err.stack);
-    } */
+    }
   }
 
 }
