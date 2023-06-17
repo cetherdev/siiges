@@ -143,6 +143,47 @@ $gmx(document).ready(function () {
 
 
   guardarCambiosButton = document.getElementById('guardarCambios')
+
+  const estado_id = document.querySelector("estado_id");
+  const nivel_id = document.querySelector("nivel_id");
+  
+  const setErrors = (message, field, isError = true) => {
+    if (isError) {
+      field.classList.add("invalid");
+      field.nextElementSibling.classList.add("error");
+      field.nextElementSibling.innerText = message;
+    } else {
+      field.classList.remove("invalid");
+      field.nextElementSibling.classList.remove("error");
+      field.nextElementSibling.innerText = "";
+    }
+  }
+  
+  const validateEmptyField = (message, e) => {
+    const field = e.target;
+    const fieldValue = e.target.value;
+    if (fieldValue.trim().length === 0) {
+      setErrors(message, field);
+    } else {
+      setErrors("", field, false);
+    }
+  }
+  
+  
+  estado_id.addEventListener("blur", (e) => validateEmptyField("estado", e));
+  nivel_id.addEventListener("blur", (e) => validateEmptyField("nivel", e));
+   
+  fileField.addEventListener("change", (e) => {
+    const field = e.target;
+    const fileExt = e.target.files[0].name.split(".").pop().toLowerCase();
+       if (!allowedExt.includes(fileExt)) {
+      setErrors(`The only extensions allowed are ${allowedExt.join(", ")}`, field);
+    } else {
+      setErrors("", field, false);
+    }
+  });
+
+
   habilitarCapturaButton = document.getElementById('habilitarCaptura')
 
   guardarCambiosButton && guardarCambiosButton.addEventListener('click', ValidacionAlumno.guardarCambios)
