@@ -66,13 +66,13 @@ $resultadoTipoValidacion = $tipoValidacion->consultarTodos();
 if ($resultadoPrograma["data"]["nivel_id"] == 2) {
   $titulo_certificado1 = "Archivo Certificado de Bachillerato o equivalente (PDF)";
   $titulo_certificado2 = "Acreditación Certificado de Bachillerato";
-  $titulo_certificado3 = "Folio de certificado*:";
+  $titulo_certificado3 = "Folio de certificado";
 }
 
 if ($resultadoPrograma["data"]["nivel_id"] >= 3 && $resultadoPrograma["data"]["nivel_id"] <= 7) {
   $titulo_certificado1 = "Archivo C&eacute;dula Profesional o T&iacute;tulo (PDF)";
   $titulo_certificado2 = "Acreditación C&eacute;dula Profesional o T&iacute;tulo";
-  $titulo_certificado3 = "Folio de c&eacute;dula profesional o t&iacute;tulo*:";
+  $titulo_certificado3 = "Folio de c&eacute;dula profesional o t&iacute;tulo";
 }
 
 
@@ -102,6 +102,12 @@ if ($_GET["proceso"] == "edicion") {
   $persona = new Persona();
   $persona->setAttributes(array("id" => $resultadoAlumno["data"]["persona_id"]));
   $resultadoPersona = $persona->consultarId();
+}
+
+if (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"] || Rol::ROL_ADMIN == $_SESSION["rol_id"]) {
+  $esIES = false;
+} else if(Rol::ROL_CONTROL_ESCOLAR_IES == $_SESSION["rol_id"] || Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"]){
+  $esIES = true;
 }
 
 ?>
@@ -297,14 +303,14 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="nombre_institucion_emisora">Instituci&oacute;n de procedencia*: </label>
-                <input type="text" id="nombre_institucion_emisora" name="nombre_institucion_emisora" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["nombre_institucion_emisora"] : ""; ?>" maxlength="255" class="form-control" required />
+                <label class="control-label" for="nombre_institucion_emisora">Instituci&oacute;n de procedencia <?php echo $esIES ? '*' : '' ?>: </label>
+                <input type="text" id="nombre_institucion_emisora" name="nombre_institucion_emisora" campo="Institución de procedencia" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["nombre_institucion_emisora"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="estado">Estado de procedencia*: </label>
-                <select id="estado_id" name="estado_id" class="selectpicker" data-live-search="true" data-width="100%" required>
+                <select id="estado_id" name="estado_id" campo="Estado de procedencia" class="selectpicker revision" data-live-search="true" data-width="100%" >
                   <option value=""> </option>
                   <?php
 
@@ -323,8 +329,8 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="clave_centro_trabajo_emisor">CCT de instituci&oacute;n de procedencia*:</label>
-                <input type="text" id="clave_centro_trabajo_emisor" name="clave_centro_trabajo_emisor" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["clave_centro_trabajo_emisor"] : ""; ?>" maxlength="255" class="form-control" required />
+                <label class="control-label" for="clave_centro_trabajo_emisor">CCT de instituci&oacute;n de procedencia <?php echo $esIES ? '*' : '' ?>:</label>
+                <input type="text" id="clave_centro_trabajo_emisor" name="clave_centro_trabajo_emisor" campo="CCT de institución de procedencia" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["clave_centro_trabajo_emisor"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
           </div>
@@ -332,7 +338,7 @@ if ($_GET["proceso"] == "edicion") {
             <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="nivel_id">Nivel de estudios cursado*: </label>
-                <select id="nivel_id" name="nivel_id" class="selectpicker" data-live-search="true" data-width="100%" onchange="crearInputCedula()" required>
+                <select id="nivel_id" name="nivel_id" campo="Nivel de estudios cursado" class="selectpicker revision" data-live-search="true" data-width="100%" onchange="crearInputCedula()">
                   <option value=""> </option>
                   <?php
                   $max = count($resultadoNivel["data"]);
@@ -352,35 +358,35 @@ if ($_GET["proceso"] == "edicion") {
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_inicio_antecedente">Fecha de inicio de antecedente*:</label>
-                <input type="text" id="fecha_inicio_antecedente" name="fecha_inicio_antecedente" value="<?php echo isset($res_validacion["data"][0]["fecha_inicio_antecedente"]) ? $res_validacion["data"][0]["fecha_inicio_antecedente"] : ""; ?>" maxlength="255" class="form-control" required />
+                <label class="control-label" for="fecha_inicio_antecedente">Fecha de inicio de antecedente <?php echo $esIES ? '*' : '' ?>:</label>
+                <input type="text" id="fecha_inicio_antecedente" name="fecha_inicio_antecedente" campo="Fecha de inicio de antecedente" value="<?php echo isset($res_validacion["data"][0]["fecha_inicio_antecedente"]) ? $res_validacion["data"][0]["fecha_inicio_antecedente"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_fin_antecedente">Fecha de finalizaci&oacute;n de antecedente*:</label>
-                <input type="text" id="fecha_fin_antecedente" name="fecha_fin_antecedente" value="<?php echo isset($res_validacion["data"][0]["fecha_fin_antecedente"]) ? $res_validacion["data"][0]["fecha_fin_antecedente"] : ""; ?>" maxlength="255" class="form-control" required />
+                <label class="control-label" for="fecha_fin_antecedente">Fecha de finalizaci&oacute;n de antecedente<?php echo $esIES ? '*' : '' ?>:</label>
+                <input type="text" id="fecha_fin_antecedente" name="fecha_fin_antecedente" campo="Fecha de finalización de antecedente" value="<?php echo isset($res_validacion["data"][0]["fecha_fin_antecedente"]) ? $res_validacion["data"][0]["fecha_fin_antecedente"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="folio"><?php echo $titulo_certificado3 ?></label>
-                <input type="text" id="folio" name="folio" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["folio"] : ""; ?>" maxlength="255" class="form-control" required />
+                <label class="control-label" for="folio"><?php echo $titulo_certificado3 ?><?php echo $esIES ? '*' : '' ?></label>
+                <input type="text" id="folio" name="folio" campo="Folio" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["folio"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_expedicion">Fecha de expedici&oacute;n*:</label>
-                <input type="text" id="fecha_expedicion" name="fecha_expedicion" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["fecha_expedicion"] : ""; ?>" maxlength="255" class="form-control" required />
+                <label class="control-label" for="fecha_expedicion">Fecha de expedici&oacute;n <?php echo $esIES ? '*' : '' ?>:</label>
+                <input type="text" id="fecha_expedicion" name="fecha_expedicion" campo="Fecha de expedición" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["fecha_expedicion"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
             <?php if (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"] || (Rol::ROL_ADMIN == $_SESSION["rol_id"])) : ?>
               <div class="col-sm-4">
                 <div class="form-group">
                   <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento*: </label>
-                  <select id="situacion_validacion_id" name="situacion_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
+                  <select id="situacion_validacion_id" name="situacion_validacion_id" campo="Situación de documento" class="selectpicker revision" data-live-search="true" data-width="100%">
                     <option value=""> </option>
                     <?php
                     $max = count($resultadoSituacionValidacion["data"]);
@@ -401,7 +407,7 @@ if ($_GET["proceso"] == "edicion") {
               <div class="col-sm-4">
                 <div class="form-group">
                   <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento*: </label>
-                  <select id="situacion_validacion_id" name="situacion_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required disabled>
+                  <select id="situacion_validacion_id" name="situacion_validacion_id" campo="Situación de documento" class="selectpicker revision" data-live-search="true" data-width="100%" disabled>
                     <option value=""> </option>
                     <?php
                     $max = count($resultadoSituacionValidacion["data"]);
@@ -424,7 +430,7 @@ if ($_GET["proceso"] == "edicion") {
             <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="tipo_validacion">Tipo de validaci&oacute;n*</label>
-                <select id="tipo_validacion_id" name="tipo_validacion_id" class="selectpicker" data-live-search="true" data-width="100%" required>
+                <select id="tipo_validacion_id" name="tipo_validacion_id" campo="Tipo de validación" class="selectpicker revision" data-live-search="true" data-width="100%">
                   <option value=""> </option>
                   <?php
                   $max = count($resultadoTipoValidacion["data"]);
@@ -454,23 +460,23 @@ if ($_GET["proceso"] == "edicion") {
           <div class="row">
             <div class="col-sm-8">
               <div class="form-group">
-                <label class="control-label" for="archivo_validacion">Archivo de validaci&oacute;n*
+                <label class="control-label" for="archivo_validacion">Archivo de validaci&oacute;n <?php echo $esIES ? '*' : '' ?>
                   <a class="questionmark" href="../views/ce-descripcion-tipo-validacion.php" target="_blank">
                     <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Da clic para ver los datalles de cada documento"></span>
                   </a>
                 </label>
-                <input type="file" id="archivo_validacion" name="archivo_validacion" accept="application/pdf" class="form-control" />
+                <input type="file" id="archivo_validacion" name="archivo_validacion" campo="Archivo de validación" accept="application/pdf" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
                 <div><a href="../uploads/<?php echo $res_validacion["data"] ? "Institucion" . $datosInstitucion["id"] . "/PLANTEL" . $resultadoPlantel["data"]["id"] . "/validaciones/" . $res_validacion["data"][0]["archivo_validacion"] : ""; ?>" target="_blank"><?php echo isset($res_validacion["data"][0]["archivo_validacion"]) ? "Oficio de validación" : ""; ?></a></div>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label" for="fecha_validacion">Fecha de archivo de validaci&oacute;n*
+                <label class="control-label" for="fecha_validacion">Fecha de archivo de validaci&oacute;n <?php echo $esIES ? '*' : '' ?>
                   <a class="questionmark" href="#">
                     <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Fecha en la que la Institución Educativa realiza la carga de información en la plataforma"></span>
                   </a>
                 </label>
-                <input type="text" id="fecha_validacion" name="fecha_validacion" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["fecha_validacion"] : ""; ?>" maxlength="255" class="form-control" required />
+                <input type="text" id="fecha_validacion" name="fecha_validacion" campo="Fecha de archivo de validación" value="<?php echo $res_validacion["data"] ? $res_validacion["data"][0]["fecha_validacion"] : ""; ?>" maxlength="255" class="form-control <?php echo $esIES ? 'revision' : '' ?>" />
               </div>
             </div>
           </div>
@@ -524,6 +530,27 @@ if ($_GET["proceso"] == "edicion") {
       </form>
 
     </section>
+
+    <!-- Modal para mensaje de errores -->
+    <div class="modal fade" id="modalErrores" tabindex="-1" role="dialog" aria-hidden="true">
+      <div id="tamanoModal" class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Error en llenado</h4>
+          </div>
+          <div class="modal-body">
+            <div id="mensajesError">
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- JS GOB.MX -->
