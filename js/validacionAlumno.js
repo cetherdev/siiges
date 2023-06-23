@@ -24,35 +24,58 @@ ValidacionAlumno.guardarCambios = async function (e) {
     e.preventDefault();
   }
 
-  const formData = new FormData(document.getElementById('form1'));
-  console.log(formData.get('url'));
-  if (!formData.get('url')) {
-    formData.append('url', `../views/ce-validacion.php?programa_id=${formData.get('programa_id')}&codigo=200`)
-  }
-  formData.append('webService', 'guardar')
-  formData.append('estatus', '1')
-  const ajaxPath = "../controllers/control-validacion.php";
-
-  try {
-    const response = await fetch(
-      ajaxPath,
-      {
-        method: "post",
-        body: formData,
-        redirect: 'follow'
-      });
-    if (response.ok) {
-      if (response.redirected) {
-        window.location.href = response.url;
+  var mensaje = $('#mensaje');
+	var resultado = '';
+	$('.revision').each(function () {
+		if ($(this).val() == '') {
+      if ($(this).attr('campo')) {
+        resultado = resultado + $(this).attr('campo') + '<br>';
       }
-      const data = await response.json();
-    }
-  } catch (err) {
-    console.error(err instanceof SyntaxError);
-    console.error(err.message);
-    console.error(err.stack);
-  }
+		}
+	});
 
+  if (resultado.length > 0) {
+		$('#modalErrores').modal();
+		var mensajes = $('#mensajesError');
+		$('#tamanoModal').attr('style', 'margin-top:20px;');
+		mensajes.addClass('alert alert-danger');
+		mensajes.html(
+			"<p class='text-left'><strong>Los siguientes campos deben de llenarse:</strong></p>" +
+				"<p class='text-left'>" +
+				resultado +
+				'</p>'
+		);
+	} else {
+
+    const formData = new FormData(document.getElementById('form1'));
+    console.log(formData.get('url'));
+    if (!formData.get('url')) {
+      formData.append('url', `../views/ce-validacion.php?programa_id=${formData.get('programa_id')}&codigo=200`)
+    }
+    formData.append('webService', 'guardar')
+    formData.append('estatus', '1')
+    const ajaxPath = "../controllers/control-validacion.php";
+  
+    try {
+      const response = await fetch(
+        ajaxPath,
+        {
+          method: "post",
+          body: formData,
+          redirect: 'follow'
+        });
+      if (response.ok) {
+        if (response.redirected) {
+          window.location.href = response.url;
+        }
+        const data = await response.json();
+      }
+    } catch (err) {
+      console.error(err instanceof SyntaxError);
+      console.error(err.message);
+      console.error(err.stack);
+    }
+  }
 
 }
 
