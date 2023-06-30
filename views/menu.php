@@ -1,10 +1,18 @@
 <?php
 require_once "../models/modelo-rol.php";
 require_once "../models/modelo-institucion.php";
+require_once "../models/modelo-usuario-usuarios.php";
 
-if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"]) {
+if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESCOLAR_IES == $_SESSION["rol_id"])) {
+
+    $usuario = new UsuarioUsuarios();
+    $resultadoUsuario = $usuario->consultarPor("usuario_usuarios", array("secundario_id" => $_SESSION["id"]), "*");
+    $usuarioPrincipal = $resultadoUsuario["data"] ? $resultadoUsuario["data"][0]["principal_id"] : $_SESSION["id"];
+    
     $institucion = new Institucion();
-    $resultadoInstitucion = $institucion->consultarPor('instituciones', array("usuario_id" => $_SESSION["id"], "deleted_at"), '*');
+    $institucion->setAttributes(array("usuario_id" => $_SESSION["id"]));
+
+    $resultadoInstitucion = $institucion->consultarPor("instituciones", array("usuario_id" => $usuarioPrincipal), "*");
 }
 ?>
 
@@ -105,6 +113,7 @@ if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"]) {
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="ce-planteles-institucion.php">Mis Programas de Estudios</a></li>
                                     <li><a href="ce-planteles-institucion-equivalencia.php">Tr&aacute;mite de Equivalencias</a></li>
+                                    <li><a href=<?= "ce-catalogo-titulo-electronico.php?institucion_id=" . $resultadoInstitucion["data"][0]["id"] ?>>Descarga de Constancia de T&iacute;tulo Electr&oacute;nico</a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>
