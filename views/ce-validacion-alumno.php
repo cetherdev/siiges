@@ -407,7 +407,7 @@ if (Rol::ROL_CONTROL_ESCOLAR_SICYT == $_SESSION["rol_id"] || Rol::ROL_ADMIN == $
               <div class="col-sm-4">
                 <div class="form-group">
                   <label class="control-label" for="situacion_validacion_id">Situaci&oacute;n de documento*: </label>
-                  <select id="situacion_validacion_id" name="situacion_validacion_id" campo="Situación de documento" class="selectpicker revision" data-live-search="true" data-width="100%" disabled>
+                  <select id="situacion_validacion_id" name="situacion_validacion_id" campo="Situación de documento" class="selectpicker <?php echo $esIES ? '' : 'revision' ?>" data-live-search="true" data-width="100%" disabled>
                     <option value=""> </option>
                     <?php
                     $max = count($resultadoSituacionValidacion["data"]);
