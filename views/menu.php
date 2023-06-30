@@ -6,8 +6,8 @@ require_once "../models/modelo-usuario-usuarios.php";
 if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESCOLAR_IES == $_SESSION["rol_id"])) {
 
     $usuario = new UsuarioUsuarios();
-    $resultadoUsuario = $usuario->consultarPor("usuario_usuarios", array("secundario_id" => $_SESSION["id"]), "*");
-    $usuarioPrincipal = $resultadoUsuario["data"] ? $resultadoUsuario["data"][0]["principal_id"] : $_SESSION["id"];
+    $resultado = $usuario->consultarPor("usuario_usuarios", array("secundario_id" => $_SESSION["id"]), "*");
+    $usuarioPrincipal = $resultado["data"] ? $resultado["data"][0]["principal_id"] : $_SESSION["id"];
     
     $institucion = new Institucion();
     $institucion->setAttributes(array("usuario_id" => $_SESSION["id"]));
