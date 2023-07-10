@@ -59,9 +59,14 @@ $pdf->Cell(60, 5, utf8_decode("Primer apellido"), 0, 0, "C", false);
 $pdf->Cell(60, 5, utf8_decode("Segundo apellido"), 0, 1, "C", false);
 
 $pdf->Ln(8);
-
 $pdf->SetFont("Nutmegbk", "", 8.5);
+if (strlen($pdf->titulo["nombre_carrera"]) > 50) {
+  $pdf->SetFont("Nutmegbk", "", 7.5);
+}
 $pdf->Cell(90, 5, utf8_decode($pdf->titulo["curp"]), 0, 0, "C", false);
+if (strlen($pdf->titulo["nombre_carrera"]) > 50) {
+    $pdf->SetFont("Nutmegbk", "", 7.5);
+}
 $pdf->Cell(90, 5, utf8_decode($pdf->titulo["nombre_carrera"]), 0, 1, "C", false);
 $pdf->Ln(2);
 $pdf->Line($marIzq, ($primeraLinea + 20), $marDer, ($primeraLinea + 20));
