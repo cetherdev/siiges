@@ -76,7 +76,6 @@ $pdf->Ln(2);
 $pdf->Line($marIzq, ($primeraLinea + 20), $marDer, ($primeraLinea + 20));
 $pdf->Cell(90, 5, utf8_decode("CURP"), 0, 0, "C", false);
 $pdf->Cell(90, 5, utf8_decode("Nombre del programa"), 0, 1, "C", false);
-// $pdf->MultiCell(130, 2, utf8_decode($pdf->titulo["sello_titulo"]), 0, "L");
 
 $pdf->Ln(8);
 
