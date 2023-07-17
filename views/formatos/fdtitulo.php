@@ -58,11 +58,20 @@ $pdf->Cell(60, 5, utf8_decode("Nombre(s)"), 0, 0, "C", false);
 $pdf->Cell(60, 5, utf8_decode("Primer apellido"), 0, 0, "C", false);
 $pdf->Cell(60, 5, utf8_decode("Segundo apellido"), 0, 1, "C", false);
 
-$pdf->Ln(8);
 
 $pdf->SetFont("Nutmegbk", "", 8.5);
-$pdf->Cell(90, 5, utf8_decode($pdf->titulo["curp"]), 0, 0, "C", false);
-$pdf->Cell(90, 5, utf8_decode($pdf->titulo["nombre_carrera"]), 0, 1, "C", false);
+if (strlen($pdf->titulo["nombre_carrera"]) > 45) {
+  $pdf->Ln(4);
+  $y = $pdf->GetY();
+  $x = $pdf->GetX();
+  $pdf->MultiCell(90, 4, utf8_decode("\n" . $pdf->titulo["curp"]), 0, "C");
+  $pdf->SetXY($x + 90, $y);
+  $pdf->MultiCell(90, 4, utf8_decode($pdf->titulo["nombre_carrera"]), 0,"C");
+} else {
+  $pdf->Ln(8);
+  $pdf->Cell(90, 5, utf8_decode($pdf->titulo["curp"]), 0, 0, "C", false);
+  $pdf->Cell(90, 5, utf8_decode($pdf->titulo["nombre_carrera"]), 0, 1, "C", false);
+}
 $pdf->Ln(2);
 $pdf->Line($marIzq, ($primeraLinea + 20), $marDer, ($primeraLinea + 20));
 $pdf->Cell(90, 5, utf8_decode("CURP"), 0, 0, "C", false);
