@@ -137,7 +137,7 @@ if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESC
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Servicios Escolares<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="ce-instituciones.php">Administracion Academica</a></li>
+                                    <li><a href="ce-instituciones.php">Coordinación de Administración Académica</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -174,9 +174,9 @@ if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESC
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Servicios Escolares<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="ce-instituciones.php">Avances Académicos</a></li>
-                                    <li><a href="ce-instituciones-validacion.php">Validación Académica</a></li>
-                                    <li><a href="ce-instituciones-titulacion.php">Titulaci&oacute;n Electr&oacute;nica</a></li>
+                                    <li><a href="ce-instituciones.php">Coordinación de Administración Académica</a></li>
+                                    <li><a href="ce-instituciones-validacion.php">Coordinación de Validación Académica</a></li>
+                                    <li><a href="ce-instituciones-titulacion.php">Coordinaci&oacute;n de Titulaci&oacute;n Electr&oacute;nica</a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>
