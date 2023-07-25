@@ -1138,10 +1138,10 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                                 <label>Horas independientes</label>
                                 <input id="independiente" class="form-control" type="number" value="0"><br>
                               </div>
-                              <div class="col-sm-12 col-md-6">
+                              <!-- <div class="col-sm-12 col-md-6">
                                 <label>Academia *</label>
                                 <input id="academiaAsiganatura" class="form-control" type="text" value="" placeholder="Nombre de la academia a la que pertenece"><br>
-                              </div>
+                              </div> -->
                               <div class="col-sm-4 col-md-4">
                                 <button class="btn btn-secundary" type="button" name="button" onclick="agregarMateria()">Registrar materia</button><br><br>
                               </div>
@@ -1243,10 +1243,10 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                                 <label>Horas independientes</label>
                                 <input id="independienteOptativa" class="form-control" type="number" value="0"><br>
                               </div>
-                              <div class="col-sm-12 col-md-6">
+                              <!-- <div class="col-sm-12 col-md-6">
                                 <label>Academia *</label>
                                 <input id="academiaOptativa" class="form-control" type="text" value="" placeholder="Nombre de la academia a la que pertenece"><br>
-                              </div>
+                              </div> -->
                               <div class="col-sm-4 col-md-4">
                                 <br>
                                 <button class="btn btn-secundary" type="button" name="button" onclick="agregarOptativa()">Registrar materia optativa</button><br><br>
