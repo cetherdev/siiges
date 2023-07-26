@@ -8,11 +8,6 @@ var Guia = {};
 //Función para periodo final de modalConvocatoria
 //Sólo los programas que ya están en observación pueden subir su información
 
-// Función para generar una cadena aleatoria o identificador único
-function generarCadenaAleatoria() {
-	return Math.random().toString(36).substr(2, 9);
-  }
-
 TerminarSolicitud.getEstatusSolicitud = function () {
 	TerminarSolicitud.promesaEstatusSolicitud = $.ajax({
 		type: 'POST',
@@ -108,10 +103,10 @@ EditarSolicitud.getSolicitud = function () {
 					if (documentos.firma_representante != undefined) {
 						$('#firma-id').val(documentos.firma_representante.id);
 						$('#contenedorFirma').attr('style', 'display: block');
-						// Generar la cadena aleatoria o identificador único
-						var randomString = generarCadenaAleatoria();
-						// Añadir la cadena aleatoria o identificador único al enlace
-						$('#enlace-firma').attr('href', documentos.firma_representante.archivo + "?" + randomString);
+						$('#enlace-firma').attr(
+							'href',
+							documentos.firma_representante.archivo
+						);
 					  }
 					if (documentos.logotipo != undefined) {
 						$('#logotipo-id').val(documentos.logotipo.id);
