@@ -26,6 +26,7 @@ require_once "../models/modelo-publicacion.php";
 require_once "../models/modelo-plantel-edificio-nivel.php";
 require_once "../models/modelo-plantel-dictamen.php";
 require_once "../models/modelo-plantel-seguridad-sistema.php";
+require_once "../models/modelo-oficio.php";
 require_once "../models/modelo-seguridad-sistema.php";
 require_once "../models/modelo-higiene.php";
 require_once "../models/modelo-plantel-higiene.php";
@@ -1751,6 +1752,10 @@ if ($_POST["webService"] == "cotejamiento") {
   $solicitud = new Solicitud;
   $solicitud->setAttributes(array("id" => $_POST["id_solicitud"], "estatus_solicitud_id" => 6, "fecha_recepcion" => $_POST["fecha_recepcion"]));
   $solicitud->guardar();
+  
+  $oficio = new Oficio;
+  $oficio->setAttributes(array("oficio" => $_POST["folio_admisorio"], "documento" => "OficioAdmisorio", "solicitud_id" => $_POST["id_solicitud"], "fecha" => $_POST["fecha_recepcion"]));
+  $oficio->guardar();
 
   //Notificación a apps
   $usuarioNotificar = new Solicitud();

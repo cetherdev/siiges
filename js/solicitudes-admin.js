@@ -501,10 +501,11 @@ Solicitudes.guardarComentarios = function (opcion) {
 };
 //Guardar revisión de documentación
 Solicitudes.revisarDocumentacion = function () {
+  const cuerpo = $("#cuerpoModal");
+  cuerpo.empty();
   $("#modalMensaje").modal();
   $("#tamanoModalMensaje").attr("style", "margin-top:20px;");
   var mensajes = $("#mensajeDocumentacion");
-
   // En convocatoria 2020 no se recibe el archivo fda06
   let inputs = document.getElementsByTagName("input");
   inputs = [...inputs];
@@ -512,6 +513,7 @@ Solicitudes.revisarDocumentacion = function () {
     (input) => input.type.toLowerCase() == "checkbox"
   );
   let i;
+
   for (let checkbox of checkboxes) {
     if (checkbox.checked == true) {
       i = 1;
@@ -528,17 +530,17 @@ Solicitudes.revisarDocumentacion = function () {
     mensajes.html(
       "<p class='text-left'><strong>¿La documentación fue recibida?</strong></p>"
     );
-
     const cuerpo = $("#cuerpoModal");
-
     const child = document.createElement("div");
     child.innerHTML = `<div class="col-sm-12 col-md-12">
     <label class="control-label" for="">Ingresar la fecha de recepción de la solicitud</label><br>
     <input type="date" id="fecha_recepcion_modal" class="form-control">
-    <br></div>`;
-
+    <br>
+    <label class="control-label" for="">Ingresar número de oficio admisorio</label><br>
+    <input type="text" id="folio_admisorio_modal" class="form-control">
+    <br>
+  </div>`;
     cuerpo.append(child);
-
     var boton = $("<button/>", {
       id: "boton_si",
       type: "button",
@@ -558,22 +560,37 @@ Solicitudes.revisarDocumentacion = function () {
     );
   }
 };
+
 //Confirmar revisión de documentacion
 Solicitudes.completarCotejamiento = function () {
-  if ($("#fecha_recepcion_modal").val() != "") {
+  if ($("#fecha_recepcion_modal").val() != "" && $("#folio_admisorio_modal").val() != "") {
+
     const fecha_recepcion_modal = $("#fecha_recepcion_modal").val();
+    const folio_admisorio_modal = $("#folio_admisorio_modal").val();
+
     $("#fecha_recepcion").val(fecha_recepcion_modal);
+    $("#folio_admisorio").val(folio_admisorio_modal);
 
     let btnConfirmar = document.getElementById("boton_si");
+
     btnConfirmar.classList.remove("active");
     btnConfirmar.classList.add("disabled");
     btnConfirmar.setAttribute("disabled", "");
 
     $("#form-cotejamiento").submit();
+  
   } else {
-    $("#fecha_recepcion_modal").focus();
+
+    if ($("#fecha_recepcion_modal").val() == "") {
+      $("#fecha_recepcion_modal").focus();
+    
+    } else if($("#folio_admisorio_modal").val() == "") {
+      $("#folio_admisorio_modal").focus();
+    
+    }
   }
 };
+
 //Entregar rvoe
 Solicitudes.recogerRVOE = function (obj) {
   Solicitudes.entregar = obj;
@@ -599,12 +616,14 @@ Solicitudes.entregarRVOE = function () {
     },
   });
 };
+
 //Eliminar solicitud (cambiar a estatus 100)
 Solicitudes.modalEliminar = function (obj) {
   Solicitudes.eliminar = obj;
   $("#modalEliminar").modal();
   $("#mensajeEliminacion").html(obj.folio);
 };
+
 Solicitudes.eliminarSolicitud = function () {
   if ($("#motivoEliminacion").val() != "") {
     $.ajax({
