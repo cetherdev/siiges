@@ -94,4 +94,4 @@ $pdf->Cell(0, 5, utf8_decode("ING. MARCO ARTURO CASTRO AGUILERA"), 0, 1, "C");
 $pdf->Cell(0, 5, utf8_decode("DIRECTOR GENERAL DE INCORPORACIÓN Y"), 0, 1, "C");
 $pdf->Cell(0, 5, utf8_decode("SERVICIOS ESCOLARES"), 0, 1, "C");
 $pdf->Ln(3);
-$pdf->Output("I", "NotificaciónRVOE.pdf");
+$pdf->Output("I", "OficioAdmisorio.pdf");
