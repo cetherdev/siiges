@@ -112,7 +112,7 @@ if (isset($_SESSION["resultado"])) {
                             </select><br>
                         </div>
                     </div>
-                    }
+
                     <!-- Dirección del plantel -->
                     <div id="direccion-plantel" class="form-group">
                         <div class="col-sm-12 col-md-4">
@@ -209,6 +209,7 @@ if (isset($_SESSION["resultado"])) {
                         </div>
                     </div>
                     <input type="hidden" name="fecha_recepcion" id="fecha_recepcion">
+                    <input type="hidden" name="folio_admisorio" id="folio_admisorio">
                     <input type="hidden" id="opcion" value="2">
                     <input type="hidden" id="id_solicitud" name="id_solicitud" value="<?= $_GET['solicitud'] ?>">
                     <input type="hidden" name="webService" value="cotejamiento">
