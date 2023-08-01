@@ -70,6 +70,7 @@ tipo_entidad = id_tabla
                                               "formato_pedagogico_01"=>37,
                                               "dictamen_impi"=>38,
                                               "formato_herramientas_05"=>39,
+                                              "aprobacion_oee"=>40
                                             );
 
     public static $dir_subida = '../uploads/';

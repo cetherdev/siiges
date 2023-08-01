@@ -96,6 +96,8 @@ EditarSolicitud.getSolicitud = function () {
 
 				if (respuesta.data.documentos != undefined) {
 					var documentos = respuesta.data.documentos;
+
+          console.log(documentos);
 					if ($('#editar').val() == 0) {
 						$('#btnGuardar').attr('disabled', true);
 						$('#btnTerminar').attr('disabled', true);
@@ -363,6 +365,15 @@ EditarSolicitud.getSolicitud = function () {
 						$('#enlace-dictamen').attr(
 							'href',
 							documentos.dictamen_evaluacion.archivo
+						);
+					}
+
+          if (documentos.aprobacion_oee != undefined) {
+						$('#aprobacion_oee-id').val(documentos.aprobacion_oee.id);
+						$('#contendoraprobacion_oee').attr('style', 'display: block');
+						$('#enlace-aprobacion_oee').attr(
+							'href',
+							documentos.aprobacion_oee.archivo
 						);
 					}
 				}

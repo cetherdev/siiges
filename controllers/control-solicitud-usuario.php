@@ -724,6 +724,13 @@ if ($_POST["webService"] = "datosSolicitud") {
             if (sizeof($res_dictamen_evaluacion["data"]) > 0) {
               $resultado["data"]["documentos"]["dictamen_evaluacion"] = $res_dictamen_evaluacion["data"][0];
             }
+
+            $aprobacion_oee = new Documento();
+            $res_aprobacion_oee = $aprobacion_oee->consultarPor("documentos", array("tipo_entidad" => Documento::$tipoEntidad["EVALUACION"], "entidad_id" => $resultado["data"]["evaluacion"]["id"], "tipo_documento" => Documento::$nombresDocumentos["aprobacion_oee"], "deleted_at"), "*");
+            if (sizeof($res_aprobacion_oee["data"]) > 0) {
+              $resultado["data"]["documentos"]["aprobacion_oee"] = $res_aprobacion_oee["data"][0];
+            }
+
           }
 
           $horarios = new Documento();
