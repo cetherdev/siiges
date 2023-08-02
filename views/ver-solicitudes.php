@@ -2208,6 +2208,21 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                             <a id="enlace-dictamen" class="enlaces" href="" target="_blank">Ver archivo</a>
                           </div>
                         </div>
+
+                        <div class="row">
+                          <!-- Plan de Estudios aprobado por el OEE -->
+                          <div class="col-sm-12 col-md-8">
+                            <label class="control-label" for="">Plan de Estudios aprobado por el OEE</label><br>
+                            <input type="hidden" id="aprobacion_oee-id" name="EVALUACION-aprobacion_oee-id" value="">
+                            <input type="file" onchange="Solicitud.verificarArchivo(this)" name="EVALUACION-aprobacion_oee" class="form-control"><br>
+                          </div>
+                          <div class="col-sm-12 col-md-4" id="contendoraprobacion_oee" style="display: none">
+                            <br>
+                            <br>
+                            <a id="enlace-aprobacion_oee" class="enlaces" href="" target="_blank">Ver archivo</a>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
