@@ -1947,7 +1947,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                       <div class="panel-body">
                         <div class="form-group">
                           <div class="col-sm-col-md-12">
-                            <h2>Instituciones de salud alenadañas, servicios de ambulancia u otros servicios de emergencia</h2>
+                            <h2>Instituciones de salud aledañas, servicios de ambulancia u otros servicios de emergencia</h2>
                             <hr class="red">
                           </div>
                           <!-- Inputs que para POST -->
