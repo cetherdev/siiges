@@ -957,7 +957,7 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                             <textarea class="form-control" id="actualizacion" name="PROGRAMA-actualizacion" rows="4" placeholder="Instancias, criterios, formas y periodicidad"></textarea><br>
                           </div>
                           <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Vinculación con colegios de profesionista, academias, asociaciones profesionales entre otras</label>
+                            <label class="control-label">Vinculación con colegios de profesionistas, academias, asociaciones profesionales entre otras</label>
                             <textarea class="form-control" id="convenios_vinculacion" name="PROGRAMA-convenios_vinculacion" rows="4" placeholder="Señalar los convenios de vinculación o colaboración afines a la profesión de egreso, que se tengan o se pretendan establecer"></textarea><br>
                           </div>
                           <div class="col-sm-12 col-md-6">
@@ -1244,7 +1244,7 @@ if (!isset($_GET['tipo']) || $_GET['tipo'] == null || $_GET['tipo'] > 6 || is_st
                           <div class="form-group col-sm-12 col-md-12">
                             <div class="col-sm-12 col-md-12">
                               <br><br>
-                              <label class="control-label">Número mínimo de horas que se deberan acreditar bajo la conducción de un docente</label>
+                              <label class="control-label">Número mínimo de horas que se deberán acreditar bajo la conducción de un docente</label>
                             </div>
                             <div class="col-sm-12 col-md-3">
                               <input type="number" id="minimo_horas" name="PROGRAMA-minimo_horas_optativas" class="form-control" value=""><br>

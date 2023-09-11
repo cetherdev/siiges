@@ -247,7 +247,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                     <div class="panel-body">
                       <div class="form-group">
                         <div class="col-sm-col-md-12">
-                          <h2>Personal desigando para diligencias</h2>
+                          <h2>Personal designado para diligencias</h2>
                           <hr class="red">
                         </div>
                         <!-- Inputs que para POST -->
@@ -977,7 +977,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                             <textarea class="form-control" id="actualizacion" name="PROGRAMA-actualizacion" rows="4" placeholder="Instancias, criterios, formas y periodicidad"></textarea><br>
                           </div>
                           <div class="col-sm-12 col-md-12">
-                            <label class="control-label">Vinculación con colegios de profesionista, academias, asociaciones profesionales entre otras</label>
+                            <label class="control-label">Vinculación con colegios de profesionistas, academias, asociaciones profesionales entre otras</label>
                             <textarea class="form-control" id="convenios_vinculacion" name="PROGRAMA-convenios_vinculacion" rows="4" placeholder="Señalar los convenios de vinculación o colaboración afines a la profesión de egreso, que se tengan o se pretendan establecer"></textarea><br>
                           </div>
                           <div class="col-sm-12 col-md-6">
@@ -1289,7 +1289,7 @@ if (!isset($_GET['tps']) || $_GET['tps'] == null || $_GET['tps'] > 6 || is_strin
                           <div class="form-group col-sm-12 col-md-12">
                             <div class="col-sm-12 col-md-12">
                               <br><br>
-                              <label class="control-label">Número mínimo de horas que se deberan acreditar bajo la conducción de un docente</label>
+                              <label class="control-label">Número mínimo de horas que se deberán acreditar bajo la conducción de un docente</label>
                             </div>
                             <div class="col-sm-12 col-md-3">
                               <input type="number" id="minimo_horas" name="PROGRAMA-minimo_horas_optativas" class="form-control" value=""><br>
