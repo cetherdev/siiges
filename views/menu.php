@@ -12,7 +12,7 @@ if (Rol::ROL_REPRESENTANTE_LEGAL == $_SESSION["rol_id"] || (Rol::ROL_CONTROL_ESC
     $institucion = new Institucion();
     $institucion->setAttributes(array("usuario_id" => $_SESSION["id"]));
 
-    $resultadoInstitucion = $institucion->consultarPor("instituciones", array("usuario_id" => $usuarioPrincipal), "*");
+    $resultadoInstitucion = $institucion->consultarPor("instituciones", array("usuario_id" => $usuarioPrincipal, "deleted_at"), "*");
 }
 ?>
 
