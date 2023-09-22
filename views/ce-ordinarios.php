@@ -231,7 +231,7 @@ $resultadoAsignatura = $asignatura->consultarId();
                             step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1"; ?>" <?php if ($resultadoAlumno["data"]["situacion_id"] == 3 || $resultadoAlumno["data"]["situacion_id"] == 4) {echo "readonly"; } ?> />
                         </td>
 												<td>
-                          <input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo $resultadoCalificacion["data"][0]["fecha_examen"]; ?>" maxlength="10" class="form-control" <?php if ($resultadoAlumno["data"]["situacion_id"] == 3) {echo "readonly"; } ?> />
+                          <input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo $resultadoCalificacion["data"][0]["fecha_examen"]; ?>" maxlength="10" class="form-control" <?php if ($resultadoAlumno["data"]["situacion_id"] == 3 || $resultadoAlumno["data"]["situacion_id"] == 4) {echo "readonly"; } ?> />
                         </td>
 											</tr>
 									<?php
