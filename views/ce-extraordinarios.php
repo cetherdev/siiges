@@ -243,7 +243,7 @@ $resultadoAsignatura = $asignatura->consultarId();
                           <?php
                             if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
                             || (!isset($resultadoCalificacion["data"][0]["calificacion"]))
-                            || ($resultadoAlumno["data"]["situacion_id"] == 3)
+                            || ($resultadoAlumno["data"]["situacion_id"] == 3 ) || ($resultadoAlumno["data"]["situacion_id"] == 4)
                             ) { echo "readonly"; }
                           ?> 
                           step="<?php echo ($resultadoPrograma["data"]["calificacion_decimal"] == 1) ? "0.1" : "1";?>" />
@@ -258,7 +258,7 @@ $resultadoAsignatura = $asignatura->consultarId();
                           <?php
                             if (($resultadoCalificacion["data"][0]["calificacion"] >= $resultadoPrograma["data"]["calificacion_aprobatoria"]) 
                             || (!isset($resultadoCalificacion["data"][0]["calificacion"]))
-                            || ($resultadoAlumno["data"]["situacion_id"] == 3)
+                            || ($resultadoAlumno["data"]["situacion_id"] == 3) || ($resultadoAlumno["data"]["situacion_id"] == 4)
                             ) { echo "readonly"; }
                           ?> />
                         </td>
