@@ -330,19 +330,17 @@ $resultadoCicloEscolar = $cicloEscolar->consultarId();
 										$resultadoPersona = $persona->consultarId();
 									?>
 										<tr>
-    <td><?php echo $resultadoAlumno["data"]["matricula"]; ?></td>
-    <td><?php echo $resultadoPersona["data"]["apellido_paterno"] . " " . $resultadoPersona["data"]["apellido_materno"] . " " . $resultadoPersona["data"]["nombre"]; ?></td>
-    <td>
-        <?php if ($resultadoAlumno["data"]["situacion_id"] != 3 && $resultadoAlumno["data"]["situacion_id"] != 4): ?>
-            <a href="../controllers/control-alumno-grupo.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $_GET["ciclo_id"]; ?>&grado=<?php echo $_GET["grado"]; ?>&grupo_id=<?php echo $_GET["grupo_id"]; ?><?php
-                echo $tramiteParam = $tramite === "equiv" ? ("&tramite=" . $tramite) : "";
-                ?>&alumno_id=<?php echo $resultadoAlumnoGrupo["data"][$i]["alumno_id"]; ?>&id=<?php echo $resultadoAlumnoGrupo["data"][$i]["id"]; ?>&webService=eliminarAlumnoGrupo" onclick="return confirmarBaja( )">
-                <span title="Eliminar" class="glyphicon glyphicon-trash col-sm-1 size_icon"></span>
-            </a>
-        <?php else: ?>
-            <span title="Eliminar" class="glyphicon glyphicon-trash col-sm-1 size_icon" style="cursor: not-allowed; opacity: 0.5;"></span>
-        <?php endif; ?>
-    </td>
+										<td><?php echo $resultadoAlumno["data"]["matricula"]; ?></td>
+<td><?php echo $resultadoPersona["data"]["apellido_paterno"] . " " . $resultadoPersona["data"]["apellido_materno"] . " " . $resultadoPersona["data"]["nombre"]; ?></td>
+<td>
+    <?php if ($resultadoAlumno["data"]["situacion_id"] != 3 && $resultadoAlumno["data"]["situacion_id"] != 4): ?>
+        <a href="../controllers/control-alumno-grupo.php?programa_id=<?php echo $_GET["programa_id"]; ?>&ciclo_id=<?php echo $_GET["ciclo_id"]; ?>&grado=<?php echo $_GET["grado"]; ?>&grupo_id=<?php echo $_GET["grupo_id"]; ?><?php
+            echo $tramiteParam = $tramite === "equiv" ? ("&tramite=" . $tramite) : "";
+            ?>&alumno_id=<?php echo $resultadoAlumnoGrupo["data"][$i]["alumno_id"]; ?>&id=<?php echo $resultadoAlumnoGrupo["data"][$i]["id"]; ?>&webService=eliminarAlumnoGrupo" onclick="return confirmarBaja( )">
+            <span title="Eliminar" class="glyphicon glyphicon-trash col-sm-1 size_icon"></span>
+        </a>
+    <?php endif; ?>
+</td>
 </tr>
 									<?php
 									}
