@@ -201,7 +201,7 @@ if ($_POST["webService"] == "plantelPorId") {
   $resultado["mesagge"] = "OK";
   if (isset($_SESSION["id"])) {
     $institucion = new Institucion();
-    $res_institucion = $institucion->consultarPor("instituciones", array("usuario_id" =>  $_SESSION["id"]), "*");
+    $res_institucion = $institucion->consultarPor("instituciones", array("usuario_id" =>  $_SESSION["id"], "deleted_at"), "*");
     if (sizeof($res_institucion["data"]) > 0) {
       $plantel = new Plantel();
       $plantel->setAttributes(array("id" => $_POST["plantelId"]));
@@ -211,20 +211,20 @@ if ($_POST["webService"] == "plantelPorId") {
         $resultado["data"]["institucion"] = $res_institucion["data"][0];
 
         $ratificacion = new RatificacionNombre();
-        $resultado_ratificacion = $ratificacion->consultarPor("ratificacion_nombres", array("institucion_id" =>  $res_institucion["data"][0]["id"]), "*");
+        $resultado_ratificacion = $ratificacion->consultarPor("ratificacion_nombres", array("institucion_id" =>  $res_institucion["data"][0]["id"], "deleted_at"), "*");
         if (sizeof($resultado_ratificacion["data"]) > 0) {
           $resultado["data"]["ratificacion"] =  $resultado_ratificacion["data"][0];
         }
         $resultado["data"]["plantel"] = $respuestaPlantel["data"];
         //Dictamenes
         $dictamen = new PlantelDictamen();
-        $dictamenes = $dictamen->consultarPor("plantel_dictamenes", array("plantel_id" => $resultado["data"]["plantel"]["id"]), "*");
+        $dictamenes = $dictamen->consultarPor("plantel_dictamenes", array("plantel_id" => $resultado["data"]["plantel"]["id"], "deleted_at"), "*");
         if (sizeof($dictamenes["data"]) > 0) {
           $resultado["data"]["plantel"]["dictamenes"] = $dictamenes["data"];
         }
         //Plantel edificios
         $edificio = new PlantelEdificioNivel();
-        $niveles = $edificio->consultarPor("planteles_edificios_niveles", array("plantel_id" => $resultado["data"]["plantel"]["id"]), "*");
+        $niveles = $edificio->consultarPor("planteles_edificios_niveles", array("plantel_id" => $resultado["data"]["plantel"]["id"], "deleted_at"), "*");
         if (sizeof($niveles["data"]) > 0) {
           foreach ($niveles["data"] as $posicionNivel => $arregloNiveles) {
             $nivel = new EdificioNivel();
@@ -237,7 +237,7 @@ if ($_POST["webService"] == "plantelPorId") {
 
         //Seguridades
         $seguridad = new PlantelSeguridadSistema();
-        $seguridades = $seguridad->consultarPor("planteles_seguridad_sistemas", array("plantel_id" => $resultado["data"]["plantel"]["id"]), "*");
+        $seguridades = $seguridad->consultarPor("planteles_seguridad_sistemas", array("plantel_id" => $resultado["data"]["plantel"]["id"], "deleted_at"), "*");
         if (sizeof($seguridades["data"]) > 0) {
           foreach ($seguridades["data"] as $indiceSeguridad => $arregloSeguridad) {
             $seguridad = new SeguridadSistema();
@@ -250,7 +250,7 @@ if ($_POST["webService"] == "plantelPorId") {
 
         //Plantel higienes
         $plantelHigiene = new PlantelHigiene();
-        $higienes = $plantelHigiene->consultarPor("planteles_higienes", array("plantel_id" => $resultado["data"]["plantel"]["id"]), "*");
+        $higienes = $plantelHigiene->consultarPor("planteles_higienes", array("plantel_id" => $resultado["data"]["plantel"]["id"], "deleted_at"), "*");
         if (sizeof($higienes["data"]) > 0) {
           foreach ($higienes["data"] as $indiceHigiene => $arregloHigiene) {
             $higiene = new Higiene();
@@ -262,7 +262,7 @@ if ($_POST["webService"] == "plantelPorId") {
         }
         //Institcuiones de salud
         $salud = new SaludInstitucion();
-        $instituciones_salud = $salud->consultarPor("salud_instituciones", array("plantel_id" => $resultado["data"]["plantel"]["id"]), "*");
+        $instituciones_salud = $salud->consultarPor("salud_instituciones", array("plantel_id" => $resultado["data"]["plantel"]["id"], "deleted_at"), "*");
         $instituciones_salud = $instituciones_salud["data"];
         if (sizeof($instituciones_salud) > 0) {
           $resultado["data"]["plantel"]["instituciones_salud"] = $instituciones_salud;
