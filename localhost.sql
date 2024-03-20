@@ -111,7 +111,7 @@ CREATE TABLE `asignaturas` (
   `id` int(11) NOT NULL,
   `infraestructura_id` int(11) NOT NULL,
   `docente_id` int(11) NOT NULL,
-  `academia` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `academia` varchar(255) COLLATE utf8_unicode_ci ,
   `programa_id` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `clave` varchar(255) COLLATE utf8_unicode_ci NOT NULL,

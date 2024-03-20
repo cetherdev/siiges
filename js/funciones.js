@@ -70,12 +70,12 @@ function agregarMateria(){
     var independiente = __('independiente').value;
     var credito = __('credito').value;
     var area = __('area').value;
-    var academia = __('academiaAsiganatura').value;
+    //var academia = __('academiaAsiganatura').value;
     var total = __('totalHorasDocentes');
     var total2 = __('totalHorasIndependientes');
     var mensaje = $('#mensajesAsignaturas');
 
-    if(grado.length==0||nombre.length==0||clave.length==0||credito.length==0||area.length==0||academia.length==0){
+    if(grado.length==0||nombre.length==0||clave.length==0||credito.length==0||area.length==0){
       mensaje.addClass("alert alert-danger").show();
       mensaje.html('Llene todos los campos obligatorios *');
     }else{
@@ -92,7 +92,7 @@ function agregarMateria(){
         a.setAttribute("type","hidden");
         a.setAttribute("id",'asignatura'+nfilaM);
         a.setAttribute("name","ASIGNATURA-asignaturas[]");
-        a.setAttribute("value",JSON.stringify({"id":null,"grado":grado,"nombre":nombre,"clave":clave,"creditos":credito,"area":area,"seriacion":seriacion,"horas_docente":docente,"horas_independiente":independiente,"academia":academia,"tipo":"1"}));
+        a.setAttribute("value",JSON.stringify({"id":null,"grado":grado,"nombre":nombre,"clave":clave,"creditos":credito,"area":area,"seriacion":seriacion,"horas_docente":docente,"horas_independiente":independiente,"tipo":"1"}));
         __('inputsAsignaturas').appendChild(a);
 
       //Aumentar contador;
@@ -158,12 +158,12 @@ function agregarOptativa(){
     var independiente = __('independienteOptativa').value;
     var credito = __('creditoOptativa').value;
     var area = __('areaOptativa').value;
-    var academia = __('academiaOptativa').value;
+    //var academia = __('academiaOptativa').value;
     var total = __('totalHorasDocentesOptativa');
     var total2 = __('totalHorasIndependientesOptativa');
     var mensaje = $('#mensajesOptativas');
 
-    if(grado.length==0||nombre.length==0||clave.length==0||credito.length==0||area.length==0||academia.length==0){
+    if(grado.length==0||nombre.length==0||clave.length==0||credito.length==0||area.length==0){
       mensaje.addClass("alert alert-danger").show();
       mensaje.html('Llene todos los campos obligatorios *');
     }else{
@@ -178,7 +178,7 @@ function agregarOptativa(){
         a.setAttribute("type","hidden");
         a.setAttribute("id",'optativas'+nfilaMO);
         a.setAttribute("name","ASIGNATURA-asignaturas[]");
-        a.setAttribute("value",JSON.stringify({"id":null,"grado":grado,"nombre":nombre,"clave":clave,"creditos":credito,"area":area,"seriacion":seriacion,"horas_docente":docente,"horas_independiente":independiente,"academia":academia,"tipo":"2"}));
+        a.setAttribute("value",JSON.stringify({"id":null,"grado":grado,"nombre":nombre,"clave":clave,"creditos":credito,"area":area,"seriacion":seriacion,"horas_docente":docente,"horas_independiente":independiente,"tipo":"2"}));
         __('inputsOptativas').appendChild(a);
 
 
@@ -200,7 +200,7 @@ function agregarOptativa(){
       $("#asignaturaInfraestructura").append('<option value="'+clave+'">'+clave+ " - " +nombre+'</option>').selectpicker('refresh');
       //Limpiar entradas
       __('nombreOptativa').value="";__('claveOptativa').value="";$('#seriacionOptativa').val("").selectpicker("refresh");__('docenteOptativa').value=0;
-      __('independienteOptativa').value=0;__('creditoOptativa').value="";__('areaOptativa').value="";__('academiaOptativa').value="";
+      __('independienteOptativa').value=0;__('creditoOptativa').value="";__('areaOptativa').value="";
       console.log(__('inputsOptativas'));
     }
 }
