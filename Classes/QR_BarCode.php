@@ -1,116 +1,55 @@
 <?php
-/**
- * QR_BarCode - Barcode QR Code Image Generator
- * @author CodexWorld
- * @url http://www.codexworld.com
- * @license http://www.codexworld.com/license/
- */
-class QR_BarCode{
-    // Google Chart API URL
-    private $googleChartAPI = 'http://chart.apis.google.com/chart';
-    // Code data
-    private $codeData;
-    
-    /**
-     * URL QR code
-     * @param string $url
-     */
-    public function url($url = null){
-        $this->codeData = preg_match("#^https?://#", $url) ? $url : "http://{$url}";
+require_once 'vendor/autoload.php'; 
+
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevel;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\QrCodeInterface;
+use Endroid\QrCode\Writer\PngWriter;
+
+class QR_BarCode {
+    private $qrCode;
+
+    public function __construct() {
+        $this->qrCode = new QrCode();
+        $this->qrCode->setEncoding(new Encoding('UTF-8'));
+        $this->qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
+        $this->qrCode->setSize(300);
+        $this->qrCode->setMargin(10);
     }
-    
-    /**
-     * Text QR code
-     * @param string $text
-     */
-    public function text($text){
-        $this->codeData = $text;
+
+    public function setText($text) {
+        $this->qrCode->setText($text);
     }
-    
-    /**
-     * Email address QR code
-     *
-     * @param string $email
-     * @param string $subject
-     * @param string $message
-     */
-    public function email($email = null, $subject = null, $message = null) {
-        $this->codeData = "MATMSG:TO:{$email};SUB:{$subject};BODY:{$message};;";
+
+    public function setUrl($url) {
+        $this->qrCode->setText($url);
     }
-    
-    /**
-     * Phone QR code
-     * @param string $phone
-     */
-    public function phone($phone){
-        $this->codeData = "TEL:{$phone}";
+
+    public function setEmail($email, $subject, $message) {
+        $this->qrCode->setText("mailto:$email?subject=$subject&body=$message");
     }
-    
-    /**
-     * SMS QR code
-     *
-     * @param string $phone
-     * @param string $text
-     */
-    public function sms($phone = null, $msg = null) {
-        $this->codeData = "SMSTO:{$phone}:{$msg}";
+
+    public function setPhone($phone) {
+        $this->qrCode->setText("tel:$phone");
     }
-    
-    /**
-     * VCARD QR code
-     *
-     * @param string $name
-     * @param string $address
-     * @param string $phone
-     * @param string $email
-     */
-    public function contact($name = null, $address = null, $phone = null, $email = null) {
-        $this->codeData = "MECARD:N:{$name};ADR:{$address};TEL:{$phone};EMAIL:{$email};;";
+
+    public function setSMS($phone, $msg) {
+        $this->qrCode->setText("sms:$phone?body=$msg");
     }
-    
-    /**
-     * Content (gif, jpg, png, etc.) QR code
-     *
-     * @param string $type
-     * @param string $size
-     * @param string $content
-     */
-    public function content($type = null, $size = null, $content = null) {
-        $this->codeData = "CNTS:TYPE:{$type};LNG:{$size};BODY:{$content};;";
+
+    public function setVCARD($name, $address, $phone, $email) {
+        $vCard = "BEGIN:VCARD\nVERSION:3.0\nFN:$name\nADR:$address\nTEL:$phone\nEMAIL:$email\nEND:VCARD";
+        $this->qrCode->setText($vCard);
     }
-    
-    /**
-     * Generate QR code image
-     *
-     * @param int $size
-     * @param string $filename
-     * @return bool
-     */
-    public function qrCode($size = 200, $filename = null) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->googleChartAPI);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "chs={$size}x{$size}&cht=qr&chl=" . urlencode($this->codeData));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        $img = curl_exec($ch);
-        curl_close($ch);
-    
-        if($img) {
-            if($filename) {
-                if(!preg_match("#.png$#i", $filename)) {
-                    $filename .= ".png";
-                }
-                
-                return file_put_contents($filename, $img);
-            } else {
-                header("Content-type: image/png");
-                print $img;
-                return true;
-            }
-        }
-        return false;
+
+    public function saveQRCode($path) {
+        $writer = new PngWriter();
+        $writer->write($this->qrCode)->saveToFile($path);
     }
 }
+
 ?>
