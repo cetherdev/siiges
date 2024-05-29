@@ -233,6 +233,9 @@ $resultadoAsignatura = $asignatura->consultarId();
 												<td>
                           <input type="date" id="fecha_examen[]" name="fecha_examen[]" value="<?php echo $resultadoCalificacion["data"][0]["fecha_examen"]; ?>" maxlength="10" class="form-control" <?php if ($resultadoAlumno["data"]["situacion_id"] == 3 || $resultadoAlumno["data"]["situacion_id"] == 4) {echo "readonly"; } ?> />
                         </td>
+                        <td>
+                          <input type="hidden" id="calificacion_id[]" name="calificacion_id[]" value="<?php echo $resultadoCalificacion["data"][0]["id"]; ?>" maxlength="10" class="form-control" />
+                        </td>
 											</tr>
 									<?php
 										}
