@@ -262,6 +262,12 @@ $resultadoAsignatura = $asignatura->consultarId();
                             ) { echo "readonly"; }
                           ?> />
                         </td>
+                        <td>
+                          <input type="hidden" id="calificacion_id[]" name="calificacion_id[]" value="<?php echo $resultadoCalificacion2["data"][0]["id"]; ?>" maxlength="10" class="form-control" />
+                        </td>
+                        <td>
+                          <input type="hidden" id="alumno_id[]" name="alumno_id[]" value="<?php echo $resultadoAlumno["data"]["id"]; ?>" maxlength="10" class="form-control" />
+                        </td>
 											</tr>
 									<?php
 										}
