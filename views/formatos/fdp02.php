@@ -17,6 +17,39 @@ $cicloTxt = [
   "CUATRIMESTRALES"
 ];
 
+function cuatrimestreANumero($cuatrimestre) {
+  $partes = explode(' ', $cuatrimestre);
+  $numeroParte = $partes[0];
+  $tipoParte = $partes[1] ?? ''; // Asume que siempre habrá dos partes, agrega manejo de errores si necesario
+
+  // Convertir la primera parte a número
+  $numero = 0;
+  switch ($numeroParte) {
+      case 'Primer':    $numero = 1;  break;
+      case 'Segundo':   $numero = 2;  break;
+      case 'Tercero':    $numero = 3;  break;
+      case 'Cuarto':    $numero = 4;  break;
+      case 'Quinto':    $numero = 5;  break;
+      case 'Sexto':     $numero = 6;  break;
+      case 'Séptimo':   $numero = 7;  break;
+      case 'Octavo':    $numero = 8;  break;
+      case 'Noveno':    $numero = 9;  break;
+      case 'Décimo':    $numero = 10; break;
+      case 'Undécimo':  $numero = 11; break;
+      case 'Duodécimo': $numero = 12; break;
+      default:          return 999; // Valor alto para cualquier cuatrimestre o semestre no reconocido
+  }
+
+  // Multiplicar por un factor según sea cuatrimestre o semestre
+  if (stripos($tipoParte, 'cuatri') !== false) {
+      $numero *= 100; // Usa 100 como base para cuatrimestres
+  } else if (stripos($tipoParte, 'semestre') !== false) {
+      $numero *= 200; // Usa 200 como base para semestres
+  }
+
+  return $numero;
+}
+
 $pdf = new PDF();
 $pdf->getData($_GET["id"]);
 $pdf->getDataPlantel($pdf->plantel["id"]);
@@ -45,6 +78,10 @@ $pdf->SetTextColor(0, 0, 0);
 
 $pdf->getCoordinador();
 $pdf->getAsignaturas();
+
+uasort($pdf->TodasAsignaturas, function($a, $b) {
+  return cuatrimestreANumero($a['grado']) - cuatrimestreANumero($b['grado']);
+});
 
 $programa = $pdf->nivel["descripcion"] . " en " . $pdf->programa["nombre"];
 $modalidad = $pdf->modalidad["nombre"];
