@@ -1,17 +1,20 @@
 <?php
+require_once __DIR__ . '/../../vendor/autoload.php';
 require("pdftitulo.php");
 
-// include QR_BarCode class 
-include "../../Classes/QR_BarCode.php";
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Writer\PngWriter;
 
 session_start();
 
-if (empty($_GET)) {
-  header("Location: ../home.php");
+if (empty($_GET['id'])) {
+    header("Location: ../home.php");
+    exit;
 }
 
 $pdf = new PDF();
-$pdf->getData($_GET["id"]);
+$pdf->getData($_GET['id']);
 
 $pdf->AliasNbPages();
 $pdf->AddPage("P", "Letter");
@@ -135,14 +138,17 @@ $pdf->Cell(90, 5, utf8_decode("Fecha de expedición"), 0, 1, "C", false);
 
 $pdf->Ln(5);
 
+// QR Code
+$qrCode = new QrCode('https://siiges.jalisco.gob.mx/consulta_titulo_electronico.php?folioControl=' . $pdf->titulo['folio_control']);
+$qrCode->setEncoding(new Encoding('UTF-8'));
+$qrCode->setSize(300);
+$qrCode->setMargin(10);
+$writer = new PngWriter();
+$tempQRPath = sys_get_temp_dir() . '/qr_code.png';
+$writer->write($qrCode)->saveToFile($tempQRPath);
+$pdf->Image($tempQRPath, 150, 208, 52);
+unlink($tempQRPath);
 
-//https://programacion.net/articulo/como_generar_un_codigo_qr_con_php_utilizando_la_api_de_google_chart_1706
-// QR_BarCode object 
-$qr = new QR_BarCode();
-$qr->url('https://siiges.jalisco.gob.mx/consulta_titulo_electronico.php?folioControl=' . $pdf->titulo["folio_control"]);
-$temp = sys_get_temp_dir();
-$qr->qrCode(350, $temp . "/cw-qr.png");
-$pdf->Image($temp . "/cw-qr.png", 150, 208, 52);
 
 ///Cadenas de titulo
 // Firma de titulo
@@ -189,5 +195,6 @@ foreach ($names as $name) {
   $pdf->MultiCell(180, 4, utf8_decode($name), 0, "L");
 }
 
-
-$pdf->Output("I", $pdf->titulo["folio_control"] . "_CONSTANCIA_TITULO.pdf");
+// Finalización del PDF
+$pdf->Output("I", $pdf->titulo['folio_control'] . "_CONSTANCIA_TITULO.pdf");
+?>
