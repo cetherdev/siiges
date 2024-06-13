@@ -17,8 +17,8 @@ $cicloTxt = [
   "CUATRIMESTRALES"
 ];
 
-function cuatrimestreANumero($cuatrimestre) {
-  $partes = explode(' ', $cuatrimestre);
+function gradoANumero($grado) {
+  $partes = explode(' ', $grado);
   $numeroParte = $partes[0];
   $tipoParte = $partes[1] ?? ''; // Asume que siempre habrá dos partes, agrega manejo de errores si necesario
 
@@ -27,7 +27,7 @@ function cuatrimestreANumero($cuatrimestre) {
   switch ($numeroParte) {
       case 'Primer':    $numero = 1;  break;
       case 'Segundo':   $numero = 2;  break;
-      case 'Tercero':    $numero = 3;  break;
+      case 'Tercero':   $numero = 3;  break;
       case 'Cuarto':    $numero = 4;  break;
       case 'Quinto':    $numero = 5;  break;
       case 'Sexto':     $numero = 6;  break;
@@ -37,6 +37,8 @@ function cuatrimestreANumero($cuatrimestre) {
       case 'Décimo':    $numero = 10; break;
       case 'Undécimo':  $numero = 11; break;
       case 'Duodécimo': $numero = 12; break;
+      case 'Flexible':  $numero = 1000; break;
+      case 'Optativa':  $numero = 9999; break;
       default:          return 999; // Valor alto para cualquier cuatrimestre o semestre no reconocido
   }
 
@@ -80,7 +82,7 @@ $pdf->getCoordinador();
 $pdf->getAsignaturas();
 
 uasort($pdf->TodasAsignaturas, function($a, $b) {
-  return cuatrimestreANumero($a['grado']) - cuatrimestreANumero($b['grado']);
+  return gradoANumero($a['grado']) - gradoANumero($b['grado']);
 });
 
 $programa = $pdf->nivel["descripcion"] . " en " . $pdf->programa["nombre"];
@@ -866,3 +868,4 @@ if ($pdf->programa["acuerdo_rvoe"]) {
 $pdf->Ln(10);
 
 $pdf->Output("I", "FDP02.pdf");
+?>
