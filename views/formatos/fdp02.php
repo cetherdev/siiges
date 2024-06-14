@@ -82,8 +82,14 @@ $pdf->getCoordinador();
 $pdf->getAsignaturas();
 
 uasort($pdf->TodasAsignaturas, function($a, $b) {
-  return gradoANumero($a['grado']) - gradoANumero($b['grado']);
+  $gradoA = gradoANumero($a['grado']);
+  $gradoB = gradoANumero($b['grado']);
+  if ($gradoA == $gradoB) {
+      return $a['id'] - $b['id']; // Ordenar por ID si los grados son iguales
+  }
+  return $gradoA - $gradoB; // Ordenar por grado en primer lugar
 });
+
 
 $programa = $pdf->nivel["descripcion"] . " en " . $pdf->programa["nombre"];
 $modalidad = $pdf->modalidad["nombre"];
