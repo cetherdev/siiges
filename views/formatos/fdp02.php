@@ -31,12 +31,12 @@ function gradoANumero($grado) {
       case 'Cuarto':    $numero = 4;  break;
       case 'Quinto':    $numero = 5;  break;
       case 'Sexto':     $numero = 6;  break;
-      case 'Séptimo':   $numero = 7;  break;
+      case 'Septimo':   $numero = 7;  break;
       case 'Octavo':    $numero = 8;  break;
       case 'Noveno':    $numero = 9;  break;
-      case 'Décimo':    $numero = 10; break;
-      case 'Undécimo':  $numero = 11; break;
-      case 'Duodécimo': $numero = 12; break;
+      case 'Decimo':    $numero = 10; break;
+      case 'Undecimo':  $numero = 11; break;
+      case 'Duodecimo': $numero = 12; break;
       case 'Flexible':  $numero = 1000; break;
       case 'Optativa':  $numero = 9999; break;
       default:          return 999; // Valor alto para cualquier cuatrimestre o semestre no reconocido
